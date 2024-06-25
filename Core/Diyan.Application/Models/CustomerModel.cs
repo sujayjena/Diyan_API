@@ -147,5 +147,11 @@ namespace Diyan.Application.Models
         public string Passwords { get; set; }
         public bool? IsActive { get; set; }
     }
+
+    public class CustomerApproveNReject_Request
+    {
+        public int? CustomerId { get; set; }
+        public int? LeadStatusId { get; set; }
+    }
 }
 

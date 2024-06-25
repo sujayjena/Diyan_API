@@ -236,6 +236,37 @@ namespace Diyan.API.Controllers
             return _response;
         }
 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> CustomerApproveNReject(CustomerApproveNReject_Request parameters)
+        {
+            int result = await _customerRepository.CustomerApproveNReject(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.LeadStatusId == 2)
+                {
+                    _response.Message = "Lead accepted successfully.";
+                }
+                else if (parameters.LeadStatusId == 3)
+                {
+                    _response.Message = "Lead rejected successfully .";
+                }
+            }
+            return _response;
+        }
         #endregion
 
         #region Contact Details 

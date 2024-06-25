@@ -18,6 +18,8 @@ namespace Diyan.Application.Interfaces
 
         Task<Customer_Response?> GetCustomerById(long Id);
 
+        Task<int> CustomerApproveNReject(CustomerApproveNReject_Request parameters);
+
         #endregion
 
         #region Contact Details 

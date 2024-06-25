@@ -115,7 +115,7 @@ namespace Diyan.API.Controllers
                 {
                     var piIssuedSearch = new PIIssuedSearch_Request()
                     {
-                        POTrackingId= vResultObj.Id
+                        POTrackingId = vResultObj.Id
                     };
 
                     var vPIIssuedObj = await _manageTrackingRepository.GetPIIssuedList(piIssuedSearch);
@@ -147,5 +147,6 @@ namespace Diyan.API.Controllers
             }
             return _response;
         }
+
     }
 }

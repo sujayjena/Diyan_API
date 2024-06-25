@@ -67,6 +67,17 @@ namespace Diyan.Persistence.Repositories
             return (await ListByStoredProcedure<Customer_Response>("GetCustomerById", queryParameters)).FirstOrDefault();
         }
 
+        public async Task<int> CustomerApproveNReject(CustomerApproveNReject_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@CustomerId", parameters.CustomerId);
+            queryParameters.Add("@LeadStatusId", parameters.LeadStatusId);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("CustomerApproveNReject", queryParameters);
+        }
+
         #endregion
 
         #region Contact Details 
