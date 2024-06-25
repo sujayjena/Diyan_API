@@ -38,6 +38,8 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@TypeOfPackagingId", parameters.TypeOfPackagingId);
             queryParameters.Add("@DeliveryTermsId", parameters.DeliveryTermsId);
             queryParameters.Add("@IsPOStatusClosed", parameters.IsPOStatusClosed);
+            queryParameters.Add("@IsPIClosed", parameters.IsPIClosed);
+            queryParameters.Add("@IsPIConfirmed", parameters.IsPIConfirmed);
             queryParameters.Add("@POImage", parameters.POImage);
             queryParameters.Add("@POOriginalFileName", parameters.POOriginalFileName);
             queryParameters.Add("@IsActive", parameters.IsActive);

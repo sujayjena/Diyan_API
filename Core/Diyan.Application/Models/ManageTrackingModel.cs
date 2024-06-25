@@ -33,6 +33,7 @@ namespace Diyan.Application.Models
         public int DeliveryTermsId { get; set; }
         public bool IsPOStatusClosed { get; set; }
         public bool IsPIClosed { get; set; }
+        public bool IsPIConfirmed { get; set; }
         public string POImage { get; set; }
         public string POImage_Base64 { get; set; }
         public string? POOriginalFileName { get; set; }
@@ -81,6 +82,7 @@ namespace Diyan.Application.Models
         public string DeliveryTerms { get; set; }
         public bool IsPOStatusClosed { get; set; }
         public bool IsPIClosed { get; set; }
+        public bool IsPIConfirmed { get; set; }
         public string POImage { get; set; }
         public string? POOriginalFileName { get; set; }
         public string POImageURL { get; set; }
