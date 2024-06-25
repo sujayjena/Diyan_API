@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Uploads\Company\**" />
+    <Compile Remove="Uploads\Documents\**" />
+    <Compile Remove="Uploads\Vendor\**" />
+    <Content Remove="Uploads\Company\**" />
+    <Content Remove="Uploads\Documents\**" />
+    <Content Remove="Uploads\Vendor\**" />
+    <EmbeddedResource Remove="Uploads\Company\**" />
+    <EmbeddedResource Remove="Uploads\Documents\**" />
+    <EmbeddedResource Remove="Uploads\Vendor\**" />
+    <None Remove="Uploads\Company\**" />
+    <None Remove="Uploads\Documents\**" />
+    <None Remove="Uploads\Vendor\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\Admin\AdminMasterController.cs~RF226157fb.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Diyan.Application\Diyan.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Diyan.Persistence\Diyan.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ErrorLogs\" />
+    <Folder Include="Uploads\Employee\" />
+  </ItemGroup>
+
+</Project>
+
+
