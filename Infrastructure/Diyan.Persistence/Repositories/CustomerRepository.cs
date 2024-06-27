@@ -46,6 +46,7 @@ namespace Diyan.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@LeadStatusId", parameters.LeadStatusId);
+            queryParameters.Add("@ParentCustomerId", parameters.ParentCustomerId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

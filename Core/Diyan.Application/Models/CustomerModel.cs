@@ -119,6 +119,7 @@ namespace Diyan.Application.Models
     {
         public int? CustomerId { get; set; }
         public int? LeadStatusId { get; set; }
+        public int? ParentCustomerId { get; set; }
     }
 
     public class Search_Request : BaseSearchEntity
