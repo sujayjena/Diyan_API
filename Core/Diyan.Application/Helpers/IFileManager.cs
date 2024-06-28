@@ -55,7 +55,7 @@ namespace Diyan.Application.Helpers
             return result;
         }
 
-        public string UploadDocumentsBase64ToFile(string base64String, string folderPath, string? fileName)
+        public string?  UploadDocumentsBase64ToFile(string base64String, string folderPath, string? fileName)
         {
             string sFileName = string.Empty;
             try
@@ -85,7 +85,7 @@ namespace Diyan.Application.Helpers
 
         #region Upload
 
-        public string UploadDocuments(IFormFile file, string folderPath)
+        public string?  UploadDocuments(IFormFile file, string folderPath)
         {
             //string folderPath = $"{_environment.ContentRootPath}\\Uploads\\Documents\\";
 

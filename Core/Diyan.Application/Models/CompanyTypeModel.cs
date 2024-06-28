@@ -13,12 +13,12 @@ namespace Diyan.Application.Models
     public class CompanyType_Request : BaseEntity
     {
         public string? CompanyType { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class CompanyType_Response : BaseResponseEntity
     {
         public string? CompanyType { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 }

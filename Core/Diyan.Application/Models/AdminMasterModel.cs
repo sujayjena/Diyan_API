@@ -17,16 +17,16 @@ namespace Diyan.Application.Models
     public class Gender_Request : BaseEntity
     {
         [DefaultValue("")]
-        public string GenderName { get; set; }
+        public string?  GenderName { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class Gender_Response : BaseResponseEntity
     {
-        public string GenderName { get; set; }
+        public string?  GenderName { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     #endregion
@@ -35,20 +35,20 @@ namespace Diyan.Application.Models
     public class UOM_Request : BaseEntity
     {
         [DefaultValue("")]
-        public string UOMName { get; set; }
+        public string?  UOMName { get; set; }
 
         [DefaultValue("")]
-        public string UOMDesc { get; set; }
+        public string?  UOMDesc { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class UOM_Response : BaseResponseEntity
     {
-        public string UOMName { get; set; }
-        public string UOMDesc { get; set; }
+        public string?  UOMName { get; set; }
+        public string?  UOMDesc { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     #endregion
@@ -57,16 +57,16 @@ namespace Diyan.Application.Models
     public class MaritalStatus_Request : BaseEntity
     {
         [DefaultValue("")]
-        public string MaritalStatus { get; set; }
+        public string?  MaritalStatus { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class MaritalStatus_Response : BaseResponseEntity
     {
-        public string MaritalStatus { get; set; }
+        public string?  MaritalStatus { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     #endregion
@@ -75,16 +75,16 @@ namespace Diyan.Application.Models
     public class BloodGroup_Request : BaseEntity
     {
         [DefaultValue("")]
-        public string BloodGroup { get; set; }
+        public string?  BloodGroup { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class BloodGroup_Response : BaseResponseEntity
     {
-        public string BloodGroup { get; set; }
+        public string?  BloodGroup { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -92,16 +92,16 @@ namespace Diyan.Application.Models
     public class CustomerType_Request : BaseEntity
     {
         [DefaultValue("")]
-        public string CustomerType { get; set; }
+        public string?  CustomerType { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class CustomerType_Response : BaseResponseEntity
     {
-        public string CustomerType { get; set; }
+        public string?  CustomerType { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -113,18 +113,18 @@ namespace Diyan.Application.Models
 
         [DefaultValue("")]
         public string? PortDischarge { get; set; }
-        public int CountryId { get; set; }
+        public int? CountryId { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class PortDischarge_Response : BaseResponseEntity
     {
         public string? PortCode { get; set; }
         public string? PortDischarge { get; set; }
-        public int CountryId { get; set; }
+        public int? CountryId { get; set; }
         public string? CountryName { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -134,13 +134,13 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? PaperType { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class PaperType_Response : BaseResponseEntity
     {
         public string? PaperType { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -151,7 +151,7 @@ namespace Diyan.Application.Models
 
         [DefaultValue("")]
         public string? Brand { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class Brand_Response : BaseResponseEntity
@@ -159,7 +159,7 @@ namespace Diyan.Application.Models
         public int? PaperTypeId { get; set; }
         public string? PaperType { get; set; }
         public string? Brand { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -168,13 +168,13 @@ namespace Diyan.Application.Models
     {
         [DefaultValue("")]
         public string? TypeOfPackaging { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class TypeOfPackaging_Response : BaseResponseEntity
     {
         public string? TypeOfPackaging { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -184,13 +184,13 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? PackagingType { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class PackagingType_Response : BaseResponseEntity
     {
         public string? PackagingType { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -200,13 +200,13 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? ContainerType { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class ContainerType_Response : BaseResponseEntity
     {
         public string? ContainerType { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -216,13 +216,13 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? CurrencyType { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class CurrencyType_Response : BaseResponseEntity
     {
         public string? CurrencyType { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -232,13 +232,13 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? DeliveryTerms { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class DeliveryTerms_Response : BaseResponseEntity
     {
         public string? DeliveryTerms { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -248,13 +248,13 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? PaymentTerms { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class PaymentTerms_Response : BaseResponseEntity
     {
         public string? PaymentTerms { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -264,13 +264,13 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? ProductionStatus { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class ProductionStatus_Response : BaseResponseEntity
     {
         public string? ProductionStatus { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -280,13 +280,13 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? BRC { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class BRC_Response : BaseResponseEntity
     {
         public string? BRC { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -296,13 +296,13 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? Forwarding { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class Forwarding_Response : BaseResponseEntity
     {
         public string? Forwarding { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 
@@ -312,13 +312,13 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? TrackingStatus { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class TrackingStatus_Response : BaseResponseEntity
     {
         public string? TrackingStatus { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     #endregion
 }

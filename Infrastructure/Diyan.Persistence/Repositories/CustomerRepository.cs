@@ -224,7 +224,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@ContactName", parameters.ContactName);
             queryParameters.Add("@Username", parameters.Username);
-            queryParameters.Add("@Passwords", parameters.Passwords);
+            queryParameters.Add("@Passwords", !string.IsNullOrWhiteSpace(parameters.Passwords) ? EncryptDecryptHelper.EncryptString(parameters.Passwords) : string.Empty);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 

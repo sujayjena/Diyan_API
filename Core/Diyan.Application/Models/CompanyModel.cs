@@ -34,7 +34,7 @@ namespace Diyan.Application.Models
         public string? CompanyLogo_Base64 { get; set; }
         public int? NoofUserAdd { get; set; }
         public int? NoofBranchAdd { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class CompanySearch_Request : BaseSearchEntity
@@ -66,6 +66,6 @@ namespace Diyan.Application.Models
         public string? CompanyLogoURL { get; set; }
         public int? NoofUserAdd { get; set; }
         public int? NoofBranchAdd { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 }

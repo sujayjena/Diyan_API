@@ -27,7 +27,7 @@ namespace Diyan.Application.Models
         public int? DistrictId { get; set; }
         public int? Pincode { get; set; }
         public int? NoofUserAdd { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
     public class BranchSearch_Request : BaseSearchEntity
     {
@@ -51,7 +51,7 @@ namespace Diyan.Application.Models
         public string? DistrictName { get; set; }
         public int? Pincode { get; set; }
         public int? NoofUserAdd { get; set; }
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class BranchMapping_Request : BaseEntity
@@ -60,13 +60,13 @@ namespace Diyan.Application.Models
         public string? Action { get; set; }
         [JsonIgnore]
         public int? UserId { get; set; }
-        public int BranchId { get; set; }
+        public int? BranchId { get; set; }
     }
 
     public class BranchMapping_Response : BaseEntity
     {
         public int? UserId { get; set; }
         public int? BranchId { get; set; }
-        public string BranchName { get; set; }
+        public string?  BranchName { get; set; }
     }
 }

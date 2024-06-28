@@ -16,16 +16,16 @@ namespace Diyan.Application.Models
 
     public class Country_Request : BaseEntity
     {
-        public string CountryName { get; set; }
-        public string CountryCode { get; set; }
-        public bool? IsActive { get; set; }
+        public string?  CountryName { get; set; }
+        public string?  CountryCode { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class Country_Response : BaseResponseEntity
     {
-        public string CountryName { get; set; }
-        public string CountryCode { get; set; }
-        public bool? IsActive { get; set; }
+        public string?  CountryName { get; set; }
+        public string?  CountryCode { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     #endregion
@@ -34,16 +34,16 @@ namespace Diyan.Application.Models
 
     public class State_Request : BaseEntity
     {
-        public string StateName { get; set; }
+        public string?  StateName { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class State_Response : BaseResponseEntity
     {
-        public string StateName { get; set; }
+        public string?  StateName { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     #endregion
@@ -52,16 +52,16 @@ namespace Diyan.Application.Models
 
     public class District_Request : BaseEntity
     {
-        public string DistrictName { get; set; }
+        public string?  DistrictName { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class District_Response : BaseResponseEntity
     {
-        public string DistrictName { get; set; }
+        public string?  DistrictName { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     #endregion
@@ -76,24 +76,24 @@ namespace Diyan.Application.Models
 
         public int? DistrictId { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     public class Territories_Response : BaseResponseEntity
     {
         public int? CountryId { get; set; }
 
-        public string CountryName { get; set; }
+        public string?  CountryName { get; set; }
 
         public int? StateId { get; set; }
 
-        public string StateName { get; set; }
+        public string?  StateName { get; set; }
 
         public int? DistrictId { get; set; }
 
-        public string DistrictName { get; set; }
+        public string?  DistrictName { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool?  IsActive { get; set; }
     }
 
     #endregion
