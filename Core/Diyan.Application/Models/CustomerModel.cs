@@ -64,6 +64,7 @@ namespace Diyan.Application.Models
     public class LoginCredentials_Request : BaseEntity
     {
         public int? CustomerId { get; set; }
+        public string ContactName { get; set; }
         public string Username { get; set; }
         public string Passwords { get; set; }
         public bool? IsActive { get; set; }
@@ -144,6 +145,7 @@ namespace Diyan.Application.Models
     {
         public int? CustomerId { get; set; }
         public string CustomerName { get; set; }
+        public string ContactName { get; set; }
         public string Username { get; set; }
         public string Passwords { get; set; }
         public bool? IsActive { get; set; }

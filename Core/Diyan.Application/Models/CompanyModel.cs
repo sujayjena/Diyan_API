@@ -50,6 +50,7 @@ namespace Diyan.Application.Models
         public string? ContactNumber { get; set; }
         public string? Email { get; set; }
         public string? Website { get; set; }
+        public string? TaxNumber { get; set; }
         public string? AddressLine1 { get; set; }
         public string? AddressLine2 { get; set; }
         public int? CountryId { get; set; }

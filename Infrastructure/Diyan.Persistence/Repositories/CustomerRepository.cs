@@ -222,6 +222,7 @@ namespace Diyan.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
             queryParameters.Add("@CustomerId", parameters.CustomerId);
+            queryParameters.Add("@ContactName", parameters.ContactName);
             queryParameters.Add("@Username", parameters.Username);
             queryParameters.Add("@Passwords", parameters.Passwords);
             queryParameters.Add("@IsActive", parameters.IsActive);
