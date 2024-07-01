@@ -10,9 +10,9 @@ namespace Diyan.Application.Interfaces
 {
     public interface IManageTrackingRepository
     {
-        Task<int> SavePurchaseOrderTracking(PurchaseOrderTracking_Request parameters);
-        Task<IEnumerable<PurchaseOrderTracking_Response>> GetPurchaseOrderTrackingList(PurchaseOrderTrackingSearch_Request parameters);
-        Task<PurchaseOrderTracking_Response?> GetPurchaseOrderTrackingById(int Id);
+        Task<int> SavePurchaseOrder(PurchaseOrder_Request parameters);
+        Task<IEnumerable<PurchaseOrder_Response>> GetPurchaseOrderList(PurchaseOrderSearch_Request parameters);
+        Task<PurchaseOrder_Response?> GetPurchaseOrderById(int Id);
 
         Task<int> SavePIIssued(PIIssued_Request parameters);
         Task<IEnumerable<PIIssued_Response>> GetPIIssuedList(PIIssuedSearch_Request parameters);

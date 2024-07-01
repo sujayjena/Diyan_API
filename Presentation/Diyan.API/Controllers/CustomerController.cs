@@ -31,6 +31,7 @@ namespace Diyan.API.Controllers
         [AllowAnonymous]
         public async Task<ResponseModel> SaveCustomer(Customer_Request parameters)
         {
+            bool bIsCustomerDeleted = false;
             int result = await _customerRepository.SaveCustomer(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
@@ -57,77 +58,114 @@ namespace Diyan.API.Controllers
             {
                 _response.Message = "Record details saved sucessfully";
 
-               
-                //if (result > 0)
-                //{
-                //    // Add data into Contact details
-                //    foreach (var items in parameters.ContactDetailsList)
-                //    {
-                //        var vContactDetails = new ContactDetails_Request()
-                //        {
-                //            Id = items.Id,
-                //            CustomerId = result,
-                //            ContactPerson = items.ContactPerson,
-                //            MobileNo = items.MobileNo,
-                //            EmailId = items.EmailId,
-                //            IsActive = items.IsActive,
-                //        };
+                if (result > 0 && parameters.ModuleType == "Cust")
+                {
+                    string strContactErrorMsg = "";
+                    string strLoginErrorMsg = "";
 
-                //        int resultContactDetails = await _customerRepository.SaveContactDetails(vContactDetails);
-                //    }
+                    // Add data into Contact details
+                    foreach (var items in parameters.ContactDetailsList)
+                    {
+                        var vContactDetails = new ContactDetails_Request()
+                        {
+                            Id = items.Id,
+                            CustomerId = result,
+                            ContactPerson = items.ContactPerson,
+                            MobileNo = items.MobileNo,
+                            EmailId = items.EmailId,
+                            IsActive = items.IsActive,
+                        };
 
-                //    // Add data into Billing details
-                //    foreach (var items in parameters.BillingDetailsList)
-                //    {
-                //        var vBillingDetails = new Billing_ShippingDetails_Request()
-                //        {
-                //            Id = items.Id,
-                //            CustomerId = result,
-                //            StreetName = items.StreetName,
-                //            CountryId = items.CountryId,
-                //            StateId = items.StateId,
-                //            PostalZipCodde = items.PostalZipCodde,
-                //            IsActive = items.IsActive,
-                //        };
+                        int resultContactDetails = await _customerRepository.SaveContactDetails(vContactDetails);
 
-                //        int resultBillingDetails = await _customerRepository.SaveBillingDetails(vBillingDetails);
-                //    }
+                        if (resultContactDetails == (int)SaveOperationEnums.NoRecordExists)
+                        {
+                            strContactErrorMsg = "No record exists in Contact detail";
+                        }
+                        else if (resultContactDetails == (int)SaveOperationEnums.ReocrdExists)
+                        {
+                            strContactErrorMsg = "Record is already exists in Contact detail";
+                        }
+                        else if (resultContactDetails == (int)SaveOperationEnums.NoResult)
+                        {
+                            strContactErrorMsg = "Something went wrong in Contact detail, please try again";
+                        }
+                        else if (resultContactDetails == -3)
+                        {
+                            strContactErrorMsg = "Mobile Number is exists in Contact detail";
+                        }
 
-                //    // Add data into Shipping details
-                //    foreach (var items in parameters.ShippingDetailsList)
-                //    {
-                //        var vShippingDetails = new Billing_ShippingDetails_Request()
-                //        {
-                //            Id = items.Id,
-                //            CustomerId = result,
-                //            StreetName = items.StreetName,
-                //            CountryId = items.CountryId,
-                //            StateId = items.StateId,
-                //            PostalZipCodde = items.PostalZipCodde,
-                //            IsActive = items.IsActive,
-                //        };
+                        if (!string.IsNullOrWhiteSpace(strContactErrorMsg))
+                        {
+                            _response.Message = strContactErrorMsg;
 
-                //        int resultShippingDetails = await _customerRepository.SaveShippingDetails(vShippingDetails);
-                //    }
+                            int resultDeleteCustomer = await _customerRepository.DeleteCustomer(result);
+                            if (resultDeleteCustomer > 0)
+                            {
+                                bIsCustomerDeleted = true;
+                            }
+                        }
+                    }
 
-                //    // Add data into Login Credentials details
-                //    foreach (var items in parameters.LoginCredntials)
-                //    {
-                //        var vLoginCredentials = new LoginCredentials_Request()
-                //        {
-                //            Id = items.Id,
-                //            CustomerId = result,
-                //            Username = items.Username,
-                //            Passwords = items.Passwords,
-                //            IsActive = items.IsActive,
-                //        };
+                    if (bIsCustomerDeleted == false)
+                    {
+                        // Add data into Billing details
+                        foreach (var items in parameters.BillingDetailsList)
+                        {
+                            var vBillingDetails = new Billing_ShippingDetails_Request()
+                            {
+                                Id = items.Id,
+                                CustomerId = result,
+                                StreetName = items.StreetName,
+                                CountryId = items.CountryId,
+                                StateId = items.StateId,
+                                PostalZipCodde = items.PostalZipCodde,
+                                IsActive = items.IsActive,
+                            };
 
-                //        int resultLoginCredentials = await _customerRepository.SaveLoginCredentials(vLoginCredentials);
-                //    }
-                //}
+                            int resultBillingDetails = await _customerRepository.SaveBillingDetails(vBillingDetails);
+                        }
+
+                        // Add data into Shipping details
+                        foreach (var items in parameters.ShippingDetailsList)
+                        {
+                            var vShippingDetails = new Billing_ShippingDetails_Request()
+                            {
+                                Id = items.Id,
+                                CustomerId = result,
+                                StreetName = items.StreetName,
+                                CountryId = items.CountryId,
+                                StateId = items.StateId,
+                                PostalZipCodde = items.PostalZipCodde,
+                                IsActive = items.IsActive,
+                            };
+
+                            int resultShippingDetails = await _customerRepository.SaveShippingDetails(vShippingDetails);
+                        }
+
+                        //// Add data into Login Credentials details
+                        //foreach (var items in parameters.LoginCredntials)
+                        //{
+                        //    var vLoginCredentials = new LoginCredentials_Request()
+                        //    {
+                        //        Id = items.Id,
+                        //        CustomerId = result,
+                        //        Username = items.Username,
+                        //        Passwords = items.Passwords,
+                        //        IsActive = items.IsActive,
+                        //    };
+
+                        //    int resultLoginCredentials = await _customerRepository.SaveLoginCredentials(vLoginCredentials);
+                        //}
+                    }
+                }
             }
 
-            _response.Id = result;
+            if (bIsCustomerDeleted == true)
+            {
+                _response.Id = 0;
+            }
+
             return _response;
         }
 

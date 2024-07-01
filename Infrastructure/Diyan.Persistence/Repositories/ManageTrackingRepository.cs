@@ -20,7 +20,7 @@ namespace Diyan.Persistence.Repositories
             _configuration = configuration;
         }
 
-        public async Task<int> SavePurchaseOrderTracking(PurchaseOrderTracking_Request parameters)
+        public async Task<int> SavePurchaseOrder(PurchaseOrder_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
@@ -45,10 +45,10 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            return await SaveByStoredProcedure<int>("SavePurchaseOrderTracking", queryParameters);
+            return await SaveByStoredProcedure<int>("SavePurchaseOrder", queryParameters);
         }
 
-        public async Task<IEnumerable<PurchaseOrderTracking_Response>> GetPurchaseOrderTrackingList(PurchaseOrderTrackingSearch_Request parameters)
+        public async Task<IEnumerable<PurchaseOrder_Response>> GetPurchaseOrderList(PurchaseOrderSearch_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@CustomerId", parameters.CustomerId);
@@ -61,25 +61,27 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<PurchaseOrderTracking_Response>("GetPurchaseOrderTrackingList", queryParameters);
+            var result = await ListByStoredProcedure<PurchaseOrder_Response>("GetPurchaseOrderList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;
         }
 
-        public async Task<PurchaseOrderTracking_Response?> GetPurchaseOrderTrackingById(int Id)
+        public async Task<PurchaseOrder_Response?> GetPurchaseOrderById(int Id)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", Id);
-            return (await ListByStoredProcedure<PurchaseOrderTracking_Response>("GetPurchaseOrderTrackingById", queryParameters)).FirstOrDefault();
+            return (await ListByStoredProcedure<PurchaseOrder_Response>("GetPurchaseOrderById", queryParameters)).FirstOrDefault();
         }
+
+
 
         public async Task<int> SavePIIssued(PIIssued_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
             queryParameters.Add("@Id", parameters.Id);
-            queryParameters.Add("@POTrackingId", parameters.POTrackingId);
+            queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
             queryParameters.Add("@PIIssueDate", parameters.PIIssueDate);
             queryParameters.Add("@PINumber", parameters.PINumber);
             queryParameters.Add("@PIImage", parameters.PIImage);
@@ -93,7 +95,7 @@ namespace Diyan.Persistence.Repositories
         public async Task<IEnumerable<PIIssued_Response>> GetPIIssuedList(PIIssuedSearch_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
-            queryParameters.Add("@POTrackingId", parameters.POTrackingId);
+            queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

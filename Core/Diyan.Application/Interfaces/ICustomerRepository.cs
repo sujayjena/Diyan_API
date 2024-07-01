@@ -14,6 +14,8 @@ namespace Diyan.Application.Interfaces
 
         Task<int> SaveCustomer(Customer_Request parameters);
 
+        Task<int> DeleteCustomer(int Id);
+
         Task<IEnumerable<Customer_Response>> GetCustomerList(CustomerSearch_Request parameters);
 
         Task<Customer_Response?> GetCustomerById(long Id);

@@ -26,6 +26,7 @@ namespace Diyan.Persistence.Repositories
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@ModuleType", parameters.ModuleType);
             queryParameters.Add("@CustomerName", parameters.CustomerName);
             queryParameters.Add("@MobileNo", parameters.MobileNo);
             queryParameters.Add("@ParentCustomerId", parameters.ParentCustomerId);
@@ -39,6 +40,14 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SaveCustomer", queryParameters);
+        }
+
+        public async Task<int> DeleteCustomer(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeleteCustomer", queryParameters);
         }
 
         public async Task<IEnumerable<Customer_Response>> GetCustomerList(CustomerSearch_Request parameters)

@@ -27,7 +27,7 @@ namespace Diyan.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> SavePurchaseOrderTracking(PurchaseOrderTracking_Request parameters)
+        public async Task<ResponseModel> SavePurchaseOrder(PurchaseOrder_Request parameters)
         {
             // PO Upload
             if (parameters! != null && !string.IsNullOrWhiteSpace(parameters.POImage_Base64))
@@ -40,7 +40,7 @@ namespace Diyan.API.Controllers
                 }
             }
 
-            int result = await _manageTrackingRepository.SavePurchaseOrderTracking(parameters);
+            int result = await _manageTrackingRepository.SavePurchaseOrder(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {
@@ -74,7 +74,7 @@ namespace Diyan.API.Controllers
 
                     var vPIIssuedObj = new PIIssued_Request()
                     {
-                        POTrackingId = result,
+                        PurchaseOrderId = result,
                         PIIssueDate = vPIIssuedItem.PIIssueDate,
                         PINumber = vPIIssuedItem.PINumber,
                         PIImage = vPIIssuedItem.PIImage,
@@ -88,12 +88,11 @@ namespace Diyan.API.Controllers
             return _response;
         }
 
-
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetPurchaseOrderTrackingList(PurchaseOrderTrackingSearch_Request parameters)
+        public async Task<ResponseModel> GetPurchaseOrderList(PurchaseOrderSearch_Request parameters)
         {
-            IEnumerable<PurchaseOrderTracking_Response> lstUsers = await _manageTrackingRepository.GetPurchaseOrderTrackingList(parameters);
+            IEnumerable<PurchaseOrder_Response> lstUsers = await _manageTrackingRepository.GetPurchaseOrderList(parameters);
             _response.Data = lstUsers.ToList();
             _response.Total = parameters.Total;
             return _response;
@@ -101,7 +100,7 @@ namespace Diyan.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetPurchaseOrderTrackingById(int Id)
+        public async Task<ResponseModel> GetPurchaseOrderById(int Id)
         {
             if (Id <= 0)
             {
@@ -109,13 +108,13 @@ namespace Diyan.API.Controllers
             }
             else
             {
-                var vResultObj = await _manageTrackingRepository.GetPurchaseOrderTrackingById(Id);
+                var vResultObj = await _manageTrackingRepository.GetPurchaseOrderById(Id);
 
                 if (vResultObj != null)
                 {
                     var piIssuedSearch = new PIIssuedSearch_Request()
                     {
-                        POTrackingId = vResultObj.Id
+                        PurchaseOrderId = vResultObj.Id
                     };
 
                     var vPIIssuedObj = await _manageTrackingRepository.GetPIIssuedList(piIssuedSearch);
@@ -125,7 +124,7 @@ namespace Diyan.API.Controllers
                         var vPIIssued = new PIIssued_Response()
                         {
                             Id = item.Id,
-                            POTrackingId = item.POTrackingId,
+                            PurchaseOrderId = item.PurchaseOrderId,
                             PIIssueDate = item.PIIssueDate,
                             PINumber = item.PINumber,
                             PIOriginalFileName = item.PIOriginalFileName,

@@ -16,14 +16,16 @@ namespace Diyan.Application.Models
 
     public class Customer_Request : BaseEntity
     {
-        //public Customer_Request()
-        //{
-        //    ContactDetailsList = new List<ContactDetails_Request>();
-        //    BillingDetailsList = new List<Billing_ShippingDetails_Request>();
-        //    ShippingDetailsList = new List<Billing_ShippingDetails_Request>();
-        //    LoginCredntials = new List<LoginCredentials_Request>();
-        //}
+        public Customer_Request()
+        {
+            ContactDetailsList = new List<ContactDetails_Request>();
+            BillingDetailsList = new List<Billing_ShippingDetails_Request>();
+            ShippingDetailsList = new List<Billing_ShippingDetails_Request>();
+            //LoginCredntials = new List<LoginCredentials_Request>();
+        }
 
+        [DefaultValue("Cust\\Lead")]
+        public string? ModuleType { get; set; }
         public string? CustomerName { get; set; }
         public string? MobileNo { get; set; }
         public int? ParentCustomerId { get; set; }
@@ -34,9 +36,9 @@ namespace Diyan.Application.Models
         public string? ContactName { get; set; }
         public int? LeadStatusId { get; set; }
         public bool? IsActive { get; set; }
-        //public List<ContactDetails_Request>? ContactDetailsList { get; set; }
-        //public List<Billing_ShippingDetails_Request>? BillingDetailsList { get; set; }
-        //public List<Billing_ShippingDetails_Request>? ShippingDetailsList { get; set; }
+        public List<ContactDetails_Request>? ContactDetailsList { get; set; }
+        public List<Billing_ShippingDetails_Request>? BillingDetailsList { get; set; }
+        public List<Billing_ShippingDetails_Request>? ShippingDetailsList { get; set; }
         //public List<LoginCredentials_Request>? LoginCredntials { get; set; }
     }
 
