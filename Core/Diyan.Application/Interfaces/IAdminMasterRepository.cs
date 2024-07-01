@@ -168,5 +168,14 @@ namespace Diyan.Application.Interfaces
         Task<TrackingStatus_Response?> GetTrackingStatusById(int Id);
 
         #endregion
+
+        #region Payment Received
+        Task<int> SavePaymentReceived(PaymentReceived_Request parameters);
+
+        Task<IEnumerable<PaymentReceived_Response>> GetPaymentReceivedList(BaseSearchEntity parameters);
+
+        Task<PaymentReceived_Response?> GetPaymentReceivedById(int Id);
+
+        #endregion
     }
 }

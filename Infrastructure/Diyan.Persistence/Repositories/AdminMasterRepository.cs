@@ -688,5 +688,42 @@ namespace Diyan.Persistence.Repositories
         }
 
         #endregion
+
+        #region Payment Received
+        public async Task<int> SavePaymentReceived(PaymentReceived_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@PaymentReceived", parameters.PaymentReceived);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SavePaymentReceived", queryParameters);
+        }
+
+        public async Task<IEnumerable<PaymentReceived_Response>> GetPaymentReceivedList(BaseSearchEntity parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<PaymentReceived_Response>("GetPaymentReceivedList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<PaymentReceived_Response?> GetPaymentReceivedById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<PaymentReceived_Response>("GetPaymentReceivedById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
     }
 }

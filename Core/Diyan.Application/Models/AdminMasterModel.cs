@@ -321,4 +321,20 @@ namespace Diyan.Application.Models
         public bool?  IsActive { get; set; }
     }
     #endregion
+
+    #region Payment Received
+    public class PaymentReceived_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? PaymentReceived { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    public class PaymentReceived_Response : BaseResponseEntity
+    {
+        public string? PaymentReceived { get; set; }
+        public bool? IsActive { get; set; }
+    }
+    #endregion
 }
