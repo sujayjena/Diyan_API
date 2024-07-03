@@ -13,6 +13,7 @@ namespace Diyan.Persistence.Repositories
         [DefaultValue("")]
         public string SearchText { get; set; }
 
+        [DefaultValue(null)]
         public bool? IsActive { get; set; }
     }
 }
