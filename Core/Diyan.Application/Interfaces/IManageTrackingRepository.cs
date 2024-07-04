@@ -14,15 +14,17 @@ namespace Diyan.Application.Interfaces
         #region Purchase Order
 
         Task<int> SavePurchaseOrder(PurchaseOrder_Request parameters);
-        Task<IEnumerable<PurchaseOrder_Response>> GetPurchaseOrderList(PurchaseOrderSearch_Request parameters);
-        Task<PurchaseOrder_Response?> GetPurchaseOrderById(int Id);
+        Task<IEnumerable<PurchaseOrderList_Response>> GetPurchaseOrderList(PurchaseOrderSearch_Request parameters);
+        Task<PurchaseOrderDetail_Response?> GetPurchaseOrderById(int Id);
 
         #endregion
 
         #region PI Issue
 
         Task<int> SavePIIssued(PIIssued_Request parameters);
-        Task<IEnumerable<PIIssued_Response>> GetPIIssuedList(PIIssuedSearch_Request parameters);
+        Task<IEnumerable<PIIssued_Response>> GetPIIssuedList(PIIssued_Search parameters);
+
+        Task<IEnumerable<PIIssuedLog_Response>> GetPIIssuedLogListById(PIIssuedLog_Search parameters);
 
         #endregion
 

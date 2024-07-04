@@ -45,15 +45,17 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@IsActive", parameters.IsActive);
 
             queryParameters.Add("@PII_IsClosed", parameters.PII_IsClosed);
+            queryParameters.Add("@PIC_IsConfirmed", parameters.PIC_IsConfirmed);
+
             queryParameters.Add("@PLR_PaymentOrLCReceived", parameters.PLR_PaymentOrLCReceived);
-            queryParameters.Add("@PLR_PaymentOrLCClosed", parameters.PLR_PaymentOrLCClosed);
+            queryParameters.Add("@PLR_IsPaymentOrLCClosed", parameters.PLR_IsPaymentOrLCClosed);
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SavePurchaseOrder", queryParameters);
         }
 
-        public async Task<IEnumerable<PurchaseOrder_Response>> GetPurchaseOrderList(PurchaseOrderSearch_Request parameters)
+        public async Task<IEnumerable<PurchaseOrderList_Response>> GetPurchaseOrderList(PurchaseOrderSearch_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@CustomerId", parameters.CustomerId);
@@ -66,17 +68,17 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<PurchaseOrder_Response>("GetPurchaseOrderList", queryParameters);
+            var result = await ListByStoredProcedure<PurchaseOrderList_Response>("GetPurchaseOrderList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;
         }
 
-        public async Task<PurchaseOrder_Response?> GetPurchaseOrderById(int Id)
+        public async Task<PurchaseOrderDetail_Response?> GetPurchaseOrderById(int Id)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", Id);
-            return (await ListByStoredProcedure<PurchaseOrder_Response>("GetPurchaseOrderById", queryParameters)).FirstOrDefault();
+            return (await ListByStoredProcedure<PurchaseOrderDetail_Response>("GetPurchaseOrderById", queryParameters)).FirstOrDefault();
         }
 
         #endregion
@@ -102,7 +104,7 @@ namespace Diyan.Persistence.Repositories
             return await SaveByStoredProcedure<int>("SavePIIssued", queryParameters);
         }
 
-        public async Task<IEnumerable<PIIssued_Response>> GetPIIssuedList(PIIssuedSearch_Request parameters)
+        public async Task<IEnumerable<PIIssued_Response>> GetPIIssuedList(PIIssued_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
@@ -120,6 +122,16 @@ namespace Diyan.Persistence.Repositories
 
             var result = await ListByStoredProcedure<PIIssued_Response>("GetPIIssuedList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<IEnumerable<PIIssuedLog_Response>> GetPIIssuedLogListById(PIIssuedLog_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@PIIssuedId", parameters.PIIssuedId);
+
+            var result = await ListByStoredProcedure<PIIssuedLog_Response>("GetPIIssuedLogListById", queryParameters);
 
             return result;
         }
