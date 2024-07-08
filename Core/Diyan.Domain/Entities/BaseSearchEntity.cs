@@ -11,7 +11,7 @@ namespace Diyan.Persistence.Repositories
     public class BaseSearchEntity : BasePaninationEntity
     {
         [DefaultValue("")]
-        public string SearchText { get; set; }
+        public string?SearchText { get; set; }
 
         [DefaultValue(null)]
         public bool? IsActive { get; set; }

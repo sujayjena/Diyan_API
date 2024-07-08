@@ -189,7 +189,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<PO_PaymentReceived_Response>("GetPaymentReceivedList", queryParameters);
+            var result = await ListByStoredProcedure<PO_PaymentReceived_Response>("GetPurchaseOrderPaymentList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;

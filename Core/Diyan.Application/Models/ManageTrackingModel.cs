@@ -69,6 +69,7 @@ namespace Diyan.Application.Models
 
     public class PurchaseOrderList_Response : BaseResponseEntity
     {
+        public string? TrackingNumber { get; set; }
         public int? CustomerId { get; set; }
         public string? CustomerName { get; set; }
         public string? ParentCustomer { get; set; }
@@ -111,6 +112,8 @@ namespace Diyan.Application.Models
             PIConfirmationList = new List<PIConfirmation_Response>();
             PaymentReceived_Or_LCReceivedDetail = new PO_PaymentReceived_Or_LCReceived_Resonse();
         }
+
+        public string? TrackingNumber { get; set; }
         public int? CustomerId { get; set; }
         public string? CustomerName { get; set; }
         public string? ParentCustomer { get; set; }
@@ -239,7 +242,7 @@ namespace Diyan.Application.Models
         public string? PIOriginalFileName { get; set; }
         public string? PIImageURL { get; set; }
         public int? StatusId { get; set; }
-        public string StatusName { get; set; }
+        public string?StatusName { get; set; }
 
         public List<PIIssuedLog_Response>? PIIssuedLogList { get; set; }
     }
@@ -247,12 +250,12 @@ namespace Diyan.Application.Models
     public class PIIssuedLog_Response
     {
         public int? PIIssuedId { get; set; }
-        public string Remarks { get; set; }
+        public string?Remarks { get; set; }
         public int? StatusId { get; set; }
-        public string StatusName { get; set; }
+        public string?StatusName { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int? CreatedBy { get; set; }
-        public string CreatorName { get; set; }
+        public string?CreatorName { get; set; }
     }
 
     #endregion
@@ -263,13 +266,13 @@ namespace Diyan.Application.Models
     {
         public int? Id { get; set; }
         public DateTime? PIIssueDate { get; set; }
-        public string PINumber { get; set; }
+        public string?PINumber { get; set; }
         public string? PIImage { get; set; }
         public string? PIOriginalFileName { get; set; }
         public string? PIImageURL { get; set; }
-        public string Remark { get; set; }
+        public string?Remark { get; set; }
         public int? StatusId { get; set; }
-        public string StatusName { get; set; }
+        public string?StatusName { get; set; }
     }
 
     #endregion
