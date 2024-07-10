@@ -41,5 +41,17 @@ namespace Diyan.Application.Interfaces
         Task<IEnumerable<PO_LCReceived_Response>> GetLCReceivedList(PO_PaymentReceived_Or_LCReceived_Search parameters);
 
         #endregion
+
+        #region Containers Under Loading
+
+        Task<int> SaveContainersUnderLoading(ContainersUnderLoading_Request parameters);
+
+        Task<int> SaveContainersUnderLoadingImages(ContainersUnderLoadingImages_Request parameters);
+
+        Task<IEnumerable<ContainersUnderLoading_Response>> GetContainersUnderLoadingById(ContainersUnderLoading_Search parameters);
+
+        Task<IEnumerable<ContainersUnderLoadingImages_Response>> GetContainersUnderLoadingImagesById(ContainersUnderLoadingImages_Search parameters);
+
+        #endregion
     }
 }

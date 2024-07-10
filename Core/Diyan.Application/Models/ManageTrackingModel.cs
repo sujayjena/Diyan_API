@@ -24,6 +24,7 @@ namespace Diyan.Application.Models
         public PurchaseOrder_Request()
         {
             PIIssuedList = new List<PIIssued_Request>();
+            ContainersUnderLoadingList = new List<ContainersUnderLoading_Request>();
         }
         public int? CustomerId { get; set; }
         public int? PO_PortDischargeId { get; set; }
@@ -62,9 +63,40 @@ namespace Diyan.Application.Models
         public bool? PLR_IsPaymentOrLCClosed { get; set; }
 
 
+
+        [DefaultValue(false)]
+        public bool? OA_IsOrderAccepted { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? OA_OrderAcceptedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? OUP_IsOrderUnderProcess { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? OUP_OrderUnderProcessDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? BI_IsBookingIssueAccepted { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? BI_BookingIssueAcceptedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? CUL_IsContainersUnderLoadingClose { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? CUL_ContainersUnderLoadingClosedDate { get; set; }
+
+
         public List<PIIssued_Request>? PIIssuedList { get; set; }
 
         public PO_PaymentReceived_Or_LCReceived_Request? PaymentReceived_Or_LCReceivedDetails { get; set; }
+
+        public List<ContainersUnderLoading_Request>? ContainersUnderLoadingList { get; set; }
     }
 
     public class PurchaseOrderList_Response : BaseResponseEntity
@@ -102,6 +134,29 @@ namespace Diyan.Application.Models
 
         [DefaultValue(false)]
         public bool? IsActive { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? PII_IsClosed { get; set; }
+
+        [DefaultValue(false)]
+        public bool? PIC_IsConfirmed { get; set; }
+
+        [DefaultValue(false)]
+        public bool? PLR_IsPaymentOrLCClosed { get; set; }
+
+        [DefaultValue(false)]
+        public bool? OA_IsOrderAccepted { get; set; }
+
+        [DefaultValue(false)]
+        public bool? OUP_IsOrderUnderProcess { get; set; }
+
+        [DefaultValue(false)]
+        public bool? BI_IsBookingIssueAccepted { get; set; }
+
+        [DefaultValue(false)]
+        public bool? CUL_IsContainersUnderLoadingClose { get; set; }
+
     }
 
     public class PurchaseOrderDetail_Response : BaseResponseEntity
@@ -111,6 +166,7 @@ namespace Diyan.Application.Models
             PIIssuedList = new List<PIIssued_Response>();
             PIConfirmationList = new List<PIConfirmation_Response>();
             PaymentReceived_Or_LCReceivedDetail = new PO_PaymentReceived_Or_LCReceived_Resonse();
+            ContainersUnderLoadingList = new List<ContainersUnderLoading_Response>();
         }
 
         public string? TrackingNumber { get; set; }
@@ -157,10 +213,10 @@ namespace Diyan.Application.Models
 
         [DefaultValue(false)]
         public bool? PIC_IsConfirmed { get; set; }
-        
+
         [DefaultValue(null)]
         public DateTime? PIC_CloseDate { get; set; }
-        
+
 
 
         [DefaultValue(0)]
@@ -176,11 +232,45 @@ namespace Diyan.Application.Models
         public DateTime? PLR_PaymentOrLCClosedDate { get; set; }
 
 
+
+        [DefaultValue(false)]
+        public bool? OA_IsOrderAccepted { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? OA_OrderAcceptedDate { get; set; }
+
+
+
+        [DefaultValue(false)]
+        public bool? OUP_IsOrderUnderProcess { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? OUP_OrderUnderProcessDate { get; set; }
+
+
+
+        [DefaultValue(false)]
+        public bool? BI_IsBookingIssueAccepted { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? BI_BookingIssueAcceptedDate { get; set; }
+
+
+
+        [DefaultValue(false)]
+        public bool? CUL_IsContainersUnderLoadingClose { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? CUL_ContainersUnderLoadingClosedDate { get; set; }
+
+
         public List<PIIssued_Response>? PIIssuedList { get; set; }
 
         public List<PIConfirmation_Response>? PIConfirmationList { get; set; }
 
         public PO_PaymentReceived_Or_LCReceived_Resonse? PaymentReceived_Or_LCReceivedDetail { get; set; }
+
+        public List<ContainersUnderLoading_Response>? ContainersUnderLoadingList { get; set; }
     }
 
 
@@ -242,7 +332,7 @@ namespace Diyan.Application.Models
         public string? PIOriginalFileName { get; set; }
         public string? PIImageURL { get; set; }
         public int? StatusId { get; set; }
-        public string?StatusName { get; set; }
+        public string? StatusName { get; set; }
 
         public List<PIIssuedLog_Response>? PIIssuedLogList { get; set; }
     }
@@ -250,12 +340,12 @@ namespace Diyan.Application.Models
     public class PIIssuedLog_Response
     {
         public int? PIIssuedId { get; set; }
-        public string?Remarks { get; set; }
+        public string? Remarks { get; set; }
         public int? StatusId { get; set; }
-        public string?StatusName { get; set; }
+        public string? StatusName { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int? CreatedBy { get; set; }
-        public string?CreatorName { get; set; }
+        public string? CreatorName { get; set; }
     }
 
     #endregion
@@ -266,13 +356,13 @@ namespace Diyan.Application.Models
     {
         public int? Id { get; set; }
         public DateTime? PIIssueDate { get; set; }
-        public string?PINumber { get; set; }
+        public string? PINumber { get; set; }
         public string? PIImage { get; set; }
         public string? PIOriginalFileName { get; set; }
         public string? PIImageURL { get; set; }
-        public string?Remark { get; set; }
+        public string? Remark { get; set; }
         public int? StatusId { get; set; }
-        public string?StatusName { get; set; }
+        public string? StatusName { get; set; }
     }
 
     #endregion
@@ -404,6 +494,67 @@ namespace Diyan.Application.Models
         public string? ImageURL { get; set; }
     }
 
+
+    #endregion
+
+    #region Containers UnderLoading Images
+
+    public class ContainersUnderLoading_Search
+    {
+        [DefaultValue(0)]
+        public int? PurchaseOrderId { get; set; }
+    }
+
+    public class ContainersUnderLoadingImages_Search
+    {
+        [DefaultValue(0)]
+        public int? ContainersUnderLoadingId { get; set; }
+    }
+
+    public class ContainersUnderLoading_Request : BaseEntity
+    {
+        public ContainersUnderLoading_Request()
+        {
+            ContainersUnderLoadingImagesList = new List<ContainersUnderLoadingImages_Request>();
+        }
+
+        [JsonIgnore]
+        public int? PurchaseOrderId { get; set; }
+        public int? ContainerCount { get; set; }
+
+        public List<ContainersUnderLoadingImages_Request>? ContainersUnderLoadingImagesList { get; set; }
+    }
+
+    public class ContainersUnderLoadingImages_Request : BaseEntity
+    {
+        [JsonIgnore]
+        public int? ContainersUnderLoadingId { get; set; }
+        public string ContainerImage { get; set; }
+        public string ContainerOriginalFileName { get; set; }
+        public string? ContainerOriginalImage_Base64 { get; set; }
+    }
+
+    public class ContainersUnderLoading_Response : BaseResponseEntity
+    {
+        public ContainersUnderLoading_Response()
+        {
+            ContainersUnderLoadingImagesList = new List<ContainersUnderLoadingImages_Response>();
+        }
+
+        [JsonIgnore]
+        public int? PurchaseOrderId { get; set; }
+        public int? ContainerCount { get; set; }
+
+        public List<ContainersUnderLoadingImages_Response>? ContainersUnderLoadingImagesList { get; set; }
+    }
+
+    public class ContainersUnderLoadingImages_Response : BaseEntity
+    {
+        public int? ContainersUnderLoadingId { get; set; }
+        public string ContainerImage { get; set; }
+        public string ContainerOriginalFileName { get; set; }
+        public string ContainerImageURL { get; set; }
+    }
 
     #endregion
 }

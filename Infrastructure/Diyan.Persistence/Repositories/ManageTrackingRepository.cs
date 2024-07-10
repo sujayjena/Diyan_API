@@ -50,6 +50,18 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PLR_PaymentOrLCReceived", parameters.PLR_PaymentOrLCReceived);
             queryParameters.Add("@PLR_IsPaymentOrLCClosed", parameters.PLR_IsPaymentOrLCClosed);
 
+            queryParameters.Add("@OA_IsOrderAccepted", parameters.OA_IsOrderAccepted);
+            queryParameters.Add("@OA_OrderAcceptedDate", parameters.OA_OrderAcceptedDate)
+                ;
+            queryParameters.Add("@OUP_IsOrderUnderProcess", parameters.OUP_IsOrderUnderProcess);
+            queryParameters.Add("@OUP_OrderUnderProcessDate", parameters.OUP_OrderUnderProcessDate);
+
+            queryParameters.Add("@BI_IsBookingIssueAccepted", parameters.BI_IsBookingIssueAccepted);
+            queryParameters.Add("@BI_BookingIssueAcceptedDate", parameters.BI_BookingIssueAcceptedDate);
+
+            queryParameters.Add("@CUL_IsContainersUnderLoadingClose", parameters.CUL_IsContainersUnderLoadingClose);
+            queryParameters.Add("@CUL_ContainersUnderLoadingClosedDate", parameters.CUL_ContainersUnderLoadingClosedDate);
+
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SavePurchaseOrder", queryParameters);
@@ -221,6 +233,58 @@ namespace Diyan.Persistence.Repositories
 
             var result = await ListByStoredProcedure<PO_LCReceived_Response>("GetLCReceivedList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        #endregion
+
+        #region Containers Under Loading
+
+        public async Task<int> SaveContainersUnderLoading(ContainersUnderLoading_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
+            queryParameters.Add("@ContainerCount", parameters.ContainerCount);
+
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveContainersUnderLoading", queryParameters);
+        }
+
+        public async Task<int> SaveContainersUnderLoadingImages(ContainersUnderLoadingImages_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@ContainersUnderLoadingId", parameters.ContainersUnderLoadingId);
+            queryParameters.Add("@ContainerImage", parameters.ContainerImage);
+            queryParameters.Add("@ContainerOriginalFileName", parameters.ContainerOriginalFileName);
+
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveContainersUnderLoadingImages", queryParameters);
+        }
+
+
+        public async Task<IEnumerable<ContainersUnderLoading_Response>> GetContainersUnderLoadingById(ContainersUnderLoading_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.PurchaseOrderId);
+
+            var result = await ListByStoredProcedure<ContainersUnderLoading_Response>("GetContainersUnderLoadingById", queryParameters);
+
+            return result;
+        }
+
+        public async Task<IEnumerable<ContainersUnderLoadingImages_Response>> GetContainersUnderLoadingImagesById(ContainersUnderLoadingImages_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.ContainersUnderLoadingId);
+
+            var result = await ListByStoredProcedure<ContainersUnderLoadingImages_Response>("GetContainersUnderLoadingImagesById", queryParameters);
 
             return result;
         }

@@ -43,7 +43,7 @@ namespace Diyan.API.Controllers
                 }
             }
 
-            if (parameters.Id > 0 && parameters.PaymentReceived_Or_LCReceivedDetails != null && parameters.PO_IsPOStatusClosed == true && parameters.PII_IsClosed == true && parameters.PIC_IsConfirmed == true)
+            if (parameters.Id > 0 && parameters.PaymentReceived_Or_LCReceivedDetails != null)
             {
                 parameters.PLR_PaymentOrLCReceived = parameters.PaymentReceived_Or_LCReceivedDetails.PaymentOrLCReceived;
                 parameters.PLR_IsPaymentOrLCClosed = parameters.PaymentReceived_Or_LCReceivedDetails.PaymentOrLCClosed;
@@ -107,7 +107,6 @@ namespace Diyan.API.Controllers
 
                 #endregion
 
-
                 #region Payment Received Or LC Received
 
                 if (parameters.Id > 0 && vResultPurchaseOrderObj.PO_IsPOStatusClosed == true && vResultPurchaseOrderObj.PII_IsClosed == true && vResultPurchaseOrderObj.PIC_IsConfirmed == true)
@@ -159,6 +158,54 @@ namespace Diyan.API.Controllers
                                 };
 
                                 int resultPaymentReceived = await _manageTrackingRepository.SavePurchaseOrderLCReceived(vPaymentReceivedObj);
+                            }
+                        }
+                    }
+                }
+
+                #endregion
+
+                #region Containers UnderLoading Images
+
+                if (parameters.Id > 0 && vResultPurchaseOrderObj.PLR_IsPaymentOrLCClosed == true && parameters.ContainersUnderLoadingList.Count > 0)
+                {
+                    foreach (var vParentItem in parameters.ContainersUnderLoadingList)
+                    {
+                        var vContainersUnderLoading_RequestObj = new ContainersUnderLoading_Request()
+                        {
+                            Id = vParentItem.Id,
+                            PurchaseOrderId = result,
+                            ContainerCount = vParentItem.ContainerCount,
+                        };
+
+                        int resultvPIIssued = await _manageTrackingRepository.SaveContainersUnderLoading(vContainersUnderLoading_RequestObj);
+
+                        // Image Save
+                        if (resultvPIIssued > 0)
+                        {
+                            foreach (var vimgItem in vParentItem.ContainersUnderLoadingImagesList)
+                            {
+                                string vImageName = "";
+                                // PO Upload
+                                if (!string.IsNullOrWhiteSpace(vimgItem.ContainerOriginalImage_Base64))
+                                {
+                                    var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(vimgItem.ContainerOriginalImage_Base64, "\\Uploads\\ManageTracking\\", vimgItem.ContainerOriginalFileName);
+
+                                    if (!string.IsNullOrWhiteSpace(vUploadFile))
+                                    {
+                                        vImageName = vUploadFile;
+                                    }
+                                }
+
+                                var vPIIssuedObj = new ContainersUnderLoadingImages_Request()
+                                {
+                                    Id = vimgItem.Id,
+                                    ContainersUnderLoadingId = resultvPIIssued,
+                                    ContainerImage = vImageName,
+                                    ContainerOriginalFileName = vimgItem.ContainerOriginalFileName,
+                                };
+
+                                int resultContainer = await _manageTrackingRepository.SaveContainersUnderLoadingImages(vPIIssuedObj);
                             }
                         }
                     }
@@ -367,6 +414,55 @@ namespace Diyan.API.Controllers
                         }
                     }
 
+
+                    #endregion
+
+                    #region Containers UnderLoading Images
+
+                    var vContainersUnderLoading_Search = new ContainersUnderLoading_Search()
+                    {
+                        PurchaseOrderId = vResultObj.Id,
+                    };
+
+                    var vContainersUnderLoadingListObj = await _manageTrackingRepository.GetContainersUnderLoadingById(vContainersUnderLoading_Search);
+                    foreach (var item in vContainersUnderLoadingListObj)
+                    {
+                        var vContainersUnderLoading_ResponseObj = new ContainersUnderLoading_Response();
+
+                        vContainersUnderLoading_ResponseObj.Id = item.Id;
+                        vContainersUnderLoading_ResponseObj.PurchaseOrderId = item.PurchaseOrderId;
+                        vContainersUnderLoading_ResponseObj.ContainerCount = item.ContainerCount;
+
+                        vContainersUnderLoading_ResponseObj.CreatedBy = item.CreatedBy;
+                        vContainersUnderLoading_ResponseObj.CreatedDate = item.CreatedDate;
+                        vContainersUnderLoading_ResponseObj.CreatorName = item.CreatorName;
+
+                        vContainersUnderLoading_ResponseObj.ModifiedBy = item.ModifiedBy;
+                        vContainersUnderLoading_ResponseObj.ModifiedDate = item.ModifiedDate;
+                        vContainersUnderLoading_ResponseObj.ModifierName = item.ModifierName;
+
+
+                        var vContainersUnderLoadingImage_Search = new ContainersUnderLoadingImages_Search()
+                        {
+                            ContainersUnderLoadingId = item.Id,
+                        };
+
+                        var vContainersUnderLoadingImageListObj = await _manageTrackingRepository.GetContainersUnderLoadingImagesById(vContainersUnderLoadingImage_Search);
+                        foreach (var itemImg in vContainersUnderLoadingImageListObj)
+                        {
+                            var vContainersUnderLoadingImages_Response = new ContainersUnderLoadingImages_Response()
+                            {
+                                Id = itemImg.Id,
+                                ContainersUnderLoadingId = item.Id,
+                                ContainerImage = itemImg.ContainerImage,
+                                ContainerOriginalFileName = itemImg.ContainerOriginalFileName,
+                                ContainerImageURL = itemImg.ContainerImageURL,
+                            };
+                            vContainersUnderLoading_ResponseObj.ContainersUnderLoadingImagesList.Add(vContainersUnderLoadingImages_Response);
+                        }
+
+                        vResultObj.ContainersUnderLoadingList.Add(vContainersUnderLoading_ResponseObj);
+                    }
 
                     #endregion
                 }
