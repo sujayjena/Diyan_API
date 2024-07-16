@@ -213,7 +213,37 @@ namespace Diyan.API.Controllers
 
                 #endregion
 
+                #region Invoice
 
+                if (parameters.Id > 0 && vResultPurchaseOrderObj.CUL_IsContainersUnderLoadingClose == true)
+                {
+                    foreach (var vPIIssuedItem in parameters.InvoiceList)
+                    {
+                        // PO Upload
+                        if (parameters! != null && !string.IsNullOrWhiteSpace(vPIIssuedItem.Invoice_Base64))
+                        {
+                            var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(vPIIssuedItem.Invoice_Base64, "\\Uploads\\ManageTracking\\", vPIIssuedItem.InvoiceOriginalFileName);
+
+                            if (!string.IsNullOrWhiteSpace(vUploadFile))
+                            {
+                                vPIIssuedItem.InvoiceImage = vUploadFile;
+                            }
+                        }
+
+                        var vInvoiceObj = new Invoice_Request()
+                        {
+                            Id = vPIIssuedItem.Id,
+                            PurchaseOrderId = result,
+                            InvoiceNumber= vPIIssuedItem.InvoiceNumber,
+                            InvoiceImage = vPIIssuedItem.InvoiceImage,
+                            InvoiceOriginalFileName = vPIIssuedItem.InvoiceOriginalFileName,
+                        };
+
+                        int resultInvoice = await _manageTrackingRepository.SaveInvoice(vInvoiceObj);
+                    }
+                }
+
+                #endregion
             }
             return _response;
         }
@@ -462,6 +492,31 @@ namespace Diyan.API.Controllers
                         }
 
                         vResultObj.ContainersUnderLoadingList.Add(vContainersUnderLoading_ResponseObj);
+                    }
+
+                    #endregion
+
+                    #region Invoice
+
+                    var vInvoice_Search = new Invoice_Search() { PurchaseOrderId = vResultObj.Id };
+                    var vInvoiceObjList = await _manageTrackingRepository.GetInvoiceList(vInvoice_Search);
+
+                    foreach (var itemLog in vInvoiceObjList)
+                    {
+                        var vPIIssuedLog = new Invoice_Response()
+                        {
+                            Id = itemLog.Id,
+                            PurchaseOrderId = itemLog.PurchaseOrderId,
+                            InvoiceNumber=itemLog.InvoiceNumber,
+                            InvoiceImage = itemLog.InvoiceImage,
+                            InvoiceOriginalFileName = itemLog.InvoiceOriginalFileName,
+                            InvoiceImageURL = itemLog.InvoiceImageURL,
+                            CreatedBy = itemLog.CreatedBy,
+                            CreatedDate = itemLog.CreatedDate,
+                            CreatorName = itemLog.CreatorName,
+                        };
+
+                        vResultObj.InvoiceList.Add(vPIIssuedLog);
                     }
 
                     #endregion

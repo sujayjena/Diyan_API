@@ -62,6 +62,9 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@CUL_IsContainersUnderLoadingClose", parameters.CUL_IsContainersUnderLoadingClose);
             queryParameters.Add("@CUL_ContainersUnderLoadingClosedDate", parameters.CUL_ContainersUnderLoadingClosedDate);
 
+            queryParameters.Add("@IN_IsInvoiceGenerateClose", parameters.IN_IsInvoiceGenerateClose);
+            queryParameters.Add("@IN_InvoiceGenerateClosedDate", parameters.IN_InvoiceGenerateClosedDate);
+
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SavePurchaseOrder", queryParameters);
@@ -286,6 +289,34 @@ namespace Diyan.Persistence.Repositories
 
             var result = await ListByStoredProcedure<ContainersUnderLoadingImages_Response>("GetContainersUnderLoadingImagesById", queryParameters);
 
+            return result;
+        }
+
+        #endregion
+
+        #region Invoice
+
+        public async Task<int> SaveInvoice(Invoice_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
+            queryParameters.Add("@InvoiceNumber", parameters.InvoiceNumber);
+            queryParameters.Add("@InvoiceImage", parameters.InvoiceImage);
+            queryParameters.Add("@InvoiceOriginalFileName", parameters.InvoiceOriginalFileName);
+
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveInvoice", queryParameters);
+        }
+
+        public async Task<IEnumerable<Invoice_Response>> GetInvoiceList(Invoice_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.PurchaseOrderId);
+
+            var result = await ListByStoredProcedure<Invoice_Response>("GetInvoiceById", queryParameters);
             return result;
         }
 

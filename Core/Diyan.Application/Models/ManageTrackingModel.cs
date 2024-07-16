@@ -25,6 +25,7 @@ namespace Diyan.Application.Models
         {
             PIIssuedList = new List<PIIssued_Request>();
             ContainersUnderLoadingList = new List<ContainersUnderLoading_Request>();
+            InvoiceList = new List<Invoice_Request>();
         }
         public int? CustomerId { get; set; }
         public int? PO_PortDischargeId { get; set; }
@@ -92,11 +93,20 @@ namespace Diyan.Application.Models
         public DateTime? CUL_ContainersUnderLoadingClosedDate { get; set; }
 
 
+        [DefaultValue(false)]
+        public bool? IN_IsInvoiceGenerateClose { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? IN_InvoiceGenerateClosedDate { get; set; }
+
+
         public List<PIIssued_Request>? PIIssuedList { get; set; }
 
         public PO_PaymentReceived_Or_LCReceived_Request? PaymentReceived_Or_LCReceivedDetails { get; set; }
 
         public List<ContainersUnderLoading_Request>? ContainersUnderLoadingList { get; set; }
+
+        public List<Invoice_Request>? InvoiceList { get; set; }
     }
 
     public class PurchaseOrderList_Response : BaseResponseEntity
@@ -157,6 +167,9 @@ namespace Diyan.Application.Models
         [DefaultValue(false)]
         public bool? CUL_IsContainersUnderLoadingClose { get; set; }
 
+        [DefaultValue(false)]
+        public bool? IN_IsInvoiceGenerateClose { get; set; }
+
     }
 
     public class PurchaseOrderDetail_Response : BaseResponseEntity
@@ -167,6 +180,7 @@ namespace Diyan.Application.Models
             PIConfirmationList = new List<PIConfirmation_Response>();
             PaymentReceived_Or_LCReceivedDetail = new PO_PaymentReceived_Or_LCReceived_Resonse();
             ContainersUnderLoadingList = new List<ContainersUnderLoading_Response>();
+            InvoiceList = new List<Invoice_Response>();
         }
 
         public string? TrackingNumber { get; set; }
@@ -264,6 +278,13 @@ namespace Diyan.Application.Models
         public DateTime? CUL_ContainersUnderLoadingClosedDate { get; set; }
 
 
+        [DefaultValue(false)]
+        public bool? IN_IsInvoiceGenerateClose { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? IN_InvoiceGenerateClosedDate { get; set; }
+
+
         public List<PIIssued_Response>? PIIssuedList { get; set; }
 
         public List<PIConfirmation_Response>? PIConfirmationList { get; set; }
@@ -271,6 +292,8 @@ namespace Diyan.Application.Models
         public PO_PaymentReceived_Or_LCReceived_Resonse? PaymentReceived_Or_LCReceivedDetail { get; set; }
 
         public List<ContainersUnderLoading_Response>? ContainersUnderLoadingList { get; set; }
+
+        public List<Invoice_Response>? InvoiceList { get; set; }
     }
 
 
@@ -554,6 +577,37 @@ namespace Diyan.Application.Models
         public string ContainerImage { get; set; }
         public string ContainerOriginalFileName { get; set; }
         public string ContainerImageURL { get; set; }
+    }
+
+    #endregion
+
+    #region Invoice
+
+    public class Invoice_Search
+    {
+        [DefaultValue(0)]
+        public int? PurchaseOrderId { get; set; }
+    }
+
+    public class Invoice_Request : BaseEntity
+    {
+        [JsonIgnore]
+        public int? PurchaseOrderId { get; set; }
+
+        public string? InvoiceNumber { get; set; }
+        public string? InvoiceImage { get; set; }
+        public string? InvoiceOriginalFileName { get; set; }
+        public string? Invoice_Base64 { get; set; }
+    }
+
+    public class Invoice_Response : BaseResponseEntity
+    {
+        [JsonIgnore]
+        public int? PurchaseOrderId { get; set; }
+        public int? InvoiceNumber { get; set; }
+        public string InvoiceImage { get; set; }
+        public string InvoiceOriginalFileName { get; set; }
+        public string InvoiceImageURL { get; set; }
     }
 
     #endregion

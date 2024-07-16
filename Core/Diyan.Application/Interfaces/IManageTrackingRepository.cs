@@ -53,5 +53,14 @@ namespace Diyan.Application.Interfaces
         Task<IEnumerable<ContainersUnderLoadingImages_Response>> GetContainersUnderLoadingImagesById(ContainersUnderLoadingImages_Search parameters);
 
         #endregion
+
+
+        #region Invoice
+
+        Task<int> SaveInvoice(Invoice_Request parameters);
+
+        Task<IEnumerable<Invoice_Response>> GetInvoiceList(Invoice_Search parameters);
+
+        #endregion
     }
 }
