@@ -530,52 +530,52 @@ namespace Diyan.API.Controllers
 
         #endregion
 
-        #region PI Issue
-
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> GetPIIssueList(PIIssued_Search parameters)
-        {
-            IEnumerable<PIIssued_Response> lstUsers = await _manageTrackingRepository.GetPIIssuedList(parameters);
-            _response.Data = lstUsers.ToList();
-            _response.Total = parameters.Total;
-            return _response;
-        }
-
-        #endregion
-
-        #region Payment Received Or LC Received
-
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> GetPaymentReceived_Or_LCReceivedList(PO_PaymentReceived_Or_LCReceived_Search parameters)
-        {
-            IEnumerable<PO_PaymentReceived_Or_LCReceivedList_Response> lstUsers = await _manageTrackingRepository.GetPaymentReceived_Or_LCReceivedList(parameters);
-            _response.Data = lstUsers.ToList();
-            _response.Total = parameters.Total;
-            return _response;
-        }
+        //#region PI Issue
 
         //[Route("[action]")]
         //[HttpPost]
-        //public async Task<ResponseModel> GetPaymentReceivedList(PO_PaymentReceived_Or_LCReceived_Search parameters)
+        //public async Task<ResponseModel> GetPIIssueList(PIIssued_Search parameters)
         //{
-        //    IEnumerable<PO_PaymentReceived_Response> lstUsers = await _manageTrackingRepository.GetPaymentReceivedList(parameters);
+        //    IEnumerable<PIIssued_Response> lstUsers = await _manageTrackingRepository.GetPIIssuedList(parameters);
         //    _response.Data = lstUsers.ToList();
         //    _response.Total = parameters.Total;
         //    return _response;
         //}
 
+        //#endregion
+
+        //#region Payment Received Or LC Received
+
         //[Route("[action]")]
         //[HttpPost]
-        //public async Task<ResponseModel> GetLCReceivedList(PO_PaymentReceived_Or_LCReceived_Search parameters)
+        //public async Task<ResponseModel> GetPaymentReceived_Or_LCReceivedList(PO_PaymentReceived_Or_LCReceived_Search parameters)
         //{
-        //    IEnumerable<PO_LCReceived_Response> lstUsers = await _manageTrackingRepository.GetLCReceivedList(parameters);
+        //    IEnumerable<PO_PaymentReceived_Or_LCReceivedList_Response> lstUsers = await _manageTrackingRepository.GetPaymentReceived_Or_LCReceivedList(parameters);
         //    _response.Data = lstUsers.ToList();
         //    _response.Total = parameters.Total;
         //    return _response;
         //}
 
-        #endregion
+        ////[Route("[action]")]
+        ////[HttpPost]
+        ////public async Task<ResponseModel> GetPaymentReceivedList(PO_PaymentReceived_Or_LCReceived_Search parameters)
+        ////{
+        ////    IEnumerable<PO_PaymentReceived_Response> lstUsers = await _manageTrackingRepository.GetPaymentReceivedList(parameters);
+        ////    _response.Data = lstUsers.ToList();
+        ////    _response.Total = parameters.Total;
+        ////    return _response;
+        ////}
+
+        ////[Route("[action]")]
+        ////[HttpPost]
+        ////public async Task<ResponseModel> GetLCReceivedList(PO_PaymentReceived_Or_LCReceived_Search parameters)
+        ////{
+        ////    IEnumerable<PO_LCReceived_Response> lstUsers = await _manageTrackingRepository.GetLCReceivedList(parameters);
+        ////    _response.Data = lstUsers.ToList();
+        ////    _response.Total = parameters.Total;
+        ////    return _response;
+        ////}
+
+        //#endregion
     }
 }

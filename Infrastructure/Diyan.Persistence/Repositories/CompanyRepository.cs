@@ -42,6 +42,9 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@CompanyLogo", parameters.CompanyLogoFileName);
             queryParameters.Add("@NoofUserAdd", parameters.NoofUserAdd);
             queryParameters.Add("@NoofBranchAdd", parameters.NoofBranchAdd);
+            queryParameters.Add("@AmcMonth", parameters.AmcMonth);
+            queryParameters.Add("@AmcStartDate", parameters.AmcStartDate);
+            queryParameters.Add("@AmcEndDate", parameters.AmcEndDate);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -71,5 +74,26 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@Id", Id);
             return (await ListByStoredProcedure<Company_Response>("GetCompanyById", queryParameters)).FirstOrDefault();
         }
+
+        #region Company AMC
+
+        public async Task<int> SaveAMCReminderEmail(CompanyAMCRminderEmail_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@CompanyId", parameters.CompanyId);
+            queryParameters.Add("@AMCYear", parameters.AMCYear);
+            queryParameters.Add("@AMCStartDate_EndDate_LastEmailDate", parameters.AMCStartDate_EndDate_LastEmailDate);
+            queryParameters.Add("@AMCRemainingDays", parameters.AMCRemainingDays);
+            queryParameters.Add("@AMCReminderCount", parameters.AMCReminderCount);
+            queryParameters.Add("@AMCPreorPostExpire", parameters.AMCPreorPostExpire);
+            queryParameters.Add("@AmcEndDate", parameters.AmcEndDate);
+            queryParameters.Add("@AmcLastEmailDate", parameters.AmcLastEmailDate);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveAMCReminderEmail", queryParameters);
+        }
+
+        #endregion
     }
 }

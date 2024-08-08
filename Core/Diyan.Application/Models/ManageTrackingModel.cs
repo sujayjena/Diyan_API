@@ -144,6 +144,7 @@ namespace Diyan.Application.Models
 
         [DefaultValue(false)]
         public bool? IsActive { get; set; }
+        public string? POCurrentStatus { get; set; }
 
 
         [DefaultValue(false)]

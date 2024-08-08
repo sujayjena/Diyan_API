@@ -32,6 +32,9 @@ namespace Diyan.Persistence
             services.AddScoped<IAdminMasterRepository, AdminMasterRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IManageTrackingRepository, ManageTrackingRepository>();
+            services.AddScoped<IEmailHelper, EmailHelper>();
+            services.AddScoped<IEmailConfigRepository, EmailConfigRepository>();
+            services.AddScoped<IConfigRefRepository, ConfigRefRepository>();
         }
     }
 }
