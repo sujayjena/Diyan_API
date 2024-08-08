@@ -217,6 +217,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@Id", parameters.Id);
             queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
             queryParameters.Add("@ReceivedDate", parameters.ReceivedDate);
+            queryParameters.Add("@LCNumber", parameters.LCNumber);
             queryParameters.Add("@ImageName", parameters.ImageName);
             queryParameters.Add("@OriginalFileName", parameters.OriginalFileName);
 

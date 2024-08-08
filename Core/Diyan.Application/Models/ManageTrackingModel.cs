@@ -446,6 +446,7 @@ namespace Diyan.Application.Models
         [JsonIgnore]
         public int? PurchaseOrderId { get; set; }
         public DateTime? ReceivedDate { get; set; }
+        public string? LCNumber { get; set; }
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }
         public string? Image_Base64 { get; set; }
@@ -485,6 +486,7 @@ namespace Diyan.Application.Models
         [JsonIgnore]
         public int? PurchaseOrderId { get; set; }
         public DateTime? ReceivedDate { get; set; }
+        public string? LCNumber { get; set; }
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }
         public string? ImageURL { get; set; }

@@ -153,6 +153,7 @@ namespace Diyan.API.Controllers
                                     Id = itemList.Id,
                                     PurchaseOrderId = result,
                                     ReceivedDate = itemList.ReceivedDate,
+                                    LCNumber = itemList.LCNumber,
                                     ImageName = itemList.ImageName,
                                     OriginalFileName = itemList.OriginalFileName,
                                 };
@@ -427,6 +428,7 @@ namespace Diyan.API.Controllers
                                 PurchaseOrderId = item.PurchaseOrderId,
 
                                 ReceivedDate = item.ReceivedDate,
+                                LCNumber = item.LCNumber,
                                 ImageName = item.ImageName,
                                 OriginalFileName = item.OriginalFileName,
                                 ImageURL = item.ImageURL,
