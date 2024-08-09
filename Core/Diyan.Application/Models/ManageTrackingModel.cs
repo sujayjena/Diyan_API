@@ -85,6 +85,17 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? BI_BookingIssueAcceptedDate { get; set; }
 
+        [DefaultValue(null)]
+        public DateTime? BI_ETD { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? BI_ETA { get; set; }
+
+        [JsonIgnore]
+        public string? BI_Image { get; set; }
+        public string? BI_OriginalFileName { get; set; }
+        public string? BI_Image_Base64 { get; set; }
+
 
         [DefaultValue(false)]
         public bool? CUL_IsContainersUnderLoadingClose { get; set; }
@@ -269,6 +280,16 @@ namespace Diyan.Application.Models
 
         [DefaultValue(null)]
         public DateTime? BI_BookingIssueAcceptedDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? BI_ETD { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? BI_ETA { get; set; }
+
+        public string? BI_OriginalFileName { get; set; }
+        public string? BI_Image { get; set; }
+        public string? BI_ImageURL { get; set; }
 
 
 

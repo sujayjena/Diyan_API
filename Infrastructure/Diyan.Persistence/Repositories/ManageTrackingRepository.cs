@@ -58,6 +58,10 @@ namespace Diyan.Persistence.Repositories
 
             queryParameters.Add("@BI_IsBookingIssueAccepted", parameters.BI_IsBookingIssueAccepted);
             queryParameters.Add("@BI_BookingIssueAcceptedDate", parameters.BI_BookingIssueAcceptedDate);
+            queryParameters.Add("@BI_ETD", parameters.BI_ETD);
+            queryParameters.Add("@BI_ETA", parameters.BI_ETA);
+            queryParameters.Add("@BI_Image", parameters.BI_Image);
+            queryParameters.Add("@BI_OriginalFileName", parameters.BI_OriginalFileName);
 
             queryParameters.Add("@CUL_IsContainersUnderLoadingClose", parameters.CUL_IsContainersUnderLoadingClose);
             queryParameters.Add("@CUL_ContainersUnderLoadingClosedDate", parameters.CUL_ContainersUnderLoadingClosedDate);

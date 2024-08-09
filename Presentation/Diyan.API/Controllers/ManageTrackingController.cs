@@ -49,6 +49,16 @@ namespace Diyan.API.Controllers
                 parameters.PLR_IsPaymentOrLCClosed = parameters.PaymentReceived_Or_LCReceivedDetails.PaymentOrLCClosed;
             }
 
+            if (parameters.Id > 0 && parameters.BI_IsBookingIssueAccepted == true && !string.IsNullOrWhiteSpace(parameters.BI_Image_Base64))
+            {
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.BI_Image_Base64, "\\Uploads\\ManageTracking\\", parameters.BI_OriginalFileName);
+
+                if (!string.IsNullOrWhiteSpace(vUploadFile))
+                {
+                    parameters.BI_Image = vUploadFile;
+                }
+            }
+
             int result = await _manageTrackingRepository.SavePurchaseOrder(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
@@ -235,7 +245,7 @@ namespace Diyan.API.Controllers
                         {
                             Id = vPIIssuedItem.Id,
                             PurchaseOrderId = result,
-                            InvoiceNumber= vPIIssuedItem.InvoiceNumber,
+                            InvoiceNumber = vPIIssuedItem.InvoiceNumber,
                             InvoiceImage = vPIIssuedItem.InvoiceImage,
                             InvoiceOriginalFileName = vPIIssuedItem.InvoiceOriginalFileName,
                         };
@@ -509,7 +519,7 @@ namespace Diyan.API.Controllers
                         {
                             Id = itemLog.Id,
                             PurchaseOrderId = itemLog.PurchaseOrderId,
-                            InvoiceNumber=itemLog.InvoiceNumber,
+                            InvoiceNumber = itemLog.InvoiceNumber,
                             InvoiceImage = itemLog.InvoiceImage,
                             InvoiceOriginalFileName = itemLog.InvoiceOriginalFileName,
                             InvoiceImageURL = itemLog.InvoiceImageURL,
