@@ -110,6 +110,47 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? IN_InvoiceGenerateClosedDate { get; set; }
 
+        public string BID_BIDraftComment { get; set; }
+        [DefaultValue(false)]
+        public bool? BID_IsBIDraftIssueClose { get; set; }
+        [DefaultValue(null)]
+        public DateTime? BID_BIDraftIssueClosedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? FBI_IsFinalBIDraftIssueClose { get; set; }
+        [DefaultValue(null)]
+        public DateTime? FBI_FinalBIDraftIssueClosedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? FAP_IsFinalAmountToPayClose { get; set; }
+        [DefaultValue(null)]
+        public DateTime? FAP_FinalAmountToPayClosedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? PR_IsPaymentReceived { get; set; }
+        [DefaultValue(null)]
+        public DateTime? PR_PaymentReceivedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? DDS_IsDocumentSendDHL_Submitted { get; set; }
+        [DefaultValue(null)]
+        public DateTime? DDS_DocumentSendDHL_SubmittedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? POC_IsPOClosed { get; set; }
+        [DefaultValue(null)]
+        public DateTime? POC_POClosedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? OC_IsOrderCompleteClosed { get; set; }
+        [DefaultValue(null)]
+        public DateTime? OC_OrderCompleteDate { get; set; }
 
         public List<PIIssued_Request>? PIIssuedList { get; set; }
 
@@ -182,6 +223,29 @@ namespace Diyan.Application.Models
         [DefaultValue(false)]
         public bool? IN_IsInvoiceGenerateClose { get; set; }
 
+
+        [DefaultValue(false)]
+        public bool? BID_IsBIDraftIssueClose { get; set; }
+
+        [DefaultValue(false)]
+        public bool? FBI_IsFinalBIDraftIssueClose { get; set; }
+
+        [DefaultValue(false)]
+        public bool? FAP_IsFinalAmountToPayClose { get; set; }
+
+        [DefaultValue(false)]
+        public bool? PR_IsPaymentReceived { get; set; }
+
+        [DefaultValue(false)]
+        public bool? DDS_IsDocumentSendDHL_Submitted { get; set; }
+
+        [DefaultValue(false)]
+        public bool? POC_IsPOClosed { get; set; }
+
+        [DefaultValue(false)]
+        public bool? OC_IsOrderCompleteClosed { get; set; }
+        [DefaultValue(null)]
+        public DateTime? OC_OrderCompleteDate { get; set; }
     }
 
     public class PurchaseOrderDetail_Response : BaseResponseEntity
@@ -305,6 +369,49 @@ namespace Diyan.Application.Models
 
         [DefaultValue(null)]
         public DateTime? IN_InvoiceGenerateClosedDate { get; set; }
+
+
+        public string BID_BIDraftComment { get; set; }
+        [DefaultValue(false)]
+        public bool? BID_IsBIDraftIssueClose { get; set; }
+        [DefaultValue(null)]
+        public DateTime? BID_BIDraftIssueClosedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? FBI_IsFinalBIDraftIssueClose { get; set; }
+        [DefaultValue(null)]
+        public DateTime? FBI_FinalBIDraftIssueClosedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? FAP_IsFinalAmountToPayClose { get; set; }
+        [DefaultValue(null)]
+        public DateTime? FAP_FinalAmountToPayClosedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? PR_IsPaymentReceived { get; set; }
+        [DefaultValue(null)]
+        public DateTime? PR_PaymentReceivedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? DDS_IsDocumentSendDHL_Submitted { get; set; }
+        [DefaultValue(null)]
+        public DateTime? DDS_DocumentSendDHL_SubmittedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? POC_IsPOClosed { get; set; }
+        [DefaultValue(null)]
+        public DateTime? POC_POClosedDate { get; set; }
+
+
+        [DefaultValue(false)]
+        public bool? OC_IsOrderCompleteClosed { get; set; }
+        [DefaultValue(null)]
+        public DateTime? OC_OrderCompleteDate { get; set; }
 
 
         public List<PIIssued_Response>? PIIssuedList { get; set; }

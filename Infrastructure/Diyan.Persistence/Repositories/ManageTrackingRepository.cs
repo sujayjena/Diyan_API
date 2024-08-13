@@ -69,6 +69,22 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@IN_IsInvoiceGenerateClose", parameters.IN_IsInvoiceGenerateClose);
             queryParameters.Add("@IN_InvoiceGenerateClosedDate", parameters.IN_InvoiceGenerateClosedDate);
 
+            queryParameters.Add("@BID_BIDraftComment", parameters.BID_BIDraftComment);
+            queryParameters.Add("@BID_IsBIDraftIssueClose", parameters.BID_IsBIDraftIssueClose);
+            queryParameters.Add("@BID_BIDraftIssueClosedDate", parameters.BID_BIDraftIssueClosedDate);
+            queryParameters.Add("@FBI_IsFinalBIDraftIssueClose", parameters.FBI_IsFinalBIDraftIssueClose);
+            queryParameters.Add("@FBI_FinalBIDraftIssueClosedDate", parameters.FBI_FinalBIDraftIssueClosedDate);
+            queryParameters.Add("@FAP_IsFinalAmountToPayClose", parameters.FAP_IsFinalAmountToPayClose);
+            queryParameters.Add("@FAP_FinalAmountToPayClosedDate", parameters.FAP_FinalAmountToPayClosedDate);
+            queryParameters.Add("@PR_IsPaymentReceived", parameters.PR_IsPaymentReceived);
+            queryParameters.Add("@PR_PaymentReceivedDate", parameters.PR_PaymentReceivedDate);
+            queryParameters.Add("@DDS_IsDocumentSendDHL_Submitted", parameters.DDS_IsDocumentSendDHL_Submitted);
+            queryParameters.Add("@DDS_DocumentSendDHL_SubmittedDate", parameters.DDS_DocumentSendDHL_SubmittedDate);
+            queryParameters.Add("@POC_IsPOClosed", parameters.POC_IsPOClosed);
+            queryParameters.Add("@POC_POClosedDate", parameters.POC_POClosedDate);
+            queryParameters.Add("@OC_IsOrderCompleteClosed", parameters.OC_IsOrderCompleteClosed);
+            queryParameters.Add("@OC_OrderCompleteDate", parameters.OC_OrderCompleteDate);
+
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SavePurchaseOrder", queryParameters);
