@@ -540,6 +540,127 @@ namespace Diyan.API.Controllers
 
         #endregion
 
+        #region PI Issue
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> DeletePIIssued(int Id)
+        {
+            int result = await _manageTrackingRepository.DeletePIIssued(Id);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details deleted sucessfully";
+            }
+            return _response;
+        }
+        #endregion
+
+        #region Payment Received Or LC Received
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> DeletePaymentReceived(int Id)
+        {
+            int result = await _manageTrackingRepository.DeletePaymentReceived(Id);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details deleted sucessfully";
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> DeleteLCReceived(int Id)
+        {
+            int result = await _manageTrackingRepository.DeleteLCReceived(Id);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details deleted sucessfully";
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region Containers Under Loading
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> DeleteContainersUnderLoadingImages(int Id)
+        {
+            int result = await _manageTrackingRepository.DeleteContainersUnderLoadingImages(Id);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details deleted sucessfully";
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region Invoice
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> DeleteInvoice(int Id)
+        {
+            int result = await _manageTrackingRepository.DeleteInvoice(Id);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details deleted sucessfully";
+            }
+            return _response;
+        }
+
+        #endregion
+
+
         //#region PI Issue
 
         //[Route("[action]")]

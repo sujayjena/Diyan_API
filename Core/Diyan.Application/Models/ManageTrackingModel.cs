@@ -14,6 +14,10 @@ namespace Diyan.Application.Models
     {
         public int? CustomerId { get; set; }
         public int? CountryId { get; set; }
+        public int? StatusId { get; set; }
+
+        [DefaultValue(null)]
+        public bool? OC_IsOrderCompleteClosed { get; set; }
 
         [DefaultValue("")]
         public string? PONumber { get; set; }

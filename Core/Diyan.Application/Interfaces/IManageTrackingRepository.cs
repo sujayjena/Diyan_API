@@ -19,12 +19,14 @@ namespace Diyan.Application.Interfaces
 
         #endregion
 
-        #region PI Issue
+        #region PI Issued
 
         Task<int> SavePIIssued(PIIssued_Request parameters);
         Task<IEnumerable<PIIssued_Response>> GetPIIssuedList(PIIssued_Search parameters);
 
         Task<IEnumerable<PIIssuedLog_Response>> GetPIIssuedLogListById(PIIssuedLog_Search parameters);
+
+        Task<int> DeletePIIssued(int Id);
 
         #endregion
 
@@ -40,6 +42,10 @@ namespace Diyan.Application.Interfaces
 
         Task<IEnumerable<PO_LCReceived_Response>> GetLCReceivedList(PO_PaymentReceived_Or_LCReceived_Search parameters);
 
+        Task<int> DeletePaymentReceived(int Id);
+
+        Task<int> DeleteLCReceived(int Id);
+
         #endregion
 
         #region Containers Under Loading
@@ -52,14 +58,17 @@ namespace Diyan.Application.Interfaces
 
         Task<IEnumerable<ContainersUnderLoadingImages_Response>> GetContainersUnderLoadingImagesById(ContainersUnderLoadingImages_Search parameters);
 
-        #endregion
+        Task<int> DeleteContainersUnderLoadingImages(int Id);
 
+        #endregion
 
         #region Invoice
 
         Task<int> SaveInvoice(Invoice_Request parameters);
 
         Task<IEnumerable<Invoice_Response>> GetInvoiceList(Invoice_Search parameters);
+
+        Task<int> DeleteInvoice(int Id);
 
         #endregion
     }

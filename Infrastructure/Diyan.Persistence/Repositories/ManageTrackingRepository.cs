@@ -96,6 +96,8 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@CountryId", parameters.CountryId);
             queryParameters.Add("@PONumber", parameters.PONumber);
+            queryParameters.Add("@StatusId", parameters.StatusId);
+            queryParameters.Add("@OC_IsOrderCompleteClosed", parameters.OC_IsOrderCompleteClosed);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -169,6 +171,15 @@ namespace Diyan.Persistence.Repositories
             var result = await ListByStoredProcedure<PIIssuedLog_Response>("GetPIIssuedLogListById", queryParameters);
 
             return result;
+        }
+
+        public async Task<int> DeletePIIssued(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeletePIIssued", queryParameters);
         }
 
         #endregion
@@ -261,6 +272,24 @@ namespace Diyan.Persistence.Repositories
             return result;
         }
 
+        public async Task<int> DeletePaymentReceived(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeletePaymentReceived", queryParameters);
+        }
+
+        public async Task<int> DeleteLCReceived(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeleteLCReceived", queryParameters);
+        }
+
         #endregion
 
         #region Containers Under Loading
@@ -313,6 +342,15 @@ namespace Diyan.Persistence.Repositories
             return result;
         }
 
+        public async Task<int> DeleteContainersUnderLoadingImages(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeleteContainersUnderLoadingImages", queryParameters);
+        }
+
         #endregion
 
         #region Invoice
@@ -341,6 +379,14 @@ namespace Diyan.Persistence.Repositories
             return result;
         }
 
+        public async Task<int> DeleteInvoice(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeleteInvoice", queryParameters);
+        }
         #endregion
     }
 }
