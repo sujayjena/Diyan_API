@@ -110,7 +110,7 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? IN_InvoiceGenerateClosedDate { get; set; }
 
-        public string BID_BIDraftComment { get; set; }
+        public string? BID_BIDraftComment { get; set; }
         [DefaultValue(false)]
         public bool? BID_IsBIDraftIssueClose { get; set; }
         [DefaultValue(null)]
@@ -371,7 +371,7 @@ namespace Diyan.Application.Models
         public DateTime? IN_InvoiceGenerateClosedDate { get; set; }
 
 
-        public string BID_BIDraftComment { get; set; }
+        public string? BID_BIDraftComment { get; set; }
         [DefaultValue(false)]
         public bool? BID_IsBIDraftIssueClose { get; set; }
         [DefaultValue(null)]
