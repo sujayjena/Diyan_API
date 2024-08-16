@@ -1,4 +1,5 @@
 ﻿using Diyan.Domain.Entities;
+using Diyan.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,6 +50,11 @@ namespace Diyan.Application.Models
         public string?  DepartmentName { get; set; }
 
         public bool?  IsActive { get; set; }
+    }
+
+    public class RoleSearch_Request : BaseSearchEntity
+    {
+        public int? DepartmentId { get; set; }
     }
 
     #endregion

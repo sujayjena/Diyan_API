@@ -61,7 +61,7 @@ namespace Diyan.Application.Models
 
         public int? DistrictId { get; set; }
 
-        public int? Pincode { get; set; }
+        public string? Pincode { get; set; }
 
         public bool?  IsSameAsPermanent { get; set; }
         public string?  TemporaryAddress { get; set; }
@@ -72,7 +72,7 @@ namespace Diyan.Application.Models
 
         public int? Temporary_DistrictId { get; set; }
 
-        public int? Temporary_Pincode { get; set; }
+        public string? Temporary_Pincode { get; set; }
 
         public string?  EmergencyName { get; set; }
         public string?  EmergencyContactNumber { get; set; }
@@ -186,7 +186,7 @@ namespace Diyan.Application.Models
         public int? DistrictId { get; set; }
 
         public string?  DistrictName { get; set; }
-        public int? Pincode { get; set; }
+        public string? Pincode { get; set; }
 
         public bool?  IsSameAsPermanent { get; set; }
 

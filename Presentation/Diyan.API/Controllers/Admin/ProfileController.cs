@@ -111,7 +111,7 @@ namespace Diyan.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetRoleList(BaseSearchEntity parameters)
+        public async Task<ResponseModel> GetRoleList(RoleSearch_Request parameters)
         {
             IEnumerable<Role_Response> lstRoles = await _profileRepository.GetRoleList(parameters);
             _response.Data = lstRoles.ToList();

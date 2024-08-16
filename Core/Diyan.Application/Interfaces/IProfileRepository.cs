@@ -19,7 +19,7 @@ namespace Diyan.Application.Interfaces
 
         Task<int> SaveRole(Role_Request parameters);
 
-        Task<IEnumerable<Role_Response>> GetRoleList(BaseSearchEntity parameters);
+        Task<IEnumerable<Role_Response>> GetRoleList(RoleSearch_Request parameters);
 
         Task<Role_Response?> GetRoleById(long Id);
 

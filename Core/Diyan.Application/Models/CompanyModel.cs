@@ -31,7 +31,7 @@ namespace Diyan.Application.Models
         public int? CountryId { get; set; }
         public int? StateId { get; set; }
         public int? DistrictId { get; set; }
-        public int? Pincode { get; set; }
+        public string? Pincode { get; set; }
         public string? GSTNumber { get; set; }
         public string? PANNumber { get; set; }
         public string? CompanyLogoFileName { get; set; }
@@ -62,7 +62,7 @@ namespace Diyan.Application.Models
         public string? StateName { get; set; }
         public int? DistrictId { get; set; }
         public string? DistrictName { get; set; }
-        public int? Pincode { get; set; }
+        public string? Pincode { get; set; }
         public string? GSTNumber { get; set; }
         public string? PANNumber { get; set; }
         public string? CompanyLogo { get; set; }

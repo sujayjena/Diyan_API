@@ -25,7 +25,7 @@ namespace Diyan.Application.Models
         public int? CountryId { get; set; }
         public int? StateId { get; set; }
         public int? DistrictId { get; set; }
-        public int? Pincode { get; set; }
+        public string? Pincode { get; set; }
         public int? NoofUserAdd { get; set; }
         public bool?  IsActive { get; set; }
     }
@@ -49,7 +49,7 @@ namespace Diyan.Application.Models
         public string? StateName { get; set; }
         public int? DistrictId { get; set; }
         public string? DistrictName { get; set; }
-        public int? Pincode { get; set; }
+        public string? Pincode { get; set; }
         public int? NoofUserAdd { get; set; }
         public bool?  IsActive { get; set; }
     }
