@@ -49,7 +49,8 @@ namespace Diyan.API.Controllers
                 parameters.PLR_IsPaymentOrLCClosed = parameters.PaymentReceived_Or_LCReceivedDetails.PaymentOrLCClosed;
             }
 
-            if (parameters.Id > 0 && parameters.BI_IsBookingIssueAccepted == true && !string.IsNullOrWhiteSpace(parameters.BI_Image_Base64))
+            // Booking Issued Image
+            if (parameters.Id > 0 && !string.IsNullOrWhiteSpace(parameters.BI_Image_Base64))
             {
                 var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.BI_Image_Base64, "\\Uploads\\ManageTracking\\", parameters.BI_OriginalFileName);
 
@@ -252,6 +253,36 @@ namespace Diyan.API.Controllers
 
                         int resultInvoice = await _manageTrackingRepository.SaveInvoice(vInvoiceObj);
                     }
+                }
+
+                #endregion
+
+                #region BI Draft
+
+                // Image Save
+                foreach (var vimgItem in parameters.BIDraftIssuedImagesList)
+                {
+                    string vImageName = "";
+                    // PO Upload
+                    if (!string.IsNullOrWhiteSpace(vimgItem.Image_Base64))
+                    {
+                        var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(vimgItem.Image_Base64, "\\Uploads\\ManageTracking\\", vimgItem.OriginalFileName);
+
+                        if (!string.IsNullOrWhiteSpace(vUploadFile))
+                        {
+                            vImageName = vUploadFile;
+                        }
+                    }
+
+                    var vPIIssuedObj = new BIDraftIssuedImages_Request()
+                    {
+                        Id = vimgItem.Id,
+                        PurchaseOrderId = result,
+                        ImageName = vImageName,
+                        OriginalFileName = vimgItem.OriginalFileName,
+                    };
+
+                    int resultContainer = await _manageTrackingRepository.SaveBIDraftIssuedImages(vPIIssuedObj);
                 }
 
                 #endregion
@@ -532,6 +563,65 @@ namespace Diyan.API.Controllers
                     }
 
                     #endregion
+
+                    #region BI Draft
+
+                    var vBIDraftIssuedImages_Search = new BIDraftIssuedImages_Search() { PurchaseOrderId = vResultObj.Id };
+                    var vBIDraftIssuedImagesObjList = await _manageTrackingRepository.GetBIDraftIssuedImagesById(vBIDraftIssuedImages_Search);
+
+                    foreach (var itemLog in vBIDraftIssuedImagesObjList)
+                    {
+                        var vPIIssuedLog = new BIDraftIssuedImages_Response()
+                        {
+                            Id = itemLog.Id,
+                            PurchaseOrderId = itemLog.PurchaseOrderId,
+                            ImageName = itemLog.ImageName,
+                            OriginalFileName = itemLog.OriginalFileName,
+                            ImageURL = itemLog.ImageURL,
+                        };
+
+                        vResultObj.BIDraftIssuedImagesList.Add(vPIIssuedLog);
+                    }
+
+                    // Remark Log
+                    var vBIDraftIssuedRemarks_Search = new BIDraftIssuedImages_Search() { PurchaseOrderId = vResultObj.Id };
+                    var vBIDraftIssuedRemarksObjList = await _manageTrackingRepository.GetBIDraftIssuedRemarkLogById(vBIDraftIssuedRemarks_Search);
+
+                    foreach (var itemLog in vBIDraftIssuedRemarksObjList)
+                    {
+                        var vPIIssuedLog = new BIDraftIssuedRemarkLog_Response()
+                        {
+                            Id = itemLog.Id,
+                            PurchaseOrderId = itemLog.PurchaseOrderId,
+                            Remarks = itemLog.Remarks,
+                            CreatedBy = itemLog.CreatedBy,
+                            CreatorName = itemLog.CreatorName,
+                            CreatedDate = itemLog.CreatedDate,
+                        };
+
+                        vResultObj.BIDraftIssuedRemarkLogList.Add(vPIIssuedLog);
+                    }
+
+                    // Comments Log
+                    var vBIDraftIssuedComments_Search = new BIDraftIssuedImages_Search() { PurchaseOrderId = vResultObj.Id };
+                    var vBIDraftIssuedCommentsObjList = await _manageTrackingRepository.GetBIDraftIssuedCommentLogById(vBIDraftIssuedComments_Search);
+
+                    foreach (var itemLog in vBIDraftIssuedCommentsObjList)
+                    {
+                        var vPIIssuedLog = new BIDraftIssuedCommentsLog_Response()
+                        {
+                            Id = itemLog.Id,
+                            PurchaseOrderId = itemLog.PurchaseOrderId,
+                            Comments = itemLog.Comments,
+                            CreatedBy = itemLog.CreatedBy,
+                            CreatorName = itemLog.CreatorName,
+                            CreatedDate = itemLog.CreatedDate,
+                        };
+
+                        vResultObj.BIDraftIssuedCommentLogList.Add(vPIIssuedLog);
+                    }
+
+                    #endregion
                 }
                 _response.Data = vResultObj;
             }
@@ -614,6 +704,27 @@ namespace Diyan.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
+        public async Task<ResponseModel> DeleteContainersUnderLoading(int Id)
+        {
+            int result = await _manageTrackingRepository.DeleteContainersUnderLoading(Id);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details deleted sucessfully";
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
         public async Task<ResponseModel> DeleteContainersUnderLoadingImages(int Id)
         {
             int result = await _manageTrackingRepository.DeleteContainersUnderLoadingImages(Id);
@@ -642,6 +753,31 @@ namespace Diyan.API.Controllers
         public async Task<ResponseModel> DeleteInvoice(int Id)
         {
             int result = await _manageTrackingRepository.DeleteInvoice(Id);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details deleted sucessfully";
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region BI Draft
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> DeleteBIDraftIssuedImages(int Id)
+        {
+            int result = await _manageTrackingRepository.DeleteBIDraftIssuedImages(Id);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {

@@ -58,6 +58,8 @@ namespace Diyan.Application.Interfaces
 
         Task<IEnumerable<ContainersUnderLoadingImages_Response>> GetContainersUnderLoadingImagesById(ContainersUnderLoadingImages_Search parameters);
 
+        Task<int> DeleteContainersUnderLoading(int Id);
+
         Task<int> DeleteContainersUnderLoadingImages(int Id);
 
         #endregion
@@ -69,6 +71,20 @@ namespace Diyan.Application.Interfaces
         Task<IEnumerable<Invoice_Response>> GetInvoiceList(Invoice_Search parameters);
 
         Task<int> DeleteInvoice(int Id);
+
+        #endregion
+
+        #region BI Draft
+
+        Task<int> SaveBIDraftIssuedImages(BIDraftIssuedImages_Request parameters);
+
+        Task<IEnumerable<BIDraftIssuedImages_Response>> GetBIDraftIssuedImagesById(BIDraftIssuedImages_Search parameters);
+
+        Task<int> DeleteBIDraftIssuedImages(int Id);
+
+        Task<IEnumerable<BIDraftIssuedRemarkLog_Response>> GetBIDraftIssuedRemarkLogById(BIDraftIssuedImages_Search parameters);
+
+        Task<IEnumerable<BIDraftIssuedCommentsLog_Response>> GetBIDraftIssuedCommentLogById(BIDraftIssuedImages_Search parameters);
 
         #endregion
     }

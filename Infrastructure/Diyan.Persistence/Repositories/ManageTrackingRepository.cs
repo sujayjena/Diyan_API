@@ -69,6 +69,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@IN_IsInvoiceGenerateClose", parameters.IN_IsInvoiceGenerateClose);
             queryParameters.Add("@IN_InvoiceGenerateClosedDate", parameters.IN_InvoiceGenerateClosedDate);
 
+            queryParameters.Add("@BID_BIDraftRemark", parameters.BID_BIDraftRemark);
             queryParameters.Add("@BID_BIDraftComment", parameters.BID_BIDraftComment);
             queryParameters.Add("@BID_IsBIDraftIssueClose", parameters.BID_IsBIDraftIssueClose);
             queryParameters.Add("@BID_BIDraftIssueClosedDate", parameters.BID_BIDraftIssueClosedDate);
@@ -93,11 +94,13 @@ namespace Diyan.Persistence.Repositories
         public async Task<IEnumerable<PurchaseOrderList_Response>> GetPurchaseOrderList(PurchaseOrderSearch_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
-            queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@CountryId", parameters.CountryId);
-            queryParameters.Add("@PONumber", parameters.PONumber);
+            queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@StatusId", parameters.StatusId);
-            queryParameters.Add("@OC_IsOrderCompleteClosed", parameters.OC_IsOrderCompleteClosed);
+            queryParameters.Add("@TrakingStatusId", parameters.TrakingStatusId);
+            queryParameters.Add("@TrakingNumber", parameters.TrakingNumber);
+            queryParameters.Add("@IsPIConfirmation", parameters.IsPIConfirmation);
+            queryParameters.Add("@IsPaymentOrLCReceived", parameters.IsPaymentOrLCReceived);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -342,6 +345,17 @@ namespace Diyan.Persistence.Repositories
             return result;
         }
 
+      
+
+        public async Task<int> DeleteContainersUnderLoading(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeleteContainersUnderLoading", queryParameters);
+        }
+
         public async Task<int> DeleteContainersUnderLoadingImages(int Id)
         {
             DynamicParameters queryParameters = new DynamicParameters();
@@ -387,6 +401,63 @@ namespace Diyan.Persistence.Repositories
 
             return await SaveByStoredProcedure<int>("DeleteInvoice", queryParameters);
         }
+        #endregion
+
+        #region BI Draft
+
+        public async Task<int> SaveBIDraftIssuedImages(BIDraftIssuedImages_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
+            queryParameters.Add("@ImageName", parameters.ImageName);
+            queryParameters.Add("@OriginalFileName", parameters.OriginalFileName);
+
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveBIDraftIssuedImages", queryParameters);
+        }
+
+        public async Task<IEnumerable<BIDraftIssuedImages_Response>> GetBIDraftIssuedImagesById(BIDraftIssuedImages_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
+
+            var result = await ListByStoredProcedure<BIDraftIssuedImages_Response>("GetBIDraftIssuedImagesById", queryParameters);
+
+            return result;
+        }
+
+        public async Task<int> DeleteBIDraftIssuedImages(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeleteBIDraftIssuedImages", queryParameters);
+        }
+
+        public async Task<IEnumerable<BIDraftIssuedRemarkLog_Response>> GetBIDraftIssuedRemarkLogById(BIDraftIssuedImages_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
+
+            var result = await ListByStoredProcedure<BIDraftIssuedRemarkLog_Response>("GetBIDraftIssuedRemarksLogById", queryParameters);
+
+            return result;
+        }
+
+        public async Task<IEnumerable<BIDraftIssuedCommentsLog_Response>> GetBIDraftIssuedCommentLogById(BIDraftIssuedImages_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
+
+            var result = await ListByStoredProcedure<BIDraftIssuedCommentsLog_Response>("GetBIDraftIssuedCommentsLogById", queryParameters);
+
+            return result;
+        }
+
         #endregion
     }
 }

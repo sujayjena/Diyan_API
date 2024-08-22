@@ -12,15 +12,25 @@ namespace Diyan.Application.Models
 {
     public class PurchaseOrderSearch_Request : BaseSearchEntity
     {
-        public int? CustomerId { get; set; }
-        public int? CountryId { get; set; }
-        public int? StatusId { get; set; }
+        [DefaultValue(0)]
+        public int CountryId { get; set; }
 
-        [DefaultValue(null)]
-        public bool? OC_IsOrderCompleteClosed { get; set; }
+        [DefaultValue(0)]
+        public int CustomerId { get; set; }
 
-        [DefaultValue("")]
-        public string? PONumber { get; set; }
+        [DefaultValue(0)]
+        public int StatusId { get; set; }
+
+        [DefaultValue(0)]
+        public int TrakingStatusId { get; set; }
+
+        public string? TrakingNumber { get; set; }
+
+        [DefaultValue(0)]
+        public int IsPIConfirmation { get; set; }
+
+        [DefaultValue(0)]
+        public int IsPaymentOrLCReceived { get; set; }
     }
 
     public class PurchaseOrder_Request : BaseEntity
@@ -30,6 +40,7 @@ namespace Diyan.Application.Models
             PIIssuedList = new List<PIIssued_Request>();
             ContainersUnderLoadingList = new List<ContainersUnderLoading_Request>();
             InvoiceList = new List<Invoice_Request>();
+            BIDraftIssuedImagesList = new List<BIDraftIssuedImages_Request>();
         }
         public int? CustomerId { get; set; }
         public int? PO_PortDischargeId { get; set; }
@@ -114,7 +125,9 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? IN_InvoiceGenerateClosedDate { get; set; }
 
+        public string? BID_BIDraftRemark { get; set; }
         public string? BID_BIDraftComment { get; set; }
+
         [DefaultValue(false)]
         public bool? BID_IsBIDraftIssueClose { get; set; }
         [DefaultValue(null)]
@@ -163,6 +176,8 @@ namespace Diyan.Application.Models
         public List<ContainersUnderLoading_Request>? ContainersUnderLoadingList { get; set; }
 
         public List<Invoice_Request>? InvoiceList { get; set; }
+
+        public List<BIDraftIssuedImages_Request>? BIDraftIssuedImagesList { get; set; }
     }
 
     public class PurchaseOrderList_Response : BaseResponseEntity
@@ -261,6 +276,9 @@ namespace Diyan.Application.Models
             PaymentReceived_Or_LCReceivedDetail = new PO_PaymentReceived_Or_LCReceived_Resonse();
             ContainersUnderLoadingList = new List<ContainersUnderLoading_Response>();
             InvoiceList = new List<Invoice_Response>();
+            BIDraftIssuedImagesList = new List<BIDraftIssuedImages_Response>();
+            BIDraftIssuedRemarkLogList = new List<BIDraftIssuedRemarkLog_Response>();
+            BIDraftIssuedCommentLogList = new List<BIDraftIssuedCommentsLog_Response>();
         }
 
         public string? TrackingNumber { get; set; }
@@ -427,6 +445,10 @@ namespace Diyan.Application.Models
         public List<ContainersUnderLoading_Response>? ContainersUnderLoadingList { get; set; }
 
         public List<Invoice_Response>? InvoiceList { get; set; }
+
+        public List<BIDraftIssuedImages_Response>? BIDraftIssuedImagesList { get; set; }
+        public List<BIDraftIssuedRemarkLog_Response>? BIDraftIssuedRemarkLogList { get; set; }
+        public List<BIDraftIssuedCommentsLog_Response>? BIDraftIssuedCommentLogList { get; set; }
     }
 
 
@@ -739,10 +761,55 @@ namespace Diyan.Application.Models
     {
         [JsonIgnore]
         public int? PurchaseOrderId { get; set; }
-        public int? InvoiceNumber { get; set; }
+        public string InvoiceNumber { get; set; }
         public string InvoiceImage { get; set; }
         public string InvoiceOriginalFileName { get; set; }
         public string InvoiceImageURL { get; set; }
+    }
+
+    #endregion
+
+    #region BI Draft
+
+    public class BIDraftIssuedImages_Search
+    {
+        [DefaultValue(0)]
+        public int? PurchaseOrderId { get; set; }
+    }
+
+    public class BIDraftIssuedImages_Request : BaseEntity
+    {
+        public int? Id { get; set; }
+
+        [JsonIgnore]
+        public int? PurchaseOrderId { get; set; }
+        public string? ImageName { get; set; }
+        public string? OriginalFileName { get; set; }
+        public string? Image_Base64 { get; set; }
+    }
+
+    public class BIDraftIssuedImages_Response : BaseEntity
+    {
+        public int? PurchaseOrderId { get; set; }
+        public string? ImageName { get; set; }
+        public string? OriginalFileName { get; set; }
+        public string ImageURL { get; set; }
+    }
+
+    public class BIDraftIssuedRemarkLog_Response : BaseResponseEntity
+    {
+        [JsonIgnore]
+        public int? PurchaseOrderId { get; set; }
+
+        public string Remarks { get; set; }
+    }
+
+    public class BIDraftIssuedCommentsLog_Response : BaseResponseEntity
+    {
+        [JsonIgnore]
+        public int? PurchaseOrderId { get; set; }
+
+        public string Comments { get; set; }
     }
 
     #endregion
