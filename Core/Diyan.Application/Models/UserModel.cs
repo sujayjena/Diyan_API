@@ -126,7 +126,7 @@ namespace Diyan.Application.Models
             UserOtherDetailsList = new List<UserOtherDetails_Response>();
         }
 
-        //public string?  UserCode { get; set; }
+        public string? UserCode { get; set; }
 
         public string?  UserName { get; set; }
 
@@ -144,6 +144,7 @@ namespace Diyan.Application.Models
         [DefaultValue(1)]
         public int? DepartmentId { get; set; }
         public string?  DepartmentName { get; set; }
+        public string? BranchName { get; set; }
 
         public int? RoleId { get; set; }
 

@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using Diyan.API.Middlewares;
+using OfficeOpenXml.Style;
+using OfficeOpenXml;
 
 namespace Diyan.API.Controllers.Admin
 {
@@ -279,6 +281,268 @@ namespace Diyan.API.Controllers.Admin
                 }
                 _response.Data = vResultObj;
             }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> ExportUserData(bool IsActive = true)
+        {
+            _response.IsSuccess = false;
+            byte[] result;
+            int recordIndex;
+            ExcelWorksheet WorkSheet1;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            var request = new BaseSearchEntity();
+            request.IsActive = IsActive;
+
+            IEnumerable<User_Response> lstSizeObj = await _userRepository.GetUserList(request);
+
+            using (MemoryStream msExportDataFile = new MemoryStream())
+            {
+                using (ExcelPackage excelExportData = new ExcelPackage())
+                {
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Employee");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "User Code";
+                    WorkSheet1.Cells[1, 2].Value = "User Name";
+                    WorkSheet1.Cells[1, 3].Value = "EmailId";
+                    WorkSheet1.Cells[1, 4].Value = "Mobile";
+                    WorkSheet1.Cells[1, 5].Value = "Company";
+                    WorkSheet1.Cells[1, 6].Value = "Branch";
+                    WorkSheet1.Cells[1, 7].Value = "Department";
+                    WorkSheet1.Cells[1, 8].Value = "Role";
+                    WorkSheet1.Cells[1, 9].Value = "ReportingTo";
+                    WorkSheet1.Cells[1, 10].Value = "DateOfBirth";
+                    WorkSheet1.Cells[1, 11].Value = "Date Of Joining";
+                    WorkSheet1.Cells[1, 12].Value = "Blood Group";
+                    WorkSheet1.Cells[1, 13].Value = "Gender";
+                    WorkSheet1.Cells[1, 14].Value = "Marital Status";
+                    WorkSheet1.Cells[1, 15].Value = "Company Number";
+                    WorkSheet1.Cells[1, 16].Value = "Permanent Address";
+                    WorkSheet1.Cells[1, 17].Value = "Country";
+                    WorkSheet1.Cells[1, 18].Value = "State";
+                    WorkSheet1.Cells[1, 19].Value = "District";
+                    WorkSheet1.Cells[1, 20].Value = "Pincode";
+                    WorkSheet1.Cells[1, 21].Value = "Temporary Address";
+                    WorkSheet1.Cells[1, 22].Value = "Country";
+                    WorkSheet1.Cells[1, 23].Value = "State";
+                    WorkSheet1.Cells[1, 24].Value = "District";
+                    WorkSheet1.Cells[1, 25].Value = "Pincode";
+                    WorkSheet1.Cells[1, 26].Value = "Emergency Name";
+                    WorkSheet1.Cells[1, 27].Value = "Emergency Contact";
+                    WorkSheet1.Cells[1, 28].Value = "Emergency Relation";
+                    WorkSheet1.Cells[1, 29].Value = "Aadhar Number";
+                    WorkSheet1.Cells[1, 30].Value = "Pan Number";
+                    WorkSheet1.Cells[1, 31].Value = "Other Proof";
+                    WorkSheet1.Cells[1, 32].Value = "IsMobileUser";
+                    WorkSheet1.Cells[1, 33].Value = "IsWebUser";
+                    WorkSheet1.Cells[1, 34].Value = "IsActive";
+
+                    recordIndex = 2;
+
+                    foreach (var items in lstSizeObj)
+                    {
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.UserCode;
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.UserName;
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.EmailId;
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.MobileNumber;
+
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.CompanyName;
+                        WorkSheet1.Cells[recordIndex, 6].Value = items.BranchName;
+                        WorkSheet1.Cells[recordIndex, 7].Value = items.DepartmentName;
+                        WorkSheet1.Cells[recordIndex, 8].Value = items.RoleName;
+                        WorkSheet1.Cells[recordIndex, 9].Value = items.ReportingToName;
+
+                        WorkSheet1.Cells[recordIndex, 10].Value = items.DateOfBirth.HasValue ? items.DateOfBirth.Value.ToString("dd/MM/yyyy") : string.Empty;
+                        WorkSheet1.Cells[recordIndex, 11].Value = items.DateOfJoining.HasValue ? items.DateOfJoining.Value.ToString("dd/MM/yyyy") : string.Empty;
+
+                        WorkSheet1.Cells[recordIndex, 12].Value = items.BloodGroup;
+                        WorkSheet1.Cells[recordIndex, 13].Value = items.GenderName;
+                        WorkSheet1.Cells[recordIndex, 14].Value = items.MaritalStatus;
+                        WorkSheet1.Cells[recordIndex, 15].Value = items.CompanyNumber;
+
+                        WorkSheet1.Cells[recordIndex, 16].Value = items.AddressLine;
+                        WorkSheet1.Cells[recordIndex, 17].Value = items.CountryName;
+                        WorkSheet1.Cells[recordIndex, 18].Value = items.StateName;
+                        WorkSheet1.Cells[recordIndex, 19].Value = items.DistrictName;
+                        WorkSheet1.Cells[recordIndex, 20].Value = items.Pincode;
+
+                        WorkSheet1.Cells[recordIndex, 21].Value = items.AddressLine;
+                        WorkSheet1.Cells[recordIndex, 22].Value = items.CountryName;
+                        WorkSheet1.Cells[recordIndex, 23].Value = items.StateName;
+                        WorkSheet1.Cells[recordIndex, 24].Value = items.DistrictName;
+                        WorkSheet1.Cells[recordIndex, 25].Value = items.Pincode;
+
+                        WorkSheet1.Cells[recordIndex, 26].Value = items.EmergencyName;
+                        WorkSheet1.Cells[recordIndex, 27].Value = items.EmergencyContactNumber;
+                        WorkSheet1.Cells[recordIndex, 28].Value = items.EmergencyRelation;
+
+                        WorkSheet1.Cells[recordIndex, 29].Value = items.AadharNumber;
+                        WorkSheet1.Cells[recordIndex, 30].Value = items.PanNumber;
+                        WorkSheet1.Cells[recordIndex, 31].Value = items.OtherProof;
+
+                        WorkSheet1.Cells[recordIndex, 32].Value = items.IsMobileUser;
+                        WorkSheet1.Cells[recordIndex, 33].Value = items.IsWebUser;
+                        WorkSheet1.Cells[recordIndex, 34].Value = items.IsActive == true ? "Active" : "Inactive";
+
+                        recordIndex += 1;
+                    }
+
+                    WorkSheet1.Columns.AutoFit();
+
+                    excelExportData.SaveAs(msExportDataFile);
+                    msExportDataFile.Position = 0;
+                    result = msExportDataFile.ToArray();
+                }
+            }
+
+            if (result != null)
+            {
+                _response.Data = result;
+                _response.IsSuccess = true;
+                _response.Message = "Exported successfully";
+            }
+
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> ExportUserHistoryData(bool IsActive = false)
+        {
+            _response.IsSuccess = false;
+            byte[] result;
+            int recordIndex;
+            ExcelWorksheet WorkSheet1;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            var request = new BaseSearchEntity();
+            request.IsActive = IsActive;
+
+            IEnumerable<User_Response> lstSizeObj = await _userRepository.GetUserList(request);
+
+            using (MemoryStream msExportDataFile = new MemoryStream())
+            {
+                using (ExcelPackage excelExportData = new ExcelPackage())
+                {
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Employee");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "User Code";
+                    WorkSheet1.Cells[1, 2].Value = "User Name";
+                    WorkSheet1.Cells[1, 3].Value = "EmailId";
+                    WorkSheet1.Cells[1, 4].Value = "Mobile";
+                    WorkSheet1.Cells[1, 5].Value = "Company";
+                    WorkSheet1.Cells[1, 6].Value = "Branch";
+                    WorkSheet1.Cells[1, 7].Value = "Department";
+                    WorkSheet1.Cells[1, 8].Value = "Role";
+                    WorkSheet1.Cells[1, 9].Value = "ReportingTo";
+                    WorkSheet1.Cells[1, 10].Value = "DateOfBirth";
+                    WorkSheet1.Cells[1, 11].Value = "Date Of Joining";
+                    WorkSheet1.Cells[1, 12].Value = "Blood Group";
+                    WorkSheet1.Cells[1, 13].Value = "Gender";
+                    WorkSheet1.Cells[1, 14].Value = "Marital Status";
+                    WorkSheet1.Cells[1, 15].Value = "Company Number";
+                    WorkSheet1.Cells[1, 16].Value = "Permanent Address";
+                    WorkSheet1.Cells[1, 17].Value = "Country";
+                    WorkSheet1.Cells[1, 18].Value = "State";
+                    WorkSheet1.Cells[1, 19].Value = "District";
+                    WorkSheet1.Cells[1, 20].Value = "Pincode";
+                    WorkSheet1.Cells[1, 21].Value = "Temporary Address";
+                    WorkSheet1.Cells[1, 22].Value = "Country";
+                    WorkSheet1.Cells[1, 23].Value = "State";
+                    WorkSheet1.Cells[1, 24].Value = "District";
+                    WorkSheet1.Cells[1, 25].Value = "Pincode";
+                    WorkSheet1.Cells[1, 26].Value = "Emergency Name";
+                    WorkSheet1.Cells[1, 27].Value = "Emergency Contact";
+                    WorkSheet1.Cells[1, 28].Value = "Emergency Relation";
+                    WorkSheet1.Cells[1, 29].Value = "Aadhar Number";
+                    WorkSheet1.Cells[1, 30].Value = "Pan Number";
+                    WorkSheet1.Cells[1, 31].Value = "Other Proof";
+                    WorkSheet1.Cells[1, 32].Value = "IsMobileUser";
+                    WorkSheet1.Cells[1, 33].Value = "IsWebUser";
+                    WorkSheet1.Cells[1, 34].Value = "IsActive";
+
+                    recordIndex = 2;
+
+                    foreach (var items in lstSizeObj)
+                    {
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.UserCode;
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.UserName;
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.EmailId;
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.MobileNumber;
+
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.CompanyName;
+                        WorkSheet1.Cells[recordIndex, 6].Value = items.BranchName;
+                        WorkSheet1.Cells[recordIndex, 7].Value = items.DepartmentName;
+                        WorkSheet1.Cells[recordIndex, 8].Value = items.RoleName;
+                        WorkSheet1.Cells[recordIndex, 9].Value = items.ReportingToName;
+
+                        WorkSheet1.Cells[recordIndex, 10].Value = items.DateOfBirth.HasValue ? items.DateOfBirth.Value.ToString("dd/MM/yyyy") : string.Empty;
+                        WorkSheet1.Cells[recordIndex, 11].Value = items.DateOfJoining.HasValue ? items.DateOfJoining.Value.ToString("dd/MM/yyyy") : string.Empty;
+
+                        WorkSheet1.Cells[recordIndex, 12].Value = items.BloodGroup;
+                        WorkSheet1.Cells[recordIndex, 13].Value = items.GenderName;
+                        WorkSheet1.Cells[recordIndex, 14].Value = items.MaritalStatus;
+                        WorkSheet1.Cells[recordIndex, 15].Value = items.CompanyNumber;
+
+                        WorkSheet1.Cells[recordIndex, 16].Value = items.AddressLine;
+                        WorkSheet1.Cells[recordIndex, 17].Value = items.CountryName;
+                        WorkSheet1.Cells[recordIndex, 18].Value = items.StateName;
+                        WorkSheet1.Cells[recordIndex, 19].Value = items.DistrictName;
+                        WorkSheet1.Cells[recordIndex, 20].Value = items.Pincode;
+
+                        WorkSheet1.Cells[recordIndex, 21].Value = items.AddressLine;
+                        WorkSheet1.Cells[recordIndex, 22].Value = items.CountryName;
+                        WorkSheet1.Cells[recordIndex, 23].Value = items.StateName;
+                        WorkSheet1.Cells[recordIndex, 24].Value = items.DistrictName;
+                        WorkSheet1.Cells[recordIndex, 25].Value = items.Pincode;
+
+                        WorkSheet1.Cells[recordIndex, 26].Value = items.EmergencyName;
+                        WorkSheet1.Cells[recordIndex, 27].Value = items.EmergencyContactNumber;
+                        WorkSheet1.Cells[recordIndex, 28].Value = items.EmergencyRelation;
+
+                        WorkSheet1.Cells[recordIndex, 29].Value = items.AadharNumber;
+                        WorkSheet1.Cells[recordIndex, 30].Value = items.PanNumber;
+                        WorkSheet1.Cells[recordIndex, 31].Value = items.OtherProof;
+
+                        WorkSheet1.Cells[recordIndex, 32].Value = items.IsMobileUser;
+                        WorkSheet1.Cells[recordIndex, 33].Value = items.IsWebUser;
+                        WorkSheet1.Cells[recordIndex, 34].Value = items.IsActive == true ? "Active" : "Inactive";
+
+                        recordIndex += 1;
+                    }
+
+                    WorkSheet1.Columns.AutoFit();
+
+                    excelExportData.SaveAs(msExportDataFile);
+                    msExportDataFile.Position = 0;
+                    result = msExportDataFile.ToArray();
+                }
+            }
+
+            if (result != null)
+            {
+                _response.Data = result;
+                _response.IsSuccess = true;
+                _response.Message = "Exported successfully";
+            }
+
             return _response;
         }
 

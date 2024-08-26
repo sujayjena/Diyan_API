@@ -54,6 +54,7 @@ namespace Diyan.Application.Models
 
     public class RoleSearch_Request : BaseSearchEntity
     {
+        [DefaultValue(0)]
         public int? DepartmentId { get; set; }
     }
 

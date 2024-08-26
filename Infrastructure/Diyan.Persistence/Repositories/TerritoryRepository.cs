@@ -57,6 +57,15 @@ namespace Diyan.Persistence.Repositories
             return (await ListByStoredProcedure<Country_Response>("GetCountryById", queryParameters)).FirstOrDefault();
         }
 
+        public async Task<IEnumerable<CountryDataValidationErrors>> ImportCountry(List<ImportedCountry> parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            string xmlData = ConvertListToXml(parameters);
+            queryParameters.Add("@XmlData", xmlData);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+            return await ListByStoredProcedure<CountryDataValidationErrors>("ImportCountry", queryParameters);
+        }
+
         #endregion
 
         #region State
@@ -95,6 +104,15 @@ namespace Diyan.Persistence.Repositories
             return (await ListByStoredProcedure<State_Response>("GetStateById", queryParameters)).FirstOrDefault();
         }
 
+        public async Task<IEnumerable<StateDataValidationErrors>> ImportState(List<ImportedState> parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            string xmlData = ConvertListToXml(parameters);
+            queryParameters.Add("@XmlData", xmlData);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+            return await ListByStoredProcedure<StateDataValidationErrors>("ImportState", queryParameters);
+        }
+
         #endregion
 
         #region District
@@ -131,6 +149,15 @@ namespace Diyan.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", Id);
             return (await ListByStoredProcedure<District_Response>("GetDistrictById", queryParameters)).FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<DistrictDataValidationErrors>> ImportDistrict(List<ImportedDistrict> parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            string xmlData = ConvertListToXml(parameters);
+            queryParameters.Add("@XmlData", xmlData);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+            return await ListByStoredProcedure<DistrictDataValidationErrors>("ImportDistrict", queryParameters);
         }
 
         #endregion

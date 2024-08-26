@@ -1,4 +1,5 @@
 ﻿using Diyan.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace Diyan.Application.Models
 {
-    public class TerritoryModel
+    public class ImportRequest
     {
+        public IFormFile FileUpload { get; set; }
     }
 
     #region Country
@@ -26,6 +28,21 @@ namespace Diyan.Application.Models
         public string?  CountryName { get; set; }
         public string?  CountryCode { get; set; }
         public bool?  IsActive { get; set; }
+    }
+
+    public class ImportedCountry
+    {
+        public string? CountryName { get; set; }
+        public string? CountryCode { get; set; }
+        public string IsActive { get; set; }
+    }
+
+    public class CountryDataValidationErrors
+    {
+        public string? CountryName { get; set; }
+        public string? CountryCode { get; set; }
+        public string IsActive { get; set; }
+        public string ValidationMessage { get; set; }
     }
 
     #endregion
@@ -46,6 +63,19 @@ namespace Diyan.Application.Models
         public bool?  IsActive { get; set; }
     }
 
+    public class ImportedState
+    {
+        public string StateName { get; set; }
+        public string IsActive { get; set; }
+    }
+
+    public class StateDataValidationErrors
+    {
+        public string StateName { get; set; }
+        public string IsActive { get; set; }
+        public string ValidationMessage { get; set; }
+    }
+
     #endregion
 
     #region District
@@ -62,6 +92,19 @@ namespace Diyan.Application.Models
         public string?  DistrictName { get; set; }
 
         public bool?  IsActive { get; set; }
+    }
+
+    public class ImportedDistrict
+    {
+        public string DistrictName { get; set; }
+        public string IsActive { get; set; }
+    }
+
+    public class DistrictDataValidationErrors
+    {
+        public string DistrictName { get; set; }
+        public string IsActive { get; set; }
+        public string ValidationMessage { get; set; }
     }
 
     #endregion

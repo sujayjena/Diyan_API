@@ -18,6 +18,8 @@ namespace Diyan.Application.Interfaces
 
         Task<Country_Response?> GetCountryById(long Id);
 
+        Task<IEnumerable<CountryDataValidationErrors>> ImportCountry(List<ImportedCountry> parameters);
+
         #endregion
 
         #region State 
@@ -28,6 +30,8 @@ namespace Diyan.Application.Interfaces
 
         Task<State_Response?> GetStateById(long Id);
 
+        Task<IEnumerable<StateDataValidationErrors>> ImportState(List<ImportedState> parameters);
+
         #endregion
 
         #region District 
@@ -37,6 +41,8 @@ namespace Diyan.Application.Interfaces
         Task<IEnumerable<District_Response>> GetDistrictList(BaseSearchEntity parameters);
 
         Task<District_Response?> GetDistrictById(long Id);
+
+        Task<IEnumerable<DistrictDataValidationErrors>> ImportDistrict(List<ImportedDistrict> parameters);
 
         #endregion
 
