@@ -2,6 +2,7 @@
 using Diyan.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -46,8 +47,10 @@ namespace Diyan.Application.Models
 
     public class RolePermission_Search : BaseSearchEntity
     {
+        [DefaultValue(0)]
         public long RoleId { get; set; }
 
+        [DefaultValue(0)]
         public long? EmployeeId { get; set; }
 
         public bool?  IsActive { get; set; }
@@ -95,6 +98,7 @@ namespace Diyan.Application.Models
 
     public class RoleMaster_Employee_Search_Request : BaseSearchEntity
     {
+        [DefaultValue(0)]
         public long EmployeeId { get; set; }
         public Nullable<bool> IsActive { get; set; }
     }

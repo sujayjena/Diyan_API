@@ -128,14 +128,18 @@ namespace Diyan.Application.Models
 
     public class CustomerSearch_Request : BaseSearchEntity
     {
-        public int? CustomerId { get; set; }
-        public int? LeadStatusId { get; set; }
-        public int? ParentCustomerId { get; set; }
+        [DefaultValue(0)]
+        public int CustomerId { get; set; }
+        [DefaultValue(0)]
+        public int LeadStatusId { get; set; }
+        [DefaultValue(0)]
+        public int ParentCustomerId { get; set; }
     }
 
     public class Search_Request : BaseSearchEntity
     {
-        public int? CustomerId { get; set; }
+        [DefaultValue(0)]
+        public int CustomerId { get; set; }
     }
 
     public class Billing_ShippingDetails_Response : BaseEntity

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Diyan.Application.Models
@@ -138,6 +139,46 @@ namespace Diyan.Application.Models
 
         public bool?  IsActive { get; set; }
     }
+
+    public class Territories_State_Dist_City_Area_Search
+    {
+        public int? CountryId { get; set; }
+
+        public int? StateId { get; set; }
+
+        [JsonIgnore]
+        public int? DistrictId { get; set; }
+        //[JsonIgnore]
+        //public int? CityId { get; set; }
+    }
+
+    public class Territories_State_Dist_City_Area_Response
+    {
+        public int? Id { get; set; }
+
+        public string? Value { get; set; }
+
+        public string? Text { get; set; }
+    }
+
+    public class TerritoriesDataValidationErrors
+    {
+        public string CountryName { get; set; }
+        public string StateName { get; set; }
+        public string DistrictName { get; set; }
+        //public string CityName { get; set; }
+        public string IsActive { get; set; }
+        public string ValidationMessage { get; set; }
+    }
+    public class ImportedTerritories
+    {
+        public string CountryName { get; set; }
+        public string StateName { get; set; }
+        public string DistrictName { get; set; }
+        //public string CityName { get; set; }
+        public string IsActive { get; set; }
+    }
+
 
     #endregion
 }

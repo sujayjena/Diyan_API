@@ -200,6 +200,26 @@ namespace Diyan.Persistence.Repositories
             return (await ListByStoredProcedure<Territories_Response>("GetTerritoriesById", queryParameters)).FirstOrDefault();
         }
 
+        public async Task<IEnumerable<Territories_State_Dist_City_Area_Response>> GetTerritories_State_Dist_City_Area_List_ById(Territories_State_Dist_City_Area_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@CountryId", parameters.CountryId);
+            queryParameters.Add("@StateId", parameters.StateId);
+
+            var result = await ListByStoredProcedure<Territories_State_Dist_City_Area_Response>("GetTerritories_State_Dist_City_Area_List_ById", queryParameters);
+
+            return result;
+        }
+
+        public async Task<IEnumerable<TerritoriesDataValidationErrors>> ImportTerritories(List<ImportedTerritories> parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            string xmlData = ConvertListToXml(parameters);
+            queryParameters.Add("@XmlData", xmlData);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+            return await ListByStoredProcedure<TerritoriesDataValidationErrors>("ImportTerritories", queryParameters);
+        }
+
         #endregion
     }
 }

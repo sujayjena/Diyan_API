@@ -11,11 +11,13 @@ namespace Diyan.Application.Models
 {
     public class CompanySearch_Request : BaseSearchEntity
     {
-        public int? CompanyId { get; set; }
+        [DefaultValue(0)]
+        public int CompanyId { get; set; }
     }
     public class CompanyAMC_Search
     {
-        public int? CompanyId { get; set; }
+        [DefaultValue(0)]
+        public int CompanyId { get; set; }
     }
     public class Company_Request : BaseEntity
     {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Diyan.Persistence.Repositories;
+using System.ComponentModel;
 
 namespace Diyan.Application.Models
 {
@@ -31,7 +32,8 @@ namespace Diyan.Application.Models
     }
     public class BranchSearch_Request : BaseSearchEntity
     {
-        public int? CompanyId { get; set; }
+        [DefaultValue(0)]
+        public int CompanyId { get; set; }
     }
     public class Branch_Response : BaseResponseEntity
     {
