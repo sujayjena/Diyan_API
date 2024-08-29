@@ -129,6 +129,8 @@ namespace Diyan.Application.Models
     public class CustomerSearch_Request : BaseSearchEntity
     {
         [DefaultValue(0)]
+        public int CountryId { get; set; }
+        [DefaultValue(0)]
         public int CustomerId { get; set; }
         [DefaultValue(0)]
         public int LeadStatusId { get; set; }

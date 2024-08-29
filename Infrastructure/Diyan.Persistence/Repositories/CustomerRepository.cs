@@ -53,6 +53,7 @@ namespace Diyan.Persistence.Repositories
         public async Task<IEnumerable<Customer_Response>> GetCustomerList(CustomerSearch_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@CountryId", parameters.CountryId);
             queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@LeadStatusId", parameters.LeadStatusId);
             queryParameters.Add("@ParentCustomerId", parameters.ParentCustomerId);
