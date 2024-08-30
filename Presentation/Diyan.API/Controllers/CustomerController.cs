@@ -6,6 +6,9 @@ using Diyan.Application.Models;
 using Diyan.Persistence.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml.Style;
+using OfficeOpenXml;
+using System.Collections.Generic;
 
 namespace Diyan.API.Controllers
 {
@@ -309,6 +312,227 @@ namespace Diyan.API.Controllers
             }
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> ExportCustomer()
+        {
+            _response.IsSuccess = false;
+            byte[] result;
+
+            var parameters = new CustomerSearch_Request();
+            IEnumerable<Customer_Response> lstCustomerListObj = await _customerRepository.GetCustomerList(parameters);
+
+            using (MemoryStream msExportDataFile = new MemoryStream())
+            {
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                using (ExcelPackage excelExportData = new ExcelPackage())
+                {
+                    int recordIndex;
+                    ExcelWorksheet WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Customer");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "Customer Name";
+                    WorkSheet1.Cells[1, 2].Value = "Parent Customer";
+                    WorkSheet1.Cells[1, 3].Value = "Mobile Number";
+                    WorkSheet1.Cells[1, 4].Value = "LandLine Number";
+                    WorkSheet1.Cells[1, 5].Value = "Customer Type";
+                    WorkSheet1.Cells[1, 6].Value = "Email";
+                    WorkSheet1.Cells[1, 7].Value = "Country Name";
+                    WorkSheet1.Cells[1, 8].Value = "Country Code";
+                    WorkSheet1.Cells[1, 9].Value = "Contact Name";
+                    WorkSheet1.Cells[1, 10].Value = "IsActive";
+
+
+                    recordIndex = 2;
+                    foreach (var items in lstCustomerListObj)
+                    {
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.ParentCustomer;
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.MobileNo;
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.LandlineNumber;
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.CustomerType;
+                        WorkSheet1.Cells[recordIndex, 6].Value = items.EmailId;
+                        WorkSheet1.Cells[recordIndex, 7].Value = items.CountryName;
+                        WorkSheet1.Cells[recordIndex, 8].Value = items.CountryCode;
+                        WorkSheet1.Cells[recordIndex, 9].Value = items.ContactName;
+                        WorkSheet1.Cells[recordIndex, 10].Value = items.IsActive == true ? "Active" : "Inactive";
+
+                        recordIndex += 1;
+                    }
+
+                    WorkSheet1.Columns.AutoFit();
+
+
+                    // Contact
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Contact");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "Customer Name";
+                    WorkSheet1.Cells[1, 2].Value = "Contact Person";
+                    WorkSheet1.Cells[1, 3].Value = "Mobile Number";
+                    WorkSheet1.Cells[1, 4].Value = "Email";
+
+                    recordIndex = 2;
+                    foreach (var items in lstCustomerListObj.ToList().Distinct())
+                    {
+                        var vContactDetail_Search = new Search_Request()
+                        {
+                            CustomerId = items.Id,
+                            SearchText = ""
+                        };
+
+                        var lstContactListObj = await _customerRepository.GetContactDetailsList(vContactDetail_Search);
+                        foreach (var itemContact in lstContactListObj)
+                        {
+                            WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
+                            WorkSheet1.Cells[recordIndex, 2].Value = itemContact.ContactPerson;
+                            WorkSheet1.Cells[recordIndex, 3].Value = itemContact.MobileNo;
+                            WorkSheet1.Cells[recordIndex, 4].Value = itemContact.EmailId;
+
+                            recordIndex += 1;
+                        }
+                    }
+                    WorkSheet1.Columns.AutoFit();
+
+
+                    // Billing
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Billing");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "Customer Name";
+                    WorkSheet1.Cells[1, 2].Value = "Street Name";
+                    WorkSheet1.Cells[1, 3].Value = "Country Name";
+
+                    recordIndex = 2;
+                    foreach (var items in lstCustomerListObj)
+                    {
+                        var vBillingSearch = new Search_Request()
+                        {
+                            CustomerId = items.Id,
+                            SearchText = ""
+                        };
+
+                        var lstAddressListObj = await _customerRepository.GetBillingDetailsList(vBillingSearch);
+                        foreach (var itemAddress in lstAddressListObj)
+                        {
+                            WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
+                            WorkSheet1.Cells[recordIndex, 2].Value = itemAddress.StreetName;
+                            WorkSheet1.Cells[recordIndex, 3].Value = itemAddress.CountryName;
+
+                            recordIndex += 1;
+                        }
+                    }
+                    WorkSheet1.Columns.AutoFit();
+
+                    // Shipping
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Shipping");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "Customer Name";
+                    WorkSheet1.Cells[1, 2].Value = "Street Name";
+                    WorkSheet1.Cells[1, 3].Value = "Country Name";
+
+                    recordIndex = 2;
+                    foreach (var items in lstCustomerListObj)
+                    {
+                        var vShippingSearch = new Search_Request()
+                        {
+                            CustomerId = items.Id,
+                            SearchText = ""
+                        };
+
+                        var lstAddressListObj = await _customerRepository.GetShippingDetailsList(vShippingSearch);
+                        foreach (var itemAddress in lstAddressListObj)
+                        {
+                            WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
+                            WorkSheet1.Cells[recordIndex, 2].Value = itemAddress.StreetName;
+                            WorkSheet1.Cells[recordIndex, 3].Value = itemAddress.CountryName;
+
+                            recordIndex += 1;
+                        }
+                    }
+                    WorkSheet1.Columns.AutoFit();
+
+                    // Shipping
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Login");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "Customer Name";
+                    WorkSheet1.Cells[1, 2].Value = "Contact Name";
+                    WorkSheet1.Cells[1, 3].Value = "Mobile";
+                    WorkSheet1.Cells[1, 4].Value = "IsActive";
+
+                    recordIndex = 2;
+                    foreach (var items in lstCustomerListObj)
+                    {
+                        var vLoginSearch = new Search_Request()
+                        {
+                            CustomerId = items.Id,
+                            SearchText = ""
+                        };
+
+                        var lstAddressListObj = await _customerRepository.GetLoginCredentialsList(vLoginSearch);
+                        foreach (var itemAddress in lstAddressListObj)
+                        {
+                            WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
+                            WorkSheet1.Cells[recordIndex, 2].Value = itemAddress.ContactName;
+                            WorkSheet1.Cells[recordIndex, 3].Value = itemAddress.Username;
+                            WorkSheet1.Cells[recordIndex, 4].Value = items.IsActive == true ? "Active" : "Inactive";
+
+                            recordIndex += 1;
+                        }
+                    }
+                    WorkSheet1.Columns.AutoFit();
+
+
+                    excelExportData.SaveAs(msExportDataFile);
+                    msExportDataFile.Position = 0;
+                    result = msExportDataFile.ToArray();
+                }
+            }
+
+
+            if (result != null)
+            {
+                _response.Data = result;
+                _response.IsSuccess = true;
+                _response.Message = "Exported successfully";
+            }
+
+            return _response;
+        }
+
         #endregion
 
         #region Contact Details 
