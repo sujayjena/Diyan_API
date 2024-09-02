@@ -72,7 +72,9 @@ namespace Diyan.API.Controllers.Admin
                     // Total Company User check with register user
                     if (totalCompanyRegisteredUser >= vCompanyNoofUserAdd)
                     {
+                        _response.IsSuccess = false;
                         _response.Message = "You are not allowed to create user more then " + vCompanyNoofUserAdd + ", Please contact your administrator to access this feature!";
+                        
                         return _response;
                     }
                 }
@@ -101,7 +103,9 @@ namespace Diyan.API.Controllers.Admin
                     {
                         string sbranchListCommaseparated = string.Join(", ", strBranchList);
 
+                        _response.IsSuccess = false;
                         _response.Message = "You are not allowed to create user more then " + vCompanyNoofUserAdd + " for branch " + sbranchListCommaseparated + ", Please contact your administrator to access this feature!";
+                        
                         return _response;
                     }
                 }
