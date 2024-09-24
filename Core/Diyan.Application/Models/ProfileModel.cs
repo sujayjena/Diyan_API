@@ -98,6 +98,9 @@ namespace Diyan.Application.Models
     {
         public long RoleId { get; set; }
         public long? RegionId { get; set; }
+
+        [DefaultValue(null)]
+        public bool? IsActive { get; set; }
     }
     public partial class EmployeesListByReportingTo_Response
     {
