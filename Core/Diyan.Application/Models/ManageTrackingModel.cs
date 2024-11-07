@@ -139,6 +139,11 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? FBI_FinalBIDraftIssueClosedDate { get; set; }
 
+        [JsonIgnore]
+        public string? FBI_FinalBIImage { get; set; }
+        public string? FBI_FinalBIOriginalFileName { get; set; }
+        public string? FBI_FinalBIImage_Base64 { get; set; }
+
 
         [DefaultValue(false)]
         public bool? FAP_IsFinalAmountToPayClose { get; set; }
@@ -404,6 +409,9 @@ namespace Diyan.Application.Models
         public bool? FBI_IsFinalBIDraftIssueClose { get; set; }
         [DefaultValue(null)]
         public DateTime? FBI_FinalBIDraftIssueClosedDate { get; set; }
+        public string? FBI_FinalBIImage { get; set; }
+        public string? FBI_FinalBIOriginalFileName { get; set; }
+        public string? FBI_FinalBIImageURL { get; set; }
 
 
         [DefaultValue(false)]

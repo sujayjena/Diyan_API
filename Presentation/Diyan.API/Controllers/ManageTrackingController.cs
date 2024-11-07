@@ -60,6 +60,17 @@ namespace Diyan.API.Controllers
                 }
             }
 
+            // Final BL Issued Image
+            if (parameters.Id > 0 && !string.IsNullOrWhiteSpace(parameters.FBI_FinalBIImage_Base64))
+            {
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.FBI_FinalBIImage_Base64, "\\Uploads\\ManageTracking\\", parameters.FBI_FinalBIOriginalFileName);
+
+                if (!string.IsNullOrWhiteSpace(vUploadFile))
+                {
+                    parameters.FBI_FinalBIImage = vUploadFile;
+                }
+            }
+
             int result = await _manageTrackingRepository.SavePurchaseOrder(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)

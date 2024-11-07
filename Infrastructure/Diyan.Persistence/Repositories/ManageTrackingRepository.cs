@@ -73,8 +73,12 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@BID_BIDraftComment", parameters.BID_BIDraftComment);
             queryParameters.Add("@BID_IsBIDraftIssueClose", parameters.BID_IsBIDraftIssueClose);
             queryParameters.Add("@BID_BIDraftIssueClosedDate", parameters.BID_BIDraftIssueClosedDate);
+           
             queryParameters.Add("@FBI_IsFinalBIDraftIssueClose", parameters.FBI_IsFinalBIDraftIssueClose);
             queryParameters.Add("@FBI_FinalBIDraftIssueClosedDate", parameters.FBI_FinalBIDraftIssueClosedDate);
+            queryParameters.Add("@FBI_FinalBIImage", parameters.FBI_FinalBIImage);
+            queryParameters.Add("@FBI_FinalBIOriginalFileName", parameters.FBI_FinalBIOriginalFileName);
+
             queryParameters.Add("@FAP_IsFinalAmountToPayClose", parameters.FAP_IsFinalAmountToPayClose);
             queryParameters.Add("@FAP_FinalAmountToPayClosedDate", parameters.FAP_FinalAmountToPayClosedDate);
             queryParameters.Add("@PR_IsPaymentReceived", parameters.PR_IsPaymentReceived);
