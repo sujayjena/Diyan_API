@@ -85,6 +85,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PR_PaymentReceivedDate", parameters.PR_PaymentReceivedDate);
             queryParameters.Add("@DDS_IsDocumentSendDHL_Submitted", parameters.DDS_IsDocumentSendDHL_Submitted);
             queryParameters.Add("@DDS_DocumentSendDHL_SubmittedDate", parameters.DDS_DocumentSendDHL_SubmittedDate);
+            queryParameters.Add("@DDS_AWBNumber", parameters.DDS_AWBNumber);
             queryParameters.Add("@POC_IsPOClosed", parameters.POC_IsPOClosed);
             queryParameters.Add("@POC_POClosedDate", parameters.POC_POClosedDate);
             queryParameters.Add("@OC_IsOrderCompleteClosed", parameters.OC_IsOrderCompleteClosed);

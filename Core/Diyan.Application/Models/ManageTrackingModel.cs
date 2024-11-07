@@ -161,6 +161,7 @@ namespace Diyan.Application.Models
         public bool? DDS_IsDocumentSendDHL_Submitted { get; set; }
         [DefaultValue(null)]
         public DateTime? DDS_DocumentSendDHL_SubmittedDate { get; set; }
+        public string? DDS_AWBNumber { get; set; }
 
 
         [DefaultValue(false)]
@@ -430,6 +431,7 @@ namespace Diyan.Application.Models
         public bool? DDS_IsDocumentSendDHL_Submitted { get; set; }
         [DefaultValue(null)]
         public DateTime? DDS_DocumentSendDHL_SubmittedDate { get; set; }
+        public string? DDS_AWBNumber { get; set; }
 
 
         [DefaultValue(false)]
