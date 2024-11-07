@@ -543,7 +543,11 @@ namespace Diyan.API.Controllers
 
             var parameters = new CustomerSearch_Request()
             {
-                ParentCustomerId = ParentCustomerId
+                ParentCustomerId = ParentCustomerId,
+                CustomerId=0,
+                CountryId=0,
+                LeadStatusId=0,
+                SearchText = ""
             };
             IEnumerable<Customer_Response> lstCustomerListObj = await _customerRepository.GetCustomerList(parameters);
 
