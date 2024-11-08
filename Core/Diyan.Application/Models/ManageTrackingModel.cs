@@ -156,6 +156,11 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? PR_PaymentReceivedDate { get; set; }
 
+        [JsonIgnore]
+        public string? PR_Image { get; set; }
+        public string? PR_OriginalFileName { get; set; }
+        public string? PR_Image_Base64 { get; set; }
+
 
         [DefaultValue(false)]
         public bool? DDS_IsDocumentSendDHL_Submitted { get; set; }
@@ -425,6 +430,9 @@ namespace Diyan.Application.Models
         public bool? PR_IsPaymentReceived { get; set; }
         [DefaultValue(null)]
         public DateTime? PR_PaymentReceivedDate { get; set; }
+        public string? PR_Image { get; set; }
+        public string? PR_OriginalFileName { get; set; }
+        public string? PR_ImageURL { get; set; }
 
 
         [DefaultValue(false)]

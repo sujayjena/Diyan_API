@@ -81,8 +81,12 @@ namespace Diyan.Persistence.Repositories
 
             queryParameters.Add("@FAP_IsFinalAmountToPayClose", parameters.FAP_IsFinalAmountToPayClose);
             queryParameters.Add("@FAP_FinalAmountToPayClosedDate", parameters.FAP_FinalAmountToPayClosedDate);
+
             queryParameters.Add("@PR_IsPaymentReceived", parameters.PR_IsPaymentReceived);
             queryParameters.Add("@PR_PaymentReceivedDate", parameters.PR_PaymentReceivedDate);
+            queryParameters.Add("@PR_OriginalFileName", parameters.PR_OriginalFileName);
+            queryParameters.Add("@PR_Image", parameters.PR_Image);
+
             queryParameters.Add("@DDS_IsDocumentSendDHL_Submitted", parameters.DDS_IsDocumentSendDHL_Submitted);
             queryParameters.Add("@DDS_DocumentSendDHL_SubmittedDate", parameters.DDS_DocumentSendDHL_SubmittedDate);
             queryParameters.Add("@DDS_AWBNumber", parameters.DDS_AWBNumber);

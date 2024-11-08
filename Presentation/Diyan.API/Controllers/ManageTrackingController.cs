@@ -71,6 +71,17 @@ namespace Diyan.API.Controllers
                 }
             }
 
+            // Payment Received Image
+            if (parameters.Id > 0 && !string.IsNullOrWhiteSpace(parameters.PR_Image_Base64))
+            {
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.PR_Image_Base64, "\\Uploads\\ManageTracking\\", parameters.PR_OriginalFileName);
+
+                if (!string.IsNullOrWhiteSpace(vUploadFile))
+                {
+                    parameters.PR_Image = vUploadFile;
+                }
+            }
+
             int result = await _manageTrackingRepository.SavePurchaseOrder(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
