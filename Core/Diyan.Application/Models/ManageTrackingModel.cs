@@ -49,8 +49,10 @@ namespace Diyan.Application.Models
         public string? PO_PONumber { get; set; }
         public int? PO_PaymentTermsId { get; set; }
         public int? PO_Quantity { get; set; }
+        public int? PO_PaymentType { get; set; }
         public int? PO_CurrencyTypeId { get; set; }
         public decimal? PO_CurrencyValue { get; set; }
+        public decimal? PO_Amount { get; set; }
         public string? PO_PaperTypeId { get; set; }
         public string? PO_BrandId { get; set; }
         public string? PO_TypeOfPackagingId { get; set; }
@@ -207,9 +209,11 @@ namespace Diyan.Application.Models
         public int? PO_PaymentTermsId { get; set; }
         public string? PO_PaymentTerms { get; set; }
         public int? PO_Quantity { get; set; }
+        public int? PO_PaymentType { get; set; }
         public int? PO_CurrencyTypeId { get; set; }
         public string? PO_CurrencyType { get; set; }
         public decimal? PO_CurrencyValue { get; set; }
+        public decimal? PO_Amount { get; set; }
         public string? PO_PaperTypeId { get; set; }
         public string? PO_PaperType { get; set; }
         public string? PO_BrandId { get; set; }
@@ -306,9 +310,11 @@ namespace Diyan.Application.Models
         public int? PO_PaymentTermsId { get; set; }
         public string? PO_PaymentTerms { get; set; }
         public int? PO_Quantity { get; set; }
+        public int? PO_PaymentType { get; set; }
         public int? PO_CurrencyTypeId { get; set; }
         public string? PO_CurrencyType { get; set; }
         public decimal? PO_CurrencyValue { get; set; }
+        public decimal? PO_Amount { get; set; }
         public string? PO_PaperTypeId { get; set; }
         public string? PO_PaperType { get; set; }
         public string? PO_BrandId { get; set; }
@@ -612,6 +618,8 @@ namespace Diyan.Application.Models
         public int? CurrencyTypeId { get; set; }
         public double? Amount { get; set; }
         public int? PaymentReceivedId { get; set; }
+        public decimal? POAmount { get; set; }
+        public decimal? RemainingAmount { get; set; }
     }
 
     public class PO_LCReceived_Request : BaseEntity
@@ -620,6 +628,7 @@ namespace Diyan.Application.Models
         public int? PurchaseOrderId { get; set; }
         public DateTime? ReceivedDate { get; set; }
         public string? LCNumber { get; set; }
+        public decimal? POAmount { get; set; }
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }
         public string? Image_Base64 { get; set; }
@@ -652,6 +661,8 @@ namespace Diyan.Application.Models
         public decimal? Amount { get; set; }
         public int? PaymentReceivedId { get; set; }
         public string? PaymentReceived { get; set; }
+        public decimal? POAmount { get; set; }
+        public decimal? RemainingAmount { get; set; }
     }
 
     public class PO_LCReceived_Response : BaseResponseEntity
@@ -660,6 +671,7 @@ namespace Diyan.Application.Models
         public int? PurchaseOrderId { get; set; }
         public DateTime? ReceivedDate { get; set; }
         public string? LCNumber { get; set; }
+        public decimal? POAmount { get; set; }
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }
         public string? ImageURL { get; set; }
@@ -686,6 +698,8 @@ namespace Diyan.Application.Models
         public decimal? Amount { get; set; }
         public int? PaymentReceivedId { get; set; }
         public string? PaymentReceived { get; set; }
+        public decimal? POAmount { get; set; }
+        public decimal? RemainingAmount { get; set; }
         public int? LCReceivedDate { get; set; }
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }

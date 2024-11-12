@@ -33,8 +33,10 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PO_PONumber", parameters.PO_PONumber);
             queryParameters.Add("@PO_PaymentTermsId", parameters.PO_PaymentTermsId);
             queryParameters.Add("@PO_Quantity", parameters.PO_Quantity);
+            queryParameters.Add("@PO_PaymentType", parameters.PO_PaymentType);
             queryParameters.Add("@PO_CurrencyTypeId", parameters.PO_CurrencyTypeId);
             queryParameters.Add("@PO_CurrencyValue", parameters.PO_CurrencyValue);
+            queryParameters.Add("@PO_Amount", parameters.PO_Amount);
             queryParameters.Add("@PO_PaperTypeId", parameters.PO_PaperTypeId);
             queryParameters.Add("@PO_BrandId", parameters.PO_BrandId);
             queryParameters.Add("@PO_TypeOfPackagingId", parameters.PO_TypeOfPackagingId);
@@ -232,6 +234,8 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@CurrencyTypeId", parameters.CurrencyTypeId);
             queryParameters.Add("@Amount", parameters.Amount);
             queryParameters.Add("@PaymentReceivedId", parameters.PaymentReceivedId);
+            queryParameters.Add("@POAmount", parameters.POAmount);
+            queryParameters.Add("@RemainingAmount", parameters.RemainingAmount);
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -261,6 +265,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
             queryParameters.Add("@ReceivedDate", parameters.ReceivedDate);
             queryParameters.Add("@LCNumber", parameters.LCNumber);
+            queryParameters.Add("@POAmount", parameters.POAmount);
             queryParameters.Add("@ImageName", parameters.ImageName);
             queryParameters.Add("@OriginalFileName", parameters.OriginalFileName);
 
