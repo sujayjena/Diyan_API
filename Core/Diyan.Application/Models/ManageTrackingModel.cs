@@ -620,6 +620,7 @@ namespace Diyan.Application.Models
         public int? PaymentReceivedId { get; set; }
         public decimal? POAmount { get; set; }
         public decimal? RemainingAmount { get; set; }
+        public decimal? TotalReceivedAmount { get; set; }
     }
 
     public class PO_LCReceived_Request : BaseEntity
@@ -663,6 +664,7 @@ namespace Diyan.Application.Models
         public string? PaymentReceived { get; set; }
         public decimal? POAmount { get; set; }
         public decimal? RemainingAmount { get; set; }
+        public decimal? TotalReceivedAmount { get; set; }
     }
 
     public class PO_LCReceived_Response : BaseResponseEntity
@@ -700,6 +702,7 @@ namespace Diyan.Application.Models
         public string? PaymentReceived { get; set; }
         public decimal? POAmount { get; set; }
         public decimal? RemainingAmount { get; set; }
+        public decimal? TotalReceivedAmount { get; set; }
         public int? LCReceivedDate { get; set; }
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }

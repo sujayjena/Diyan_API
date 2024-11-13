@@ -162,7 +162,8 @@ namespace Diyan.API.Controllers
                                     Amount = itemList.Amount,
                                     PaymentReceivedId = itemList.PaymentReceivedId,
                                     POAmount = itemList.POAmount,
-                                    RemainingAmount = itemList.RemainingAmount
+                                    RemainingAmount = itemList.RemainingAmount,
+                                    TotalReceivedAmount = itemList.TotalReceivedAmount
                                 };
 
                                 int resultPaymentReceived = await _manageTrackingRepository.SavePurchaseOrderPaymentReceived(vPaymentReceivedObj);
@@ -471,6 +472,7 @@ namespace Diyan.API.Controllers
                                 PaymentReceived = item.PaymentReceived,
                                 POAmount = item.POAmount,
                                 RemainingAmount = item.RemainingAmount,
+                                TotalReceivedAmount = item.TotalReceivedAmount,
 
                                 CreatedBy = item.CreatedBy,
                                 CreatedDate = item.CreatedDate,

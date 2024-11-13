@@ -236,6 +236,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PaymentReceivedId", parameters.PaymentReceivedId);
             queryParameters.Add("@POAmount", parameters.POAmount);
             queryParameters.Add("@RemainingAmount", parameters.RemainingAmount);
+            queryParameters.Add("@TotalReceivedAmount", parameters.TotalReceivedAmount);
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
