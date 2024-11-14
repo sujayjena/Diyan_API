@@ -330,7 +330,8 @@ namespace Diyan.Application.Models
         [DefaultValue(false)]
         public bool? IsActive { get; set; }
         public bool? PO_IsPOStatusClosed { get; set; }
-
+        [DefaultValue(null)]
+        public DateTime? PO_StatusClosedDate { get; set; }
 
 
         [DefaultValue(false)]
