@@ -369,6 +369,9 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? OA_OrderAcceptedDate { get; set; }
 
+        [DefaultValue(null)]
+        public DateTime? OA_OrderAcceptedClosedDate { get; set; }
+
 
 
         [DefaultValue(false)]
@@ -376,6 +379,9 @@ namespace Diyan.Application.Models
 
         [DefaultValue(null)]
         public DateTime? OUP_OrderUnderProcessDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? OUP_OrderUnderProcessClosedDate { get; set; }
 
 
 
@@ -403,6 +409,9 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? CUL_ContainersUnderLoadingClosedDate { get; set; }
 
+        [DefaultValue(null)]
+        public DateTime? CUL_ContainersUnderLoadingClosedDateTime { get; set; }
+
 
         [DefaultValue(false)]
         public bool? IN_IsInvoiceGenerateClose { get; set; }
@@ -410,18 +419,31 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? IN_InvoiceGenerateClosedDate { get; set; }
 
+        [DefaultValue(null)]
+        public DateTime? IN_InvoiceGenerateClosedDateTime { get; set; }
+
 
         public string? BID_BIDraftComment { get; set; }
+
         [DefaultValue(false)]
         public bool? BID_IsBIDraftIssueClose { get; set; }
+
         [DefaultValue(null)]
         public DateTime? BID_BIDraftIssueClosedDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? BID_BIDraftIssueClosedDateTime { get; set; }
 
 
         [DefaultValue(false)]
         public bool? FBI_IsFinalBIDraftIssueClose { get; set; }
+
         [DefaultValue(null)]
         public DateTime? FBI_FinalBIDraftIssueClosedDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? FBI_FinalBIDraftIssueClosedDateTime { get; set; }
+
         public string? FBI_FinalBIImage { get; set; }
         public string? FBI_FinalBIOriginalFileName { get; set; }
         public string? FBI_FinalBIImageURL { get; set; }
@@ -429,14 +451,22 @@ namespace Diyan.Application.Models
 
         [DefaultValue(false)]
         public bool? FAP_IsFinalAmountToPayClose { get; set; }
+
         [DefaultValue(null)]
         public DateTime? FAP_FinalAmountToPayClosedDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? FAP_FinalAmountToPayClosedDateTime { get; set; }
 
 
         [DefaultValue(false)]
         public bool? PR_IsPaymentReceived { get; set; }
+
         [DefaultValue(null)]
         public DateTime? PR_PaymentReceivedDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? PR_PaymentReceivedClosedDate { get; set; }
         public string? PR_Image { get; set; }
         public string? PR_OriginalFileName { get; set; }
         public string? PR_ImageURL { get; set; }
@@ -444,21 +474,33 @@ namespace Diyan.Application.Models
 
         [DefaultValue(false)]
         public bool? DDS_IsDocumentSendDHL_Submitted { get; set; }
+
         [DefaultValue(null)]
         public DateTime? DDS_DocumentSendDHL_SubmittedDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? DDS_DocumentSendDHL_SubmittedClosedDate { get; set; }
         public string? DDS_AWBNumber { get; set; }
 
 
         [DefaultValue(false)]
         public bool? POC_IsPOClosed { get; set; }
+
         [DefaultValue(null)]
         public DateTime? POC_POClosedDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? POC_POClosedDateTime { get; set; }
 
 
         [DefaultValue(false)]
         public bool? OC_IsOrderCompleteClosed { get; set; }
+
         [DefaultValue(null)]
         public DateTime? OC_OrderCompleteDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? OC_OrderCompleteClosedDate { get; set; }
 
 
         public List<PIIssued_Response>? PIIssuedList { get; set; }
