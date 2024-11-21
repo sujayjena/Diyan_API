@@ -26,6 +26,8 @@ namespace Diyan.Application.Models
 
         public string? TrakingNumber { get; set; }
 
+        public string? PINumber { get; set; }
+
         [DefaultValue(0)]
         public int IsPIConfirmation { get; set; }
 

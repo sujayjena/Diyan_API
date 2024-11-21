@@ -827,7 +827,16 @@ namespace Diyan.API.Controllers
         #endregion
 
 
-        //#region PI Issue
+        #region PI Issue
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetPINumberForSelectList()
+        {
+            IEnumerable<SelectListResponse> lstUsers = await _manageTrackingRepository.GetPINumberForSelectList();
+            _response.Data = lstUsers.ToList();
+            return _response;
+        }
 
         //[Route("[action]")]
         //[HttpPost]
@@ -839,7 +848,7 @@ namespace Diyan.API.Controllers
         //    return _response;
         //}
 
-        //#endregion
+        #endregion
 
         //#region Payment Received Or LC Received
 

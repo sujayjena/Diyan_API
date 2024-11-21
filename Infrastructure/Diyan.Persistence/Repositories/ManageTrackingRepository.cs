@@ -110,6 +110,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@StatusId", parameters.StatusId);
             queryParameters.Add("@TrakingStatusId", parameters.TrakingStatusId);
             queryParameters.Add("@TrakingNumber", parameters.TrakingNumber);
+            queryParameters.Add("@PINumber", parameters.PINumber);
             queryParameters.Add("@IsPIConfirmation", parameters.IsPIConfirmation);
             queryParameters.Add("@IsPaymentOrLCReceived", parameters.IsPaymentOrLCReceived);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
@@ -194,6 +195,14 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@Id", Id);
 
             return await SaveByStoredProcedure<int>("DeletePIIssued", queryParameters);
+        }
+
+        public async Task<IEnumerable<SelectListResponse>> GetPINumberForSelectList()
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            var result = await ListByStoredProcedure<SelectListResponse>("GetPINumberForSelectList", queryParameters);
+
+            return result;
         }
 
         #endregion

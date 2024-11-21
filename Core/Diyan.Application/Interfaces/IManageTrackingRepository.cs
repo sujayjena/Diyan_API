@@ -28,6 +28,8 @@ namespace Diyan.Application.Interfaces
 
         Task<int> DeletePIIssued(int Id);
 
+        Task<IEnumerable<SelectListResponse>> GetPINumberForSelectList();
+
         #endregion
 
         #region Payment Received Or LC Received
