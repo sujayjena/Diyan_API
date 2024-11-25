@@ -48,6 +48,9 @@ namespace Diyan.Application.Interfaces
 
         Task<int> DeleteLCReceived(int Id);
 
+        Task<int> SavePurchaseOrderPaymentReceivedImages(PurchaseOrderPaymentReceivedImages_Request parameters);
+        Task<IEnumerable<PurchaseOrderPaymentReceivedImages_Response>> GetPurchaseOrderPaymentReceivedImagesById(PurchaseOrderPaymentReceivedImage_Search parameters);
+
         #endregion
 
         #region Containers Under Loading

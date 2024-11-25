@@ -163,10 +163,40 @@ namespace Diyan.API.Controllers
                                     PaymentReceivedId = itemList.PaymentReceivedId,
                                     POAmount = itemList.POAmount,
                                     RemainingAmount = itemList.RemainingAmount,
-                                    TotalReceivedAmount = itemList.TotalReceivedAmount
+                                    TotalReceivedAmount = itemList.TotalReceivedAmount,
+                                    BankReferenceNumber = itemList.BankReferenceNumber
                                 };
 
                                 int resultPaymentReceived = await _manageTrackingRepository.SavePurchaseOrderPaymentReceived(vPaymentReceivedObj);
+
+                                // Image Save
+                                if (resultPaymentReceived > 0)
+                                {
+                                    foreach (var vimgItem in itemList.PurchaseOrderPaymentReceivedImagesList)
+                                    {
+                                        string vImageName = "";
+                                        // Image Upload
+                                        if (!string.IsNullOrWhiteSpace(vimgItem.Image_Base64))
+                                        {
+                                            var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(vimgItem.Image_Base64, "\\Uploads\\ManageTracking\\", vimgItem.ImageOriginalFileName);
+
+                                            if (!string.IsNullOrWhiteSpace(vUploadFile))
+                                            {
+                                                vImageName = vUploadFile;
+                                            }
+                                        }
+
+                                        var vPOPaymentReceivedImagesObj = new PurchaseOrderPaymentReceivedImages_Request()
+                                        {
+                                            Id = vimgItem.Id,
+                                            PurchaseOrderPaymentReceivedId = resultPaymentReceived,
+                                            ImageFileName = vImageName,
+                                            ImageOriginalFileName = vimgItem.ImageOriginalFileName,
+                                        };
+
+                                        int resultPaymentReceivedImage = await _manageTrackingRepository.SavePurchaseOrderPaymentReceivedImages(vPOPaymentReceivedImagesObj);
+                                    }
+                                }
                             }
                         }
                         else if (parameters.PaymentReceived_Or_LCReceivedDetails.PaymentOrLCReceived == 2)
@@ -272,7 +302,9 @@ namespace Diyan.API.Controllers
                         {
                             Id = vPIIssuedItem.Id,
                             PurchaseOrderId = result,
+                            InvoiceGeneratedDate= vPIIssuedItem.InvoiceGeneratedDate,
                             InvoiceNumber = vPIIssuedItem.InvoiceNumber,
+                            InvoiceAmount = vPIIssuedItem.InvoiceAmount,
                             InvoiceImage = vPIIssuedItem.InvoiceImage,
                             InvoiceOriginalFileName = vPIIssuedItem.InvoiceOriginalFileName,
                         };
@@ -456,32 +488,50 @@ namespace Diyan.API.Controllers
                         var lstPaymentReceived_Or_LCReceived = await _manageTrackingRepository.GetPaymentReceivedList(vPO_PaymentReceived_Or_LCReceived_Search);
                         foreach (var item in lstPaymentReceived_Or_LCReceived)
                         {
-                            var vPO_PaymentReceived_Response = new PO_PaymentReceived_Response()
+                            var vPO_PaymentReceived_Response = new PO_PaymentReceived_Response();
+
+                            vPO_PaymentReceived_Response.Id = item.Id;
+                            vPO_PaymentReceived_Response.PurchaseOrderId = item.PurchaseOrderId;
+                            vPO_PaymentReceived_Response.InvoiceNumber = item.InvoiceNumber;
+                            vPO_PaymentReceived_Response.PaymentTermsId = item.PaymentTermsId;
+                            vPO_PaymentReceived_Response.PaymentTerms = item.PaymentTerms;
+                            vPO_PaymentReceived_Response.PaymentReceivedDate = item.PaymentReceivedDate;
+                            vPO_PaymentReceived_Response.CurrencyTypeId = item.CurrencyTypeId;
+                            vPO_PaymentReceived_Response.CurrencyType = item.CurrencyType;
+                            vPO_PaymentReceived_Response.Amount = item.Amount;
+                            vPO_PaymentReceived_Response.PaymentReceivedId = item.PaymentReceivedId;
+                            vPO_PaymentReceived_Response.PaymentReceived = item.PaymentReceived;
+                            vPO_PaymentReceived_Response.POAmount = item.POAmount;
+                            vPO_PaymentReceived_Response.RemainingAmount = item.RemainingAmount;
+                            vPO_PaymentReceived_Response.TotalReceivedAmount = item.TotalReceivedAmount;
+                            vPO_PaymentReceived_Response.BankReferenceNumber = item.BankReferenceNumber;
+
+                            vPO_PaymentReceived_Response.CreatedBy = item.CreatedBy;
+                            vPO_PaymentReceived_Response.CreatedDate = item.CreatedDate;
+                            vPO_PaymentReceived_Response.CreatorName = item.CreatorName;
+
+                            vPO_PaymentReceived_Response.ModifiedBy = item.ModifiedBy;
+                            vPO_PaymentReceived_Response.ModifiedDate = item.ModifiedDate;
+                            vPO_PaymentReceived_Response.ModifierName = item.ModifierName;
+
+                            var vPurchaseOrderPaymentReceivedImage_Search = new PurchaseOrderPaymentReceivedImage_Search()
                             {
-                                Id = item.Id,
-                                PurchaseOrderId = item.PurchaseOrderId,
-
-                                InvoiceNumber = item.InvoiceNumber,
-                                PaymentTermsId = item.PaymentTermsId,
-                                PaymentTerms = item.PaymentTerms,
-                                PaymentReceivedDate = item.PaymentReceivedDate,
-                                CurrencyTypeId = item.CurrencyTypeId,
-                                CurrencyType = item.CurrencyType,
-                                Amount = item.Amount,
-                                PaymentReceivedId = item.PaymentReceivedId,
-                                PaymentReceived = item.PaymentReceived,
-                                POAmount = item.POAmount,
-                                RemainingAmount = item.RemainingAmount,
-                                TotalReceivedAmount = item.TotalReceivedAmount,
-
-                                CreatedBy = item.CreatedBy,
-                                CreatedDate = item.CreatedDate,
-                                CreatorName = item.CreatorName,
-
-                                ModifiedBy = item.ModifiedBy,
-                                ModifiedDate = item.ModifiedDate,
-                                ModifierName = item.ModifierName
+                                PurchaseOrderPaymentReceivedId = item.Id,
                             };
+
+                            var vPurchaseOrderPaymentReceivedImageistObj = await _manageTrackingRepository.GetPurchaseOrderPaymentReceivedImagesById(vPurchaseOrderPaymentReceivedImage_Search);
+                            foreach (var itemImg in vPurchaseOrderPaymentReceivedImageistObj)
+                            {
+                                var vPurchaseOrderPaymentReceivedImages_Response = new PurchaseOrderPaymentReceivedImages_Response()
+                                {
+                                    Id = itemImg.Id,
+                                    PurchaseOrderPaymentReceivedId = item.Id,
+                                    ImageFileName = itemImg.ImageFileName,
+                                    ImageOriginalFileName = itemImg.ImageOriginalFileName,
+                                    ImageURL = itemImg.ImageURL,
+                                };
+                                vPO_PaymentReceived_Response.PurchaseOrderPaymentReceivedImagesList.Add(vPurchaseOrderPaymentReceivedImages_Response);
+                            }
 
                             vResultObj.PaymentReceived_Or_LCReceivedDetail.PaymentReceivedDetail.Add(vPO_PaymentReceived_Response);
                         }
@@ -580,7 +630,9 @@ namespace Diyan.API.Controllers
                         {
                             Id = itemLog.Id,
                             PurchaseOrderId = itemLog.PurchaseOrderId,
+                            InvoiceGeneratedDate = itemLog.InvoiceGeneratedDate,
                             InvoiceNumber = itemLog.InvoiceNumber,
+                            InvoiceAmount = itemLog.InvoiceAmount,
                             InvoiceImage = itemLog.InvoiceImage,
                             InvoiceOriginalFileName = itemLog.InvoiceOriginalFileName,
                             InvoiceImageURL = itemLog.InvoiceImageURL,

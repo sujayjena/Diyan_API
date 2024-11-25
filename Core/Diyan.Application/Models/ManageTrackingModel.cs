@@ -153,12 +153,15 @@ namespace Diyan.Application.Models
         public bool? FAP_IsFinalAmountToPayClose { get; set; }
         [DefaultValue(null)]
         public DateTime? FAP_FinalAmountToPayClosedDate { get; set; }
+        public decimal? FAP_FinalAmountToPay { get; set; }
 
 
         [DefaultValue(false)]
         public bool? PR_IsPaymentReceived { get; set; }
         [DefaultValue(null)]
         public DateTime? PR_PaymentReceivedDate { get; set; }
+
+        public decimal? PR_FinalAmount { get; set; }
 
         [JsonIgnore]
         public string? PR_Image { get; set; }
@@ -459,6 +462,7 @@ namespace Diyan.Application.Models
 
         [DefaultValue(null)]
         public DateTime? FAP_FinalAmountToPayClosedDateTime { get; set; }
+        public decimal? FAP_FinalAmountToPay { get; set; }
 
 
         [DefaultValue(false)]
@@ -469,6 +473,9 @@ namespace Diyan.Application.Models
 
         [DefaultValue(null)]
         public DateTime? PR_PaymentReceivedClosedDate { get; set; }
+
+        public decimal? PR_FinalAmount { get; set; }
+
         public string? PR_Image { get; set; }
         public string? PR_OriginalFileName { get; set; }
         public string? PR_ImageURL { get; set; }
@@ -655,6 +662,11 @@ namespace Diyan.Application.Models
 
     public class PO_PaymentReceived_Request : BaseEntity
     {
+        public PO_PaymentReceived_Request()
+        {
+            PurchaseOrderPaymentReceivedImagesList = new List<PurchaseOrderPaymentReceivedImages_Request>();
+        }
+
         [JsonIgnore]
         public int? PurchaseOrderId { get; set; }
         public string? InvoiceNumber { get; set; }
@@ -666,6 +678,8 @@ namespace Diyan.Application.Models
         public decimal? POAmount { get; set; }
         public decimal? RemainingAmount { get; set; }
         public decimal? TotalReceivedAmount { get; set; }
+        public string? BankReferenceNumber { get; set; }
+        public List<PurchaseOrderPaymentReceivedImages_Request> PurchaseOrderPaymentReceivedImagesList { get; set; }
     }
 
     public class PO_LCReceived_Request : BaseEntity
@@ -696,6 +710,11 @@ namespace Diyan.Application.Models
 
     public class PO_PaymentReceived_Response : BaseResponseEntity
     {
+        public PO_PaymentReceived_Response()
+        {
+            PurchaseOrderPaymentReceivedImagesList = new List<PurchaseOrderPaymentReceivedImages_Response>();
+        }
+
         [JsonIgnore]
         public int? PurchaseOrderId { get; set; }
         public string? InvoiceNumber { get; set; }
@@ -710,6 +729,8 @@ namespace Diyan.Application.Models
         public decimal? POAmount { get; set; }
         public decimal? RemainingAmount { get; set; }
         public decimal? TotalReceivedAmount { get; set; }
+        public string? BankReferenceNumber { get; set; }
+        public List<PurchaseOrderPaymentReceivedImages_Response> PurchaseOrderPaymentReceivedImagesList { get; set; }
     }
 
     public class PO_LCReceived_Response : BaseResponseEntity
@@ -721,6 +742,29 @@ namespace Diyan.Application.Models
         public decimal? POAmount { get; set; }
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }
+        public string? ImageURL { get; set; }
+    }
+
+    public class PurchaseOrderPaymentReceivedImages_Request : BaseEntity
+    {
+        [JsonIgnore]
+        public int? PurchaseOrderPaymentReceivedId { get; set; }
+        public string? ImageFileName { get; set; }
+        public string? ImageOriginalFileName { get; set; }
+        public string? Image_Base64 { get; set; }
+    }
+
+    public class PurchaseOrderPaymentReceivedImage_Search
+    {
+        [DefaultValue(0)]
+        public int? PurchaseOrderPaymentReceivedId { get; set; }
+    }
+
+    public class PurchaseOrderPaymentReceivedImages_Response : BaseEntity
+    {
+        public int? PurchaseOrderPaymentReceivedId { get; set; }
+        public string? ImageFileName { get; set; }
+        public string? ImageOriginalFileName { get; set; }
         public string? ImageURL { get; set; }
     }
 
@@ -830,8 +874,9 @@ namespace Diyan.Application.Models
     {
         [JsonIgnore]
         public int? PurchaseOrderId { get; set; }
-
+        public DateTime? InvoiceGeneratedDate { get; set; }
         public string? InvoiceNumber { get; set; }
+        public decimal? InvoiceAmount { get; set; }
         public string? InvoiceImage { get; set; }
         public string? InvoiceOriginalFileName { get; set; }
         public string? Invoice_Base64 { get; set; }
@@ -841,10 +886,12 @@ namespace Diyan.Application.Models
     {
         [JsonIgnore]
         public int? PurchaseOrderId { get; set; }
-        public string InvoiceNumber { get; set; }
-        public string InvoiceImage { get; set; }
-        public string InvoiceOriginalFileName { get; set; }
-        public string InvoiceImageURL { get; set; }
+        public DateTime? InvoiceGeneratedDate { get; set; }
+        public string? InvoiceNumber { get; set; }
+        public decimal? InvoiceAmount { get; set; }
+        public string? InvoiceImage { get; set; }
+        public string? InvoiceOriginalFileName { get; set; }
+        public string? InvoiceImageURL { get; set; }
     }
 
     #endregion

@@ -83,9 +83,11 @@ namespace Diyan.Persistence.Repositories
 
             queryParameters.Add("@FAP_IsFinalAmountToPayClose", parameters.FAP_IsFinalAmountToPayClose);
             queryParameters.Add("@FAP_FinalAmountToPayClosedDate", parameters.FAP_FinalAmountToPayClosedDate);
+            queryParameters.Add("@FAP_FinalAmountToPay", parameters.FAP_FinalAmountToPay);
 
             queryParameters.Add("@PR_IsPaymentReceived", parameters.PR_IsPaymentReceived);
             queryParameters.Add("@PR_PaymentReceivedDate", parameters.PR_PaymentReceivedDate);
+            queryParameters.Add("@PR_FinalAmount", parameters.PR_FinalAmount);
             queryParameters.Add("@PR_OriginalFileName", parameters.PR_OriginalFileName);
             queryParameters.Add("@PR_Image", parameters.PR_Image);
 
@@ -246,6 +248,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@POAmount", parameters.POAmount);
             queryParameters.Add("@RemainingAmount", parameters.RemainingAmount);
             queryParameters.Add("@TotalReceivedAmount", parameters.TotalReceivedAmount);
+            queryParameters.Add("@BankReferenceNumber", parameters.BankReferenceNumber);
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -315,6 +318,30 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@Id", Id);
 
             return await SaveByStoredProcedure<int>("DeleteLCReceived", queryParameters);
+        }
+
+        public async Task<int> SavePurchaseOrderPaymentReceivedImages(PurchaseOrderPaymentReceivedImages_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@PurchaseOrderPaymentReceivedId", parameters.PurchaseOrderPaymentReceivedId);
+            queryParameters.Add("@ImageFileName", parameters.ImageFileName);
+            queryParameters.Add("@ImageOriginalFileName", parameters.ImageOriginalFileName);
+
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SavePurchaseOrderPaymentReceivedImages", queryParameters);
+        }
+
+        public async Task<IEnumerable<PurchaseOrderPaymentReceivedImages_Response>> GetPurchaseOrderPaymentReceivedImagesById(PurchaseOrderPaymentReceivedImage_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.PurchaseOrderPaymentReceivedId);
+
+            var result = await ListByStoredProcedure<PurchaseOrderPaymentReceivedImages_Response>("GetPurchaseOrderPaymentReceivedImagesById", queryParameters);
+
+            return result;
         }
 
         #endregion
@@ -399,7 +426,9 @@ namespace Diyan.Persistence.Repositories
 
             queryParameters.Add("@Id", parameters.Id);
             queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
+            queryParameters.Add("@InvoiceGeneratedDate", parameters.InvoiceGeneratedDate);
             queryParameters.Add("@InvoiceNumber", parameters.InvoiceNumber);
+            queryParameters.Add("@InvoiceAmount", parameters.InvoiceAmount);
             queryParameters.Add("@InvoiceImage", parameters.InvoiceImage);
             queryParameters.Add("@InvoiceOriginalFileName", parameters.InvoiceOriginalFileName);
 
