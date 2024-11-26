@@ -115,6 +115,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PINumber", parameters.PINumber);
             queryParameters.Add("@IsPIConfirmation", parameters.IsPIConfirmation);
             queryParameters.Add("@IsPaymentOrLCReceived", parameters.IsPaymentOrLCReceived);
+            queryParameters.Add("@FilterType", parameters.FilterType);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -342,6 +343,15 @@ namespace Diyan.Persistence.Repositories
             var result = await ListByStoredProcedure<PurchaseOrderPaymentReceivedImages_Response>("GetPurchaseOrderPaymentReceivedImagesById", queryParameters);
 
             return result;
+        }
+
+        public async Task<int> DeletePurchaseOrderPaymentReceivedImages(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeletePurchaseOrderPaymentReceivedImages", queryParameters);
         }
 
         #endregion

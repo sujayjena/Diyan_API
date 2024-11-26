@@ -780,6 +780,27 @@ namespace Diyan.API.Controllers
             return _response;
         }
 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> DeletePurchaseOrderPaymentReceivedImages(int Id)
+        {
+            int result = await _manageTrackingRepository.DeletePurchaseOrderPaymentReceivedImages(Id);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details deleted sucessfully";
+            }
+            return _response;
+        }
+
         #endregion
 
         #region Containers Under Loading

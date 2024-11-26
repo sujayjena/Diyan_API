@@ -33,6 +33,9 @@ namespace Diyan.Application.Models
 
         [DefaultValue(0)]
         public int IsPaymentOrLCReceived { get; set; }
+
+        [DefaultValue("All")]
+        public string FilterType { get; set; }
     }
 
     public class PurchaseOrder_Request : BaseEntity

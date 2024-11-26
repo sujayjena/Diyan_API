@@ -51,6 +51,8 @@ namespace Diyan.Application.Interfaces
         Task<int> SavePurchaseOrderPaymentReceivedImages(PurchaseOrderPaymentReceivedImages_Request parameters);
         Task<IEnumerable<PurchaseOrderPaymentReceivedImages_Response>> GetPurchaseOrderPaymentReceivedImagesById(PurchaseOrderPaymentReceivedImage_Search parameters);
 
+        Task<int> DeletePurchaseOrderPaymentReceivedImages(int Id);
+
         #endregion
 
         #region Containers Under Loading

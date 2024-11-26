@@ -986,6 +986,11 @@ namespace Diyan.API.Controllers
             else
             {
                 var vResultObj = await _customerRepository.GetLoginCredentialsById(Id);
+                if (vResultObj != null)
+                {
+                    vResultObj.Passwords = !string.IsNullOrWhiteSpace(vResultObj.Passwords) ? EncryptDecryptHelper.DecryptString(vResultObj.Passwords) : string.Empty;
+                }
+
                 _response.Data = vResultObj;
             }
             return _response;
