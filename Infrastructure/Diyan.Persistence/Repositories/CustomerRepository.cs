@@ -36,6 +36,8 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@CountryId", parameters.CountryId);
             queryParameters.Add("@ContactName", parameters.ContactName);
             queryParameters.Add("@LeadStatusId", parameters.LeadStatusId);
+            queryParameters.Add("@AutoPassword", parameters.AutoPassword);
+            queryParameters.Add("@EncryptPassword", !string.IsNullOrWhiteSpace(parameters.AutoPassword) ? EncryptDecryptHelper.EncryptString(parameters.AutoPassword) : string.Empty);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -264,6 +266,17 @@ namespace Diyan.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", Id);
             return (await ListByStoredProcedure<LoginCredentials_Response>("GetLoginCredentialsById", queryParameters)).FirstOrDefault();
+        }
+
+        public async Task<string?> GetAutoGenPassword(string AutoPassword)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@AutoPassword", AutoPassword, null, System.Data.ParameterDirection.Output);
+
+            var result = await SaveByStoredProcedure<string>("sp_AutoGenPassword", queryParameters);
+            AutoPassword = queryParameters.Get<string>("AutoPassword");
+
+            return AutoPassword;
         }
 
         #endregion

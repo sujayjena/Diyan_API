@@ -34,6 +34,16 @@ namespace Diyan.API.Controllers
         [AllowAnonymous]
         public async Task<ResponseModel> SaveCustomer(Customer_Request parameters)
         {
+            //auto generated password
+            if (parameters.Id == 0)
+            {
+                var resultPass = await _customerRepository.GetAutoGenPassword("");
+                if (!string.IsNullOrEmpty(resultPass))
+                {
+                    parameters.AutoPassword = resultPass;
+                }
+            }
+
             bool bIsCustomerDeleted = false;
             int result = await _customerRepository.SaveCustomer(parameters);
 

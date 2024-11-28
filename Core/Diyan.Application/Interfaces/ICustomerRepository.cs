@@ -62,6 +62,8 @@ namespace Diyan.Application.Interfaces
 
         Task<LoginCredentials_Response?> GetLoginCredentialsById(long Id);
 
+        Task<string?> GetAutoGenPassword(string AutoPassword);
+
         #endregion
     }
 }

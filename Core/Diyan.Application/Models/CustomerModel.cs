@@ -36,6 +36,10 @@ namespace Diyan.Application.Models
         public string? ContactName { get; set; }
         public int? LeadStatusId { get; set; }
         public bool? IsActive { get; set; }
+
+        [JsonIgnore]
+        public string? AutoPassword { get; set; }
+
         public List<ContactDetails_Request>? ContactDetailsList { get; set; }
         public List<Billing_ShippingDetails_Request>? BillingDetailsList { get; set; }
         public List<Billing_ShippingDetails_Request>? ShippingDetailsList { get; set; }
@@ -171,6 +175,11 @@ namespace Diyan.Application.Models
     {
         public int? CustomerId { get; set; }
         public int? LeadStatusId { get; set; }
+    }
+
+    public class AutoGenPassword_Response
+    {
+        public string? AutoPassword { get; set; }
     }
 }
 
