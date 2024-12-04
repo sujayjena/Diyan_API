@@ -44,6 +44,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PO_IsPOStatusClosed", parameters.PO_IsPOStatusClosed);
             queryParameters.Add("@PO_Image", parameters.PO_POImage);
             queryParameters.Add("@PO_OriginalFileName", parameters.PO_POOriginalFileName);
+            queryParameters.Add("@PO_CommissionPerTon", parameters.PO_CommissionPerTon);
             queryParameters.Add("@IsActive", parameters.IsActive);
 
             queryParameters.Add("@PII_IsClosed", parameters.PII_IsClosed);
@@ -96,6 +97,14 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@DDS_AWBNumber", parameters.DDS_AWBNumber);
             queryParameters.Add("@POC_IsPOClosed", parameters.POC_IsPOClosed);
             queryParameters.Add("@POC_POClosedDate", parameters.POC_POClosedDate);
+
+            queryParameters.Add("@MC_TotalQty", parameters.MC_TotalQty);
+            queryParameters.Add("@MC_TotalPaymentReceived", parameters.MC_TotalPaymentReceived);
+            queryParameters.Add("@MC_CommissionPerTon", parameters.MC_CommissionPerTon);
+            queryParameters.Add("@MC_TotalCommission", parameters.MC_TotalCommission);
+            queryParameters.Add("@MC_CommissionClosedDate", parameters.MC_CommissionClosedDate);
+            queryParameters.Add("@MC_IsCommissionClosed", parameters.MC_IsCommissionClosed);
+
             queryParameters.Add("@OC_IsOrderCompleteClosed", parameters.OC_IsOrderCompleteClosed);
             queryParameters.Add("@OC_OrderCompleteDate", parameters.OC_OrderCompleteDate);
 

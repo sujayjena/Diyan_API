@@ -305,6 +305,7 @@ namespace Diyan.API.Controllers
                             InvoiceGeneratedDate= vPIIssuedItem.InvoiceGeneratedDate,
                             InvoiceNumber = vPIIssuedItem.InvoiceNumber,
                             InvoiceAmount = vPIIssuedItem.InvoiceAmount,
+                            Quantity = vPIIssuedItem.Quantity,
                             InvoiceImage = vPIIssuedItem.InvoiceImage,
                             InvoiceOriginalFileName = vPIIssuedItem.InvoiceOriginalFileName,
                         };
@@ -633,6 +634,7 @@ namespace Diyan.API.Controllers
                             InvoiceGeneratedDate = itemLog.InvoiceGeneratedDate,
                             InvoiceNumber = itemLog.InvoiceNumber,
                             InvoiceAmount = itemLog.InvoiceAmount,
+                            Quantity = itemLog.Quantity,
                             InvoiceImage = itemLog.InvoiceImage,
                             InvoiceOriginalFileName = itemLog.InvoiceOriginalFileName,
                             InvoiceImageURL = itemLog.InvoiceImageURL,

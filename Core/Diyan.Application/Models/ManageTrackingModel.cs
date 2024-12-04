@@ -67,6 +67,8 @@ namespace Diyan.Application.Models
         public string? PO_POImage { get; set; }
         public string? PO_POOriginalFileName { get; set; }
         public string? PO_Image_Base64 { get; set; }
+        public decimal? PO_CommissionPerTon { get; set; }
+
         [DefaultValue(false)]
         public bool? IsActive { get; set; }
 
@@ -184,6 +186,17 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? POC_POClosedDate { get; set; }
 
+        public int? MC_TotalQty { get; set; }
+        public decimal? MC_TotalPaymentReceived { get; set; }
+        public decimal? MC_CommissionPerTon { get; set; }
+        public decimal? MC_TotalCommission { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? MC_CommissionClosedDate { get; set; }
+
+        [DefaultValue(false)]
+        public bool? MC_IsCommissionClosed { get; set; }
+
 
         [DefaultValue(false)]
         public bool? OC_IsOrderCompleteClosed { get; set; }
@@ -285,6 +298,9 @@ namespace Diyan.Application.Models
         public bool? POC_IsPOClosed { get; set; }
 
         [DefaultValue(false)]
+        public bool? MC_IsCommissionClosed { get; set; }
+
+        [DefaultValue(false)]
         public bool? OC_IsOrderCompleteClosed { get; set; }
         [DefaultValue(null)]
         public DateTime? OC_OrderCompleteDate { get; set; }
@@ -335,6 +351,8 @@ namespace Diyan.Application.Models
         public string? PO_OriginalFileName { get; set; }
         public string? PO_Image { get; set; }
         public string? PO_ImageURL { get; set; }
+        public decimal? PO_CommissionPerTon { get; set; }
+
         [DefaultValue(false)]
         public bool? IsActive { get; set; }
         public bool? PO_IsPOStatusClosed { get; set; }
@@ -503,6 +521,20 @@ namespace Diyan.Application.Models
 
         [DefaultValue(null)]
         public DateTime? POC_POClosedDateTime { get; set; }
+
+        public int? MC_TotalQty { get; set; }
+        public decimal? MC_TotalPaymentReceived { get; set; }
+        public decimal? MC_CommissionPerTon { get; set; }
+        public decimal? MC_TotalCommission { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? MC_CommissionClosedDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? MC_CommissionClosedDateTime { get; set; }
+
+        [DefaultValue(false)]
+        public bool? MC_IsCommissionClosed { get; set; }
 
 
         [DefaultValue(false)]
@@ -880,6 +912,7 @@ namespace Diyan.Application.Models
         public DateTime? InvoiceGeneratedDate { get; set; }
         public string? InvoiceNumber { get; set; }
         public decimal? InvoiceAmount { get; set; }
+        public int? Quantity { get; set; }
         public string? InvoiceImage { get; set; }
         public string? InvoiceOriginalFileName { get; set; }
         public string? Invoice_Base64 { get; set; }
@@ -892,6 +925,7 @@ namespace Diyan.Application.Models
         public DateTime? InvoiceGeneratedDate { get; set; }
         public string? InvoiceNumber { get; set; }
         public decimal? InvoiceAmount { get; set; }
+        public int? Quantity { get; set; }
         public string? InvoiceImage { get; set; }
         public string? InvoiceOriginalFileName { get; set; }
         public string? InvoiceImageURL { get; set; }
