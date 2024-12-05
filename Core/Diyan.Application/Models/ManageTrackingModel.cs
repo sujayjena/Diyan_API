@@ -34,6 +34,9 @@ namespace Diyan.Application.Models
         [DefaultValue(0)]
         public int IsPaymentOrLCReceived { get; set; }
 
+        [DefaultValue(0)]
+        public int IsCommissionAgent { get; set; }
+
         [DefaultValue("All")]
         public string FilterType { get; set; }
     }
@@ -248,6 +251,7 @@ namespace Diyan.Application.Models
         public string? PO_OriginalFileName { get; set; }
         public string? PO_Image { get; set; }
         public string? PO_ImageURL { get; set; }
+        public decimal? PO_CommissionPerTon { get; set; }
 
         [DefaultValue(false)]
         public bool? IsActive { get; set; }

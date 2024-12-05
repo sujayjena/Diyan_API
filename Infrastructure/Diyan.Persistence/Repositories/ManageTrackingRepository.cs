@@ -124,6 +124,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PINumber", parameters.PINumber);
             queryParameters.Add("@IsPIConfirmation", parameters.IsPIConfirmation);
             queryParameters.Add("@IsPaymentOrLCReceived", parameters.IsPaymentOrLCReceived);
+            queryParameters.Add("@IsCommissionAgent", parameters.IsCommissionAgent);
             queryParameters.Add("@FilterType", parameters.FilterType);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
@@ -448,6 +449,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@InvoiceGeneratedDate", parameters.InvoiceGeneratedDate);
             queryParameters.Add("@InvoiceNumber", parameters.InvoiceNumber);
             queryParameters.Add("@InvoiceAmount", parameters.InvoiceAmount);
+            queryParameters.Add("@Quantity", parameters.Quantity);
             queryParameters.Add("@InvoiceImage", parameters.InvoiceImage);
             queryParameters.Add("@InvoiceOriginalFileName", parameters.InvoiceOriginalFileName);
 
