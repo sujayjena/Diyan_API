@@ -35,6 +35,7 @@ namespace Diyan.Persistence
             services.AddScoped<IEmailHelper, EmailHelper>();
             services.AddScoped<IEmailConfigRepository, EmailConfigRepository>();
             services.AddScoped<IConfigRefRepository, ConfigRefRepository>();
+            services.AddScoped<IManageMISRepository, ManageMISRepository>();
         }
     }
 }
