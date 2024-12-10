@@ -164,7 +164,9 @@ namespace Diyan.API.Controllers
                                     POAmount = itemList.POAmount,
                                     RemainingAmount = itemList.RemainingAmount,
                                     TotalReceivedAmount = itemList.TotalReceivedAmount,
-                                    BankReferenceNumber = itemList.BankReferenceNumber
+                                    BankReferenceNumber = itemList.BankReferenceNumber,
+                                    InvoiceGenerateDate = itemList.InvoiceGenerateDate,
+                                    PINumber = itemList.PINumber,
                                 };
 
                                 int resultPaymentReceived = await _manageTrackingRepository.SavePurchaseOrderPaymentReceived(vPaymentReceivedObj);
@@ -221,6 +223,7 @@ namespace Diyan.API.Controllers
                                     ReceivedDate = itemList.ReceivedDate,
                                     LCNumber = itemList.LCNumber,
                                     POAmount = itemList.POAmount,
+                                    PINumber = itemList.PINumber,
                                     ImageName = itemList.ImageName,
                                     OriginalFileName = itemList.OriginalFileName,
                                 };
@@ -506,6 +509,8 @@ namespace Diyan.API.Controllers
                             vPO_PaymentReceived_Response.RemainingAmount = item.RemainingAmount;
                             vPO_PaymentReceived_Response.TotalReceivedAmount = item.TotalReceivedAmount;
                             vPO_PaymentReceived_Response.BankReferenceNumber = item.BankReferenceNumber;
+                            vPO_PaymentReceived_Response.InvoiceGenerateDate = item.InvoiceGenerateDate;
+                            vPO_PaymentReceived_Response.PINumber = item.PINumber;
 
                             vPO_PaymentReceived_Response.CreatedBy = item.CreatedBy;
                             vPO_PaymentReceived_Response.CreatedDate = item.CreatedDate;
@@ -551,6 +556,7 @@ namespace Diyan.API.Controllers
                                 ReceivedDate = item.ReceivedDate,
                                 LCNumber = item.LCNumber,
                                 POAmount = item.POAmount,
+                                PINumber = item.PINumber,
                                 ImageName = item.ImageName,
                                 OriginalFileName = item.OriginalFileName,
                                 ImageURL = item.ImageURL,
