@@ -641,6 +641,12 @@ namespace Diyan.Application.Models
         public string? CreatorName { get; set; }
     }
 
+    public class ValidatePINumber_Response
+    {
+        public int? Id { get; set; }
+        public string? PINumber { get; set; }
+    }
+
     #endregion
 
     #region PI Confirmation

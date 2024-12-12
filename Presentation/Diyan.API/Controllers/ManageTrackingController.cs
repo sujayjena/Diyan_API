@@ -919,6 +919,21 @@ namespace Diyan.API.Controllers
             return _response;
         }
 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> ValidatePINumber(string PINumber = "")
+        {
+            var objList = await _manageTrackingRepository.ValidatePINumber(PINumber);
+            if (objList.ToList().Count > 0)
+            {
+                _response.Id = -1;
+                _response.IsSuccess = false;
+                _response.Message = "The PI Number is already Exist";
+            }
+
+            return _response;
+        }
+
         //[Route("[action]")]
         //[HttpPost]
         //public async Task<ResponseModel> GetPIIssueList(PIIssued_Search parameters)

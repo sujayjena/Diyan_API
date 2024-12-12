@@ -30,6 +30,8 @@ namespace Diyan.Application.Interfaces
 
         Task<IEnumerable<SelectListResponse>> GetPINumberForSelectList();
 
+        Task<IEnumerable<ValidatePINumber_Response>> ValidatePINumber(string PINumber);
+
         #endregion
 
         #region Payment Received Or LC Received

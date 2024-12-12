@@ -218,6 +218,16 @@ namespace Diyan.Persistence.Repositories
             return result;
         }
 
+        public async Task<IEnumerable<ValidatePINumber_Response>> ValidatePINumber(string PINumber)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@PINumber", PINumber); ;
+
+            var result = await ListByStoredProcedure<ValidatePINumber_Response>("ValidatePINumber", queryParameters);
+            return result;
+        }
+
         #endregion
 
         #region Payment Received Or LC Received
@@ -290,6 +300,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@ReceivedDate", parameters.ReceivedDate);
             queryParameters.Add("@LCNumber", parameters.LCNumber);
             queryParameters.Add("@POAmount", parameters.POAmount);
+            queryParameters.Add("@PINumber", parameters.PINumber);
             queryParameters.Add("@ImageName", parameters.ImageName);
             queryParameters.Add("@OriginalFileName", parameters.OriginalFileName);
 
@@ -533,5 +544,6 @@ namespace Diyan.Persistence.Repositories
         }
 
         #endregion
+
     }
 }
