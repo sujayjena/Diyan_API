@@ -270,6 +270,8 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@RemainingAmount", parameters.RemainingAmount);
             queryParameters.Add("@TotalReceivedAmount", parameters.TotalReceivedAmount);
             queryParameters.Add("@BankReferenceNumber", parameters.BankReferenceNumber);
+            queryParameters.Add("@InvoiceGenerateDate", parameters.InvoiceGenerateDate);
+            queryParameters.Add("@PINumber", parameters.PINumber);
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
