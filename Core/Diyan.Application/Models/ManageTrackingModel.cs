@@ -726,6 +726,7 @@ namespace Diyan.Application.Models
         public string? BankReferenceNumber { get; set; }
         public DateTime? InvoiceGenerateDate { get; set; }
         public string? PINumber { get; set; }
+        public DateTime? PIIssuedDate { get; set; }
         public List<PurchaseOrderPaymentReceivedImages_Request> PurchaseOrderPaymentReceivedImagesList { get; set; }
     }
 
@@ -737,6 +738,7 @@ namespace Diyan.Application.Models
         public string? LCNumber { get; set; }
         public decimal? POAmount { get; set; }
         public string? PINumber { get; set; }
+        public DateTime? PIIssuedDate { get; set; }
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }
         public string? Image_Base64 { get; set; }
@@ -780,6 +782,7 @@ namespace Diyan.Application.Models
         public string? BankReferenceNumber { get; set; }
         public DateTime? InvoiceGenerateDate { get; set; }
         public string? PINumber { get; set; }
+        public DateTime? PIIssuedDate { get; set; }
         public List<PurchaseOrderPaymentReceivedImages_Response> PurchaseOrderPaymentReceivedImagesList { get; set; }
     }
 
@@ -791,6 +794,7 @@ namespace Diyan.Application.Models
         public string? LCNumber { get; set; }
         public decimal? POAmount { get; set; }
         public string? PINumber { get; set; }
+        public DateTime? PIIssuedDate { get; set; }
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }
         public string? ImageURL { get; set; }

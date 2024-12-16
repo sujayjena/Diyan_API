@@ -167,6 +167,7 @@ namespace Diyan.API.Controllers
                                     BankReferenceNumber = itemList.BankReferenceNumber,
                                     InvoiceGenerateDate = itemList.InvoiceGenerateDate,
                                     PINumber = itemList.PINumber,
+                                    PIIssuedDate = itemList.PIIssuedDate,
                                 };
 
                                 int resultPaymentReceived = await _manageTrackingRepository.SavePurchaseOrderPaymentReceived(vPaymentReceivedObj);
@@ -224,6 +225,7 @@ namespace Diyan.API.Controllers
                                     LCNumber = itemList.LCNumber,
                                     POAmount = itemList.POAmount,
                                     PINumber = itemList.PINumber,
+                                    PIIssuedDate = itemList.PIIssuedDate,
                                     ImageName = itemList.ImageName,
                                     OriginalFileName = itemList.OriginalFileName,
                                 };
@@ -511,6 +513,7 @@ namespace Diyan.API.Controllers
                             vPO_PaymentReceived_Response.BankReferenceNumber = item.BankReferenceNumber;
                             vPO_PaymentReceived_Response.InvoiceGenerateDate = item.InvoiceGenerateDate;
                             vPO_PaymentReceived_Response.PINumber = item.PINumber;
+                            vPO_PaymentReceived_Response.PIIssuedDate = item.PIIssuedDate;
 
                             vPO_PaymentReceived_Response.CreatedBy = item.CreatedBy;
                             vPO_PaymentReceived_Response.CreatedDate = item.CreatedDate;
@@ -557,6 +560,7 @@ namespace Diyan.API.Controllers
                                 LCNumber = item.LCNumber,
                                 POAmount = item.POAmount,
                                 PINumber = item.PINumber,
+                                PIIssuedDate = item.PIIssuedDate,
                                 ImageName = item.ImageName,
                                 OriginalFileName = item.OriginalFileName,
                                 ImageURL = item.ImageURL,

@@ -272,6 +272,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@BankReferenceNumber", parameters.BankReferenceNumber);
             queryParameters.Add("@InvoiceGenerateDate", parameters.InvoiceGenerateDate);
             queryParameters.Add("@PINumber", parameters.PINumber);
+            queryParameters.Add("@PIIssuedDate", parameters.PIIssuedDate);
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -303,6 +304,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@LCNumber", parameters.LCNumber);
             queryParameters.Add("@POAmount", parameters.POAmount);
             queryParameters.Add("@PINumber", parameters.PINumber);
+            queryParameters.Add("@PIIssuedDate", parameters.PIIssuedDate);
             queryParameters.Add("@ImageName", parameters.ImageName);
             queryParameters.Add("@OriginalFileName", parameters.OriginalFileName);
 
