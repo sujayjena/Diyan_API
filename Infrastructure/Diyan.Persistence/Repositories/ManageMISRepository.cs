@@ -66,5 +66,50 @@ namespace Diyan.Persistence.Repositories
 
             return result;
         }
+        public async Task<IEnumerable<MIS_SBillList_Response>> GetMIS_SBillList(MIS_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<MIS_SBillList_Response>("GetMIS_SBillList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+        public async Task<IEnumerable<MIS_CommissionList_Response>> GetMIS_CommissionList(MIS_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<MIS_CommissionList_Response>("GetMIS_CommissionList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+        public async Task<IEnumerable<MIS_SellRateList_Response>> GetMIS_SellRateList(MIS_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<MIS_SellRateList_Response>("GetMIS_SellRateList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
     }
 }
