@@ -417,5 +417,106 @@ namespace Diyan.API.Controllers
 
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetMIS_CommissionList(MIS_Search parameters)
+        {
+            IEnumerable<MIS_CommissionList_Response> lstUsers = await _manageMISRepository.GetMIS_CommissionList(parameters);
+            _response.Data = lstUsers.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> ExportMIS_CommissionListData(MIS_Search parameters)
+        {
+            _response.IsSuccess = false;
+            byte[] result;
+            int recordIndex;
+            ExcelWorksheet WorkSheet1;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            IEnumerable<MIS_CommissionList_Response> lstSizeObj = await _manageMISRepository.GetMIS_CommissionList(parameters);
+
+            using (MemoryStream msExportDataFile = new MemoryStream())
+            {
+                using (ExcelPackage excelExportData = new ExcelPackage())
+                {
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("MIS_Commission");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "Invoice Number";
+                    WorkSheet1.Cells[1, 2].Value = "Invoice Date";
+                    WorkSheet1.Cells[1, 3].Value = "SB No.";
+                    WorkSheet1.Cells[1, 4].Value = "SB Date";
+                    WorkSheet1.Cells[1, 5].Value = "Exchange Rate";
+                    WorkSheet1.Cells[1, 6].Value = "PI No.";
+                    WorkSheet1.Cells[1, 7].Value = "Consignee";
+                    WorkSheet1.Cells[1, 8].Value = "Notify Party";
+                    WorkSheet1.Cells[1, 9].Value = "Destination Country";
+                    WorkSheet1.Cells[1, 10].Value = "Quantity";
+                    WorkSheet1.Cells[1, 11].Value = "Invoice Amount";
+                    WorkSheet1.Cells[1, 12].Value = "Commission / MT";
+                    WorkSheet1.Cells[1, 13].Value = "Total Commission";
+                    WorkSheet1.Cells[1, 14].Value = "Commission Mentioned In S.Bill";
+                    WorkSheet1.Cells[1, 15].Value = "Utilized Amount";
+                    WorkSheet1.Cells[1, 16].Value = "UnUtilized Amount";
+                    WorkSheet1.Cells[1, 17].Value = "Created Date";
+                    WorkSheet1.Cells[1, 18].Value = "Created By";
+
+                    recordIndex = 2;
+
+                    foreach (var items in lstSizeObj)
+                    {
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.InvoiceNumber;
+                        WorkSheet1.Cells[recordIndex, 2].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.InvoiceDate;
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.SBNo;
+                        WorkSheet1.Cells[recordIndex, 4].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.SBDate;
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.ExchangeRate;
+                        WorkSheet1.Cells[recordIndex, 6].Value = items.PINumber;
+                        WorkSheet1.Cells[recordIndex, 7].Value = items.ConsigneeName;
+                        WorkSheet1.Cells[recordIndex, 8].Value = items.NotifyPartyName;
+                        WorkSheet1.Cells[recordIndex, 9].Value = items.CountryName;
+                        WorkSheet1.Cells[recordIndex, 10].Value = items.Quantity;
+                        WorkSheet1.Cells[recordIndex, 11].Value = items.InvoiceAmount;
+                        WorkSheet1.Cells[recordIndex, 12].Value = items.PO_CommissionPerTon;
+                        WorkSheet1.Cells[recordIndex, 13].Value = items.TotalCommission;
+                        WorkSheet1.Cells[recordIndex, 14].Value = items.CommissionMentionInSBill;
+                        WorkSheet1.Cells[recordIndex, 15].Value = items.UtilizedAmount;
+                        WorkSheet1.Cells[recordIndex, 16].Value = items.UnUtilizedAmount;
+                        WorkSheet1.Cells[recordIndex, 17].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
+                        WorkSheet1.Cells[recordIndex, 17].Value = items.CreatedDate;
+                        WorkSheet1.Cells[recordIndex, 18].Value = items.CreatorName;
+
+                        recordIndex += 1;
+                    }
+
+                    WorkSheet1.Columns.AutoFit();
+
+                    excelExportData.SaveAs(msExportDataFile);
+                    msExportDataFile.Position = 0;
+                    result = msExportDataFile.ToArray();
+                }
+            }
+
+            if (result != null)
+            {
+                _response.Data = result;
+                _response.IsSuccess = true;
+                _response.Message = "Exported successfully";
+            }
+
+            return _response;
+        }
     }
 }
