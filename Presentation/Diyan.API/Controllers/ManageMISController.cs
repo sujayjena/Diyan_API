@@ -518,5 +518,128 @@ namespace Diyan.API.Controllers
 
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetMIS_SellRateList(MIS_Search parameters)
+        {
+            IEnumerable<MIS_SellRateList_Response> lstUsers = await _manageMISRepository.GetMIS_SellRateList(parameters);
+            _response.Data = lstUsers.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> ExportMIS_SellRateListData(MIS_Search parameters)
+        {
+            _response.IsSuccess = false;
+            byte[] result;
+            int recordIndex;
+            ExcelWorksheet WorkSheet1;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            IEnumerable<MIS_SellRateList_Response> lstSizeObj = await _manageMISRepository.GetMIS_SellRateList(parameters);
+
+            using (MemoryStream msExportDataFile = new MemoryStream())
+            {
+                using (ExcelPackage excelExportData = new ExcelPackage())
+                {
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("MIS_SellRate");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "Invoice Number";
+                    WorkSheet1.Cells[1, 2].Value = "Invoice Date";
+                    WorkSheet1.Cells[1, 3].Value = "Quantity";
+                    WorkSheet1.Cells[1, 4].Value = "Final Invoice Amount";
+                    WorkSheet1.Cells[1, 5].Value = "Containers";
+                    WorkSheet1.Cells[1, 6].Value = "Reuse / Fresh.";
+                    WorkSheet1.Cells[1, 7].Value = "Transporter";
+                    WorkSheet1.Cells[1, 8].Value = "Rate";
+                    WorkSheet1.Cells[1, 9].Value = "Land Freight";
+                    WorkSheet1.Cells[1, 10].Value = "Transporter Invoice";
+                    WorkSheet1.Cells[1, 11].Value = "Forwarder";
+                    WorkSheet1.Cells[1, 12].Value = "Forwarder Invoice";
+                    WorkSheet1.Cells[1, 13].Value = "Sea Freight";
+                    WorkSheet1.Cells[1, 14].Value = "Cha";
+                    WorkSheet1.Cells[1, 15].Value = "Cha Invoice";
+                    WorkSheet1.Cells[1, 16].Value = "Clearing";
+                    WorkSheet1.Cells[1, 17].Value = "Commission / MT";
+                    WorkSheet1.Cells[1, 18].Value = "Total Commission";
+                    WorkSheet1.Cells[1, 19].Value = "Exchange Rate";
+                    WorkSheet1.Cells[1, 20].Value = "Commission In (INR)";
+                    WorkSheet1.Cells[1, 21].Value = "SB No.";
+                    WorkSheet1.Cells[1, 22].Value = "SB Date";
+                    WorkSheet1.Cells[1, 23].Value = "FOB Value";
+                    WorkSheet1.Cells[1, 24].Value = "Current Exchange Rate";
+                    WorkSheet1.Cells[1, 25].Value = "DrawBack + RodTep";
+                    WorkSheet1.Cells[1, 26].Value = "InvoiceAmount In (INR)";
+                    WorkSheet1.Cells[1, 27].Value = "NetSellRate";
+                    WorkSheet1.Cells[1, 28].Value = "Created Date";
+                    WorkSheet1.Cells[1, 29].Value = "Created By";
+
+                    recordIndex = 2;
+
+                    foreach (var items in lstSizeObj)
+                    {
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.InvoiceNumber;
+                        WorkSheet1.Cells[recordIndex, 2].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.InvoiceDate;
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.Quantity;
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.FinalInvoiceAmount;
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.Containers;
+                        WorkSheet1.Cells[recordIndex, 6].Value = items.Reuse_Fresh;
+                        WorkSheet1.Cells[recordIndex, 7].Value = items.Transporter;
+                        WorkSheet1.Cells[recordIndex, 8].Value = items.Rate;
+                        WorkSheet1.Cells[recordIndex, 9].Value = items.LandFreight;
+                        WorkSheet1.Cells[recordIndex, 10].Value = items.TransporterInvoice;
+                        WorkSheet1.Cells[recordIndex, 11].Value = items.Forwarder;
+                        WorkSheet1.Cells[recordIndex, 12].Value = items.ForwarderInvoice;
+                        WorkSheet1.Cells[recordIndex, 13].Value = items.SeaFreight;
+                        WorkSheet1.Cells[recordIndex, 14].Value = items.Cha;
+                        WorkSheet1.Cells[recordIndex, 15].Value = items.ChaInvoice;
+                        WorkSheet1.Cells[recordIndex, 16].Value = items.Clearing;
+                        WorkSheet1.Cells[recordIndex, 17].Value = items.PO_CommissionPerTon;
+                        WorkSheet1.Cells[recordIndex, 18].Value = items.TotalCommission;
+                        WorkSheet1.Cells[recordIndex, 19].Value = items.ExchangeRate;
+                        WorkSheet1.Cells[recordIndex, 20].Value = items.CommissionInINR;
+                        WorkSheet1.Cells[recordIndex, 21].Value = items.SBNo;
+                        WorkSheet1.Cells[recordIndex, 22].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
+                        WorkSheet1.Cells[recordIndex, 22].Value = items.SBDate;
+                        WorkSheet1.Cells[recordIndex, 23].Value = items.FOBValue;
+                        WorkSheet1.Cells[recordIndex, 24].Value = items.CurrentExchangeRate;
+                        WorkSheet1.Cells[recordIndex, 25].Value = items.DrawBack_RodTep;
+                        WorkSheet1.Cells[recordIndex, 26].Value = items.InvoiceAmountInINR;
+                        WorkSheet1.Cells[recordIndex, 27].Value = items.NetSellRate;
+                        WorkSheet1.Cells[recordIndex, 28].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
+                        WorkSheet1.Cells[recordIndex, 28].Value = items.CreatedDate;
+                        WorkSheet1.Cells[recordIndex, 29].Value = items.CreatorName;
+
+                        recordIndex += 1;
+                    }
+
+                    WorkSheet1.Columns.AutoFit();
+
+                    excelExportData.SaveAs(msExportDataFile);
+                    msExportDataFile.Position = 0;
+                    result = msExportDataFile.ToArray();
+                }
+            }
+
+            if (result != null)
+            {
+                _response.Data = result;
+                _response.IsSuccess = true;
+                _response.Message = "Exported successfully";
+            }
+
+            return _response;
+        }
     }
 }

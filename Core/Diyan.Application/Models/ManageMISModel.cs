@@ -158,20 +158,13 @@ namespace Diyan.Application.Models
         public decimal? PO_CommissionPerTon { get; set; }
         public decimal? TotalCommission { get; set; }
         public decimal? ExchangeRate { get; set; }
+        public decimal? CommissionInINR { get; set; }
         public string? SBNo { get; set; }
         public DateTime? SBDate { get; set; }
         public decimal? FOBValue { get; set; }
         public decimal? CurrentExchangeRate { get; set; }
         public decimal? DrawBack_RodTep { get; set; }
-        public decimal? InvoiceAmount { get; set; }
+        public decimal? InvoiceAmountInINR { get; set; }
         public decimal? NetSellRate { get; set; }
-
-       
-     
-       
-       
-        public decimal? CommissionMentionInSBill { get; set; }
-        public decimal? UtilizedAmount { get; set; }
-        public decimal? UnUtilizedAmount { get; set; }
     }
 }
