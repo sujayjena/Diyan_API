@@ -42,6 +42,8 @@ namespace Diyan.Application.Interfaces
 
         Task<IEnumerable<PO_PaymentReceived_Response>> GetPaymentReceivedList(PO_PaymentReceived_Or_LCReceived_Search parameters);
 
+        Task<PO_PaymentReceived_Response?> GetPurchaseOrderPaymentById(int Id);
+
         Task<int> SavePurchaseOrderLCReceived(PO_LCReceived_Request parameters);
 
         Task<IEnumerable<PO_LCReceived_Response>> GetLCReceivedList(PO_PaymentReceived_Or_LCReceived_Search parameters);
@@ -78,6 +80,8 @@ namespace Diyan.Application.Interfaces
         Task<int> SaveInvoice(Invoice_Request parameters);
 
         Task<IEnumerable<Invoice_Response>> GetInvoiceList(Invoice_Search parameters);
+
+        Task<IEnumerable<Invoice_Response>> GetInvoiceById(int Id);
 
         Task<int> DeleteInvoice(int Id);
 

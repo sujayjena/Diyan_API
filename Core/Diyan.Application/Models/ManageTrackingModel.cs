@@ -727,6 +727,17 @@ namespace Diyan.Application.Models
         public DateTime? InvoiceGenerateDate { get; set; }
         public string? PINumber { get; set; }
         public DateTime? PIIssuedDate { get; set; }
+
+        [DefaultValue("")]
+        public string? Bank { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? BankCommission { get; set; }
+
+        [DefaultValue("Payment_Received")]
+        [JsonIgnore]
+        public string? ModuleType { get; set; }
+
         public List<PurchaseOrderPaymentReceivedImages_Request> PurchaseOrderPaymentReceivedImagesList { get; set; }
     }
 
@@ -783,6 +794,8 @@ namespace Diyan.Application.Models
         public DateTime? InvoiceGenerateDate { get; set; }
         public string? PINumber { get; set; }
         public DateTime? PIIssuedDate { get; set; }
+        public string? Bank { get; set; }
+        public decimal? BankCommission { get; set; }
         public List<PurchaseOrderPaymentReceivedImages_Response> PurchaseOrderPaymentReceivedImagesList { get; set; }
     }
 
@@ -919,7 +932,7 @@ namespace Diyan.Application.Models
 
     #region Invoice
 
-    public class Invoice_Search
+    public class Invoice_Search : BaseSearchEntity
     {
         [DefaultValue(0)]
         public int? PurchaseOrderId { get; set; }
@@ -933,9 +946,100 @@ namespace Diyan.Application.Models
         public string? InvoiceNumber { get; set; }
         public decimal? InvoiceAmount { get; set; }
         public int? Quantity { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? Freight { get; set; }
+
+        [DefaultValue("")]
+        public string? PortCode { get; set; }
+
+        [DefaultValue("")]
+        public string? SBNo { get; set; }
+        public DateTime? SBDate { get; set; }
+        public DateTime? LeoDate { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? ExchangeRate { get; set; }
+
+        [DefaultValue(false)]
+        public bool? BRCInBank { get; set; }
+
+        [DefaultValue(false)]
+        public bool? BRCInDGFT { get; set; }
+
+        [DefaultValue(false)]
+        public bool? DBKReceived { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? IGSTAmount { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IGSTReceived { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? CommissionMentionInSBill { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? UtilizedAmount { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? UnUtilizedAmount { get; set; }
+
+        [DefaultValue(0)]
+        public int? Containers { get; set; }
+
+        [DefaultValue("")]
+        public string? Reuse_Fresh { get; set; }
+
+        [DefaultValue("")]
+        public string? Transporter { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? Rate { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? LandFreight { get; set; }
+
+        [DefaultValue("")]
+        public string? TransporterInvoice { get; set; }
+
+        [DefaultValue("")]
+        public string? Forwarder { get; set; }
+
+        [DefaultValue("")]
+        public string? ForwarderInvoice { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? SeaFreight { get; set; }
+
+        [DefaultValue("")]
+        public string? Cha { get; set; }
+
+        [DefaultValue("")]
+        public string? ChaInvoice { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? Clearing { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? CurrentExchangeRate { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? DrawBack_RodTep { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? InvoiceAmountInINR { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? NetSellRate { get; set; }
+
         public string? InvoiceImage { get; set; }
         public string? InvoiceOriginalFileName { get; set; }
         public string? Invoice_Base64 { get; set; }
+
+        [JsonIgnore]
+        [DefaultValue("Invoice")]
+        public string? ModuleType { get; set; }
     }
 
     public class Invoice_Response : BaseResponseEntity
@@ -946,6 +1050,38 @@ namespace Diyan.Application.Models
         public string? InvoiceNumber { get; set; }
         public decimal? InvoiceAmount { get; set; }
         public int? Quantity { get; set; }
+
+        public decimal? Freight { get; set; }
+        public string? PortCode { get; set; }
+        public string? SBNo { get; set; }
+        public DateTime? SBDate { get; set; }
+        public DateTime? LeoDate { get; set; }
+        public decimal? ExchangeRate { get; set; }
+        public bool? BRCInBank { get; set; }
+        public bool? BRCInDGFT { get; set; }
+        public bool? DBKReceived { get; set; }
+        public decimal? IGSTAmount { get; set; }
+        public bool? IGSTReceived { get; set; }
+        public decimal? CommissionMentionInSBill { get; set; }
+        public decimal? UtilizedAmount { get; set; }
+        public decimal? UnUtilizedAmount { get; set; }
+        public int? Containers { get; set; }
+        public string? Reuse_Fresh { get; set; }
+        public string? Transporter { get; set; }
+        public decimal? Rate { get; set; }
+        public decimal? LandFreight { get; set; }
+        public string? TransporterInvoice { get; set; }
+        public string? Forwarder { get; set; }
+        public string? ForwarderInvoice { get; set; }
+        public decimal? SeaFreight { get; set; }
+        public string? Cha { get; set; }
+        public string? ChaInvoice { get; set; }
+        public decimal? Clearing { get; set; }
+        public decimal? CurrentExchangeRate { get; set; }
+        public decimal? DrawBack_RodTep { get; set; }
+        public decimal? InvoiceAmountInINR { get; set; }
+        public decimal? NetSellRate { get; set; }
+
         public string? InvoiceImage { get; set; }
         public string? InvoiceOriginalFileName { get; set; }
         public string? InvoiceImageURL { get; set; }

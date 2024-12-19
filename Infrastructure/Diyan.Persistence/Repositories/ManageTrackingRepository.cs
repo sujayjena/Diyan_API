@@ -273,6 +273,9 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@InvoiceGenerateDate", parameters.InvoiceGenerateDate);
             queryParameters.Add("@PINumber", parameters.PINumber);
             queryParameters.Add("@PIIssuedDate", parameters.PIIssuedDate);
+            queryParameters.Add("@Bank", parameters.Bank);
+            queryParameters.Add("@BankCommission", parameters.BankCommission);
+            queryParameters.Add("@ModuleType", parameters.ModuleType);
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -292,6 +295,13 @@ namespace Diyan.Persistence.Repositories
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;
+        }
+
+        public async Task<PO_PaymentReceived_Response?> GetPurchaseOrderPaymentById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<PO_PaymentReceived_Response>("GetPurchaseOrderPaymentById", queryParameters)).FirstOrDefault();
         }
 
         public async Task<int> SavePurchaseOrderLCReceived(PO_LCReceived_Request parameters)
@@ -465,8 +475,42 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@InvoiceNumber", parameters.InvoiceNumber);
             queryParameters.Add("@InvoiceAmount", parameters.InvoiceAmount);
             queryParameters.Add("@Quantity", parameters.Quantity);
+
+            queryParameters.Add("@Freight", parameters.Freight);
+            queryParameters.Add("@PortCode", parameters.PortCode);
+            queryParameters.Add("@SBNo", parameters.SBNo);
+            queryParameters.Add("@SBDate", parameters.SBDate);
+            queryParameters.Add("@LeoDate", parameters.LeoDate);
+            queryParameters.Add("@ExchangeRate", parameters.ExchangeRate);
+            queryParameters.Add("@BRCInBank", parameters.BRCInBank);
+            queryParameters.Add("@BRCInDGFT", parameters.BRCInDGFT);
+            queryParameters.Add("@DBKReceived", parameters.DBKReceived);
+            queryParameters.Add("@IGSTAmount", parameters.IGSTAmount);
+            queryParameters.Add("@IGSTReceived", parameters.IGSTReceived);
+            queryParameters.Add("@CommissionMentionInSBill", parameters.CommissionMentionInSBill);
+            queryParameters.Add("@UtilizedAmount", parameters.UtilizedAmount);
+            queryParameters.Add("@UnUtilizedAmount", parameters.UnUtilizedAmount);
+            queryParameters.Add("@Containers", parameters.Containers);
+            queryParameters.Add("@Reuse_Fresh", parameters.Reuse_Fresh);
+            queryParameters.Add("@Transporter", parameters.Transporter);
+            queryParameters.Add("@Rate", parameters.Rate);
+            queryParameters.Add("@LandFreight", parameters.LandFreight);
+            queryParameters.Add("@TransporterInvoice", parameters.TransporterInvoice);
+            queryParameters.Add("@Forwarder", parameters.Forwarder);
+            queryParameters.Add("@ForwarderInvoice", parameters.ForwarderInvoice);
+            queryParameters.Add("@SeaFreight", parameters.SeaFreight);
+            queryParameters.Add("@Cha", parameters.Cha);
+            queryParameters.Add("@ChaInvoice", parameters.ChaInvoice);
+            queryParameters.Add("@Clearing", parameters.Clearing);
+            queryParameters.Add("@CurrentExchangeRate", parameters.CurrentExchangeRate);
+            queryParameters.Add("@DrawBack_RodTep", parameters.DrawBack_RodTep);
+            queryParameters.Add("@InvoiceAmountInINR", parameters.InvoiceAmountInINR);
+            queryParameters.Add("@NetSellRate", parameters.NetSellRate);
+
             queryParameters.Add("@InvoiceImage", parameters.InvoiceImage);
             queryParameters.Add("@InvoiceOriginalFileName", parameters.InvoiceOriginalFileName);
+
+            queryParameters.Add("@ModuleType", parameters.ModuleType);
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -476,7 +520,20 @@ namespace Diyan.Persistence.Repositories
         public async Task<IEnumerable<Invoice_Response>> GetInvoiceList(Invoice_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
-            queryParameters.Add("@Id", parameters.PurchaseOrderId);
+            queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<Invoice_Response>("GetInvoiceList", queryParameters);
+            return result;
+        }
+
+        public async Task<IEnumerable<Invoice_Response>> GetInvoiceById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
 
             var result = await ListByStoredProcedure<Invoice_Response>("GetInvoiceById", queryParameters);
             return result;

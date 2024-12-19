@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml.Style;
 using OfficeOpenXml;
 using System.Globalization;
+using Diyan.Application.Enums;
 
 namespace Diyan.API.Controllers
 {
@@ -16,10 +17,12 @@ namespace Diyan.API.Controllers
     {
         private ResponseModel _response;
         private readonly IManageMISRepository _manageMISRepository;
+        private readonly IManageTrackingRepository _manageTrackingRepository;
 
-        public ManageMISController(IManageMISRepository manageMISRepository)
+        public ManageMISController(IManageMISRepository manageMISRepository, IManageTrackingRepository manageTrackingRepository)
         {
             _manageMISRepository = manageMISRepository;
+            _manageTrackingRepository = manageTrackingRepository;
 
             _response = new ResponseModel();
             _response.IsSuccess = true;
@@ -126,6 +129,33 @@ namespace Diyan.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
+        public async Task<ResponseModel> UpdateMIS_AdvanceAmount(PO_PaymentReceived_Request parameters)
+        {
+            parameters.ModuleType = "MIS_AdvanceAmount";
+
+            int result = await _manageTrackingRepository.SavePurchaseOrderPaymentReceived(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details saved sucessfully";
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
         public async Task<ResponseModel> ExportMIS_AdvanceAmountData(MIS_Search parameters)
         {
             _response.IsSuccess = false;
@@ -207,6 +237,33 @@ namespace Diyan.API.Controllers
             IEnumerable<MIS_FinalInvoicePaymentList_Response> lstUsers = await _manageMISRepository.GetMIS_FinalInvoicePaymentList(parameters);
             _response.Data = lstUsers.ToList();
             _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> UpdateMIS_FinalInvoicePayment(Invoice_Request parameters)
+        {
+            parameters.ModuleType = "MIS_FinalInvoicePayment";
+
+            int result = await _manageTrackingRepository.SaveInvoice(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details saved sucessfully";
+            }
             return _response;
         }
 
@@ -324,6 +381,33 @@ namespace Diyan.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
+        public async Task<ResponseModel> UpdateMIS_SBill(Invoice_Request parameters)
+        {
+            parameters.ModuleType = "MIS_SBill";
+
+            int result = await _manageTrackingRepository.SaveInvoice(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details saved sucessfully";
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
         public async Task<ResponseModel> ExportMIS_SBillListData(MIS_Search parameters)
         {
             _response.IsSuccess = false;
@@ -430,6 +514,33 @@ namespace Diyan.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
+        public async Task<ResponseModel> UpdateMIS_Commission(Invoice_Request parameters)
+        {
+            parameters.ModuleType = "MIS_Commission";
+
+            int result = await _manageTrackingRepository.SaveInvoice(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details saved sucessfully";
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
         public async Task<ResponseModel> ExportMIS_CommissionListData(MIS_Search parameters)
         {
             _response.IsSuccess = false;
@@ -526,6 +637,33 @@ namespace Diyan.API.Controllers
             IEnumerable<MIS_SellRateList_Response> lstUsers = await _manageMISRepository.GetMIS_SellRateList(parameters);
             _response.Data = lstUsers.ToList();
             _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> UpdateMIS_SellRate(Invoice_Request parameters)
+        {
+            parameters.ModuleType = "MIS_SellRate";
+
+            int result = await _manageTrackingRepository.SaveInvoice(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details saved sucessfully";
+            }
             return _response;
         }
 

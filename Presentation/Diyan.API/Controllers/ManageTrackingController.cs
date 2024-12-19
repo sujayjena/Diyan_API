@@ -168,6 +168,7 @@ namespace Diyan.API.Controllers
                                     InvoiceGenerateDate = itemList.InvoiceGenerateDate,
                                     PINumber = itemList.PINumber,
                                     PIIssuedDate = itemList.PIIssuedDate,
+                                    ModuleType = "Payment_Received"
                                 };
 
                                 int resultPaymentReceived = await _manageTrackingRepository.SavePurchaseOrderPaymentReceived(vPaymentReceivedObj);
@@ -313,6 +314,7 @@ namespace Diyan.API.Controllers
                             Quantity = vPIIssuedItem.Quantity,
                             InvoiceImage = vPIIssuedItem.InvoiceImage,
                             InvoiceOriginalFileName = vPIIssuedItem.InvoiceOriginalFileName,
+                            ModuleType="Invoice"
                         };
 
                         int resultInvoice = await _manageTrackingRepository.SaveInvoice(vInvoiceObj);
@@ -752,6 +754,22 @@ namespace Diyan.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
+        public async Task<ResponseModel> GetPurchaseOrderPaymentById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _manageTrackingRepository.GetPurchaseOrderPaymentById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
         public async Task<ResponseModel> DeletePaymentReceived(int Id)
         {
             int result = await _manageTrackingRepository.DeletePaymentReceived(Id);
@@ -865,6 +883,22 @@ namespace Diyan.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
+        public async Task<ResponseModel> GetInvoiceById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _manageTrackingRepository.GetInvoiceById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
         public async Task<ResponseModel> DeleteInvoice(int Id)
         {
             int result = await _manageTrackingRepository.DeleteInvoice(Id);
@@ -910,7 +944,6 @@ namespace Diyan.API.Controllers
         }
 
         #endregion
-
 
         #region PI Issue
 
