@@ -331,7 +331,7 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 8].Value = items.PaperType;
                         WorkSheet1.Cells[recordIndex, 9].Value = items.TypeOfPackaging;
                         WorkSheet1.Cells[recordIndex, 10].Value = items.Brand;
-                        WorkSheet1.Cells[recordIndex, 11].Value = items.PO_DeliveryTerms;
+                        WorkSheet1.Cells[recordIndex, 11].Value = items.DeliveryTerms;
                         WorkSheet1.Cells[recordIndex, 12].Value = items.Quantity;
                         WorkSheet1.Cells[recordIndex, 13].Value = items.InvoiceAmount;
                         WorkSheet1.Cells[recordIndex, 14].Value = items.FOBValue;

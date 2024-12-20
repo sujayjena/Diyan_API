@@ -78,7 +78,7 @@ namespace Diyan.Application.Models
         public string? PO_BrandId { get; set; }
         public string? Brand { get; set; }
         public int? PO_DeliveryTermsId { get; set; }
-        public string? PO_DeliveryTerms{ get; set; }
+        public string? DeliveryTerms{ get; set; }
         public int? Quantity { get; set; }
         public decimal? InvoiceAmount { get; set; }
         public decimal? Freight { get; set; }
