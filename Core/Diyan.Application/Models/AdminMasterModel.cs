@@ -337,4 +337,52 @@ namespace Diyan.Application.Models
         public bool? IsActive { get; set; }
     }
     #endregion
+
+    #region Transporter
+    public class Transporter_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? Transporter { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    public class Transporter_Response : BaseResponseEntity
+    {
+        public string? Transporter { get; set; }
+        public bool? IsActive { get; set; }
+    }
+    #endregion
+
+    #region Forwarder
+    public class Forwarder_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? Forwarder { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    public class Forwarder_Response : BaseResponseEntity
+    {
+        public string? Forwarder { get; set; }
+        public bool? IsActive { get; set; }
+    }
+    #endregion
+
+    #region CHA
+    public class CHA_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? CHA { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    public class CHA_Response : BaseResponseEntity
+    {
+        public string? CHA { get; set; }
+        public bool? IsActive { get; set; }
+    }
+    #endregion
 }

@@ -177,5 +177,32 @@ namespace Diyan.Application.Interfaces
         Task<PaymentReceived_Response?> GetPaymentReceivedById(int Id);
 
         #endregion
+
+        #region Transporter
+        Task<int> SaveTransporter(Transporter_Request parameters);
+
+        Task<IEnumerable<Transporter_Response>> GetTransporterList(BaseSearchEntity parameters);
+
+        Task<Transporter_Response?> GetTransporterById(int Id);
+
+        #endregion
+
+        #region Forwarder
+        Task<int> SaveForwarder(Forwarder_Request parameters);
+
+        Task<IEnumerable<Forwarder_Response>> GetForwarderList(BaseSearchEntity parameters);
+
+        Task<Forwarder_Response?> GetForwarderById(int Id);
+
+        #endregion
+
+        #region CHA
+        Task<int> SaveCHA(CHA_Request parameters);
+
+        Task<IEnumerable<CHA_Response>> GetCHAList(BaseSearchEntity parameters);
+
+        Task<CHA_Response?> GetCHAById(int Id);
+
+        #endregion
     }
 }
