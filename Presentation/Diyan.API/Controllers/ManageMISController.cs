@@ -28,6 +28,8 @@ namespace Diyan.API.Controllers
             _response.IsSuccess = true;
         }
 
+        #region MIS PI Tracking
+
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> GetMIS_PITrackingList(MIS_PITracking_Search parameters)
@@ -116,6 +118,10 @@ namespace Diyan.API.Controllers
 
             return _response;
         }
+
+        #endregion
+
+        #region MIS Advance Amount
 
         [Route("[action]")]
         [HttpPost]
@@ -209,6 +215,12 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 10].Value = items.CreatedDate;
                         WorkSheet1.Cells[recordIndex, 11].Value = items.CreatorName;
 
+                        if (string.IsNullOrEmpty(items.Bank) || items.BankCommission == 0)
+                        {
+                            WorkSheet1.Row(recordIndex).Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            WorkSheet1.Row(recordIndex).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Pink);
+                        }
+
                         recordIndex += 1;
                     }
 
@@ -229,6 +241,10 @@ namespace Diyan.API.Controllers
 
             return _response;
         }
+
+        #endregion
+
+        #region MIS Final Invoice & Payment Record
 
         [Route("[action]")]
         [HttpPost]
@@ -348,6 +364,12 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 22].Value = items.CreatedDate;
                         WorkSheet1.Cells[recordIndex, 23].Value = items.CreatorName;
 
+                        if (string.IsNullOrEmpty(items.PortCode) || string.IsNullOrEmpty(items.SBNo) || items.Freight == 0 || items.SBDate == null)
+                        {
+                            WorkSheet1.Row(recordIndex).Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            WorkSheet1.Row(recordIndex).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Pink);
+                        }
+
                         recordIndex += 1;
                     }
 
@@ -368,6 +390,10 @@ namespace Diyan.API.Controllers
 
             return _response;
         }
+
+        #endregion
+
+        #region MIS SHIPPING Bill Record
 
         [Route("[action]")]
         [HttpPost]
@@ -481,6 +507,14 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 19].Value = items.CreatedDate;
                         WorkSheet1.Cells[recordIndex, 20].Value = items.CreatorName;
 
+                        if (string.IsNullOrEmpty(items.PortCode) || string.IsNullOrEmpty(items.SBNo) || items.Freight == 0 || items.SBDate == null || items.LeoDate == null 
+                            || items.ExchangeRate == 0 || items.BRCInBank == false || items.BRCInDGFT == false || items.DBKValue == 0 || items.DBKReceived == false 
+                            || items.IGSTAmount == 0 || items.IGSTReceived == false)
+                        {
+                            WorkSheet1.Row(recordIndex).Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            WorkSheet1.Row(recordIndex).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Pink);
+                        }
+
                         recordIndex += 1;
                     }
 
@@ -501,6 +535,10 @@ namespace Diyan.API.Controllers
 
             return _response;
         }
+
+        #endregion
+
+        #region MIS Commission
 
         [Route("[action]")]
         [HttpPost]
@@ -609,6 +647,12 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 17].Value = items.CreatedDate;
                         WorkSheet1.Cells[recordIndex, 18].Value = items.CreatorName;
 
+                        if (string.IsNullOrEmpty(items.SBNo) || items.SBDate == null || items.ExchangeRate == 0 || items.CommissionMentionInSBill == 0 || items.UtilizedAmount == 0 || items.UnUtilizedAmount == 0)
+                        {
+                            WorkSheet1.Row(recordIndex).Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            WorkSheet1.Row(recordIndex).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Pink);
+                        }
+
                         recordIndex += 1;
                     }
 
@@ -629,6 +673,10 @@ namespace Diyan.API.Controllers
 
             return _response;
         }
+
+        #endregion
+
+        #region MIS Sell Rate
 
         [Route("[action]")]
         [HttpPost]
@@ -759,6 +807,17 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 28].Value = items.CreatedDate;
                         WorkSheet1.Cells[recordIndex, 29].Value = items.CreatorName;
 
+                        if (items.Containers == 0 || string.IsNullOrEmpty(items.Reuse_Fresh) || string.IsNullOrEmpty(items.SBNo) || items.SBDate == null 
+                            || items.ExchangeRate == 0 || items.Rate == 0 || items.LandFreight == 0 || string.IsNullOrEmpty(items.TransporterInvoice) 
+                            || string.IsNullOrEmpty(items.ForwarderInvoice) || items.SeaFreight == 0 || string.IsNullOrEmpty(items.ChaInvoice) 
+                            || items.Clearing==0 || items.CurrentExchangeRate == 0 || items.DrawBack_RodTep == 0 || items.InvoiceAmountInINR == 0 
+                            || items.NetSellRate == 0 || string.IsNullOrEmpty(items.Transporter) || string.IsNullOrEmpty(items.Forwarder) 
+                            || string.IsNullOrEmpty(items.Cha))
+                        {
+                            WorkSheet1.Row(recordIndex).Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            WorkSheet1.Row(recordIndex).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Pink);
+                        }
+
                         recordIndex += 1;
                     }
 
@@ -779,5 +838,7 @@ namespace Diyan.API.Controllers
 
             return _response;
         }
+
+        #endregion
     }
 }

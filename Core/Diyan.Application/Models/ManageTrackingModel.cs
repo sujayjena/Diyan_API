@@ -945,7 +945,7 @@ namespace Diyan.Application.Models
         public DateTime? InvoiceGeneratedDate { get; set; }
         public string? InvoiceNumber { get; set; }
         public decimal? InvoiceAmount { get; set; }
-        public int? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         [DefaultValue(0)]
         public decimal? Freight { get; set; }
@@ -1049,7 +1049,7 @@ namespace Diyan.Application.Models
         public DateTime? InvoiceGeneratedDate { get; set; }
         public string? InvoiceNumber { get; set; }
         public decimal? InvoiceAmount { get; set; }
-        public int? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         public decimal? Freight { get; set; }
         public string? PortCode { get; set; }
