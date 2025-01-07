@@ -788,7 +788,7 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 11].Value = items.Forwarder;
                         WorkSheet1.Cells[recordIndex, 12].Value = items.ForwarderInvoice;
                         WorkSheet1.Cells[recordIndex, 13].Value = items.SeaFreight;
-                        WorkSheet1.Cells[recordIndex, 14].Value = items.Cha;
+                        WorkSheet1.Cells[recordIndex, 14].Value = items.CHA;
                         WorkSheet1.Cells[recordIndex, 15].Value = items.ChaInvoice;
                         WorkSheet1.Cells[recordIndex, 16].Value = items.Clearing;
                         WorkSheet1.Cells[recordIndex, 17].Value = items.PO_CommissionPerTon;
@@ -812,7 +812,7 @@ namespace Diyan.API.Controllers
                             || string.IsNullOrEmpty(items.ForwarderInvoice) || items.SeaFreight == 0 || string.IsNullOrEmpty(items.ChaInvoice) 
                             || items.Clearing==0 || items.CurrentExchangeRate == 0 || items.DrawBack_RodTep == 0 || items.InvoiceAmountInINR == 0 
                             || items.NetSellRate == 0 || string.IsNullOrEmpty(items.Transporter) || string.IsNullOrEmpty(items.Forwarder) 
-                            || string.IsNullOrEmpty(items.Cha))
+                            || string.IsNullOrEmpty(items.CHA))
                         {
                             WorkSheet1.Row(recordIndex).Style.Fill.PatternType = ExcelFillStyle.Solid;
                             WorkSheet1.Row(recordIndex).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Pink);

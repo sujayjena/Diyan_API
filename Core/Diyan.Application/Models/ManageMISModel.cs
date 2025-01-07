@@ -145,14 +145,17 @@ namespace Diyan.Application.Models
         public decimal? FinalInvoiceAmount { get; set; }
         public int? Containers { get; set; }
         public string? Reuse_Fresh { get; set; }
+        public int? TransporterId { get; set; }
         public string? Transporter { get; set; }
         public decimal? Rate { get; set; }
         public decimal? LandFreight { get; set; }
         public string? TransporterInvoice { get; set; }
+        public int? ForwarderId { get; set; }
         public string? Forwarder { get; set; }
         public string? ForwarderInvoice { get; set; }
         public decimal? SeaFreight { get; set; }
-        public string? Cha { get; set; }
+        public int? CHAId { get; set; }
+        public string? CHA { get; set; }
         public string? ChaInvoice { get; set; }
         public decimal? Clearing { get; set; }
         public decimal? PO_CommissionPerTon { get; set; }

@@ -89,6 +89,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PR_IsPaymentReceived", parameters.PR_IsPaymentReceived);
             queryParameters.Add("@PR_PaymentReceivedDate", parameters.PR_PaymentReceivedDate);
             queryParameters.Add("@PR_FinalAmount", parameters.PR_FinalAmount);
+            queryParameters.Add("@PR_BankReferenceNumber", parameters.PR_BankReferenceNumber);
             queryParameters.Add("@PR_OriginalFileName", parameters.PR_OriginalFileName);
             queryParameters.Add("@PR_Image", parameters.PR_Image);
 
@@ -484,6 +485,8 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@ExchangeRate", parameters.ExchangeRate);
             queryParameters.Add("@BRCInBank", parameters.BRCInBank);
             queryParameters.Add("@BRCInDGFT", parameters.BRCInDGFT);
+            queryParameters.Add("@FOBPerct", parameters.FOBPerct);
+            queryParameters.Add("@DBKValue", parameters.DBKValue);
             queryParameters.Add("@DBKReceived", parameters.DBKReceived);
             queryParameters.Add("@IGSTAmount", parameters.IGSTAmount);
             queryParameters.Add("@IGSTReceived", parameters.IGSTReceived);
@@ -492,14 +495,14 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@UnUtilizedAmount", parameters.UnUtilizedAmount);
             queryParameters.Add("@Containers", parameters.Containers);
             queryParameters.Add("@Reuse_Fresh", parameters.Reuse_Fresh);
-            queryParameters.Add("@Transporter", parameters.Transporter);
+            queryParameters.Add("@TransporterId", parameters.TransporterId);
             queryParameters.Add("@Rate", parameters.Rate);
             queryParameters.Add("@LandFreight", parameters.LandFreight);
             queryParameters.Add("@TransporterInvoice", parameters.TransporterInvoice);
-            queryParameters.Add("@Forwarder", parameters.Forwarder);
+            queryParameters.Add("@ForwarderId", parameters.ForwarderId);
             queryParameters.Add("@ForwarderInvoice", parameters.ForwarderInvoice);
             queryParameters.Add("@SeaFreight", parameters.SeaFreight);
-            queryParameters.Add("@Cha", parameters.Cha);
+            queryParameters.Add("@CHAId", parameters.CHAId);
             queryParameters.Add("@ChaInvoice", parameters.ChaInvoice);
             queryParameters.Add("@Clearing", parameters.Clearing);
             queryParameters.Add("@CurrentExchangeRate", parameters.CurrentExchangeRate);

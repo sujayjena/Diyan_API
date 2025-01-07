@@ -169,7 +169,8 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? PR_PaymentReceivedDate { get; set; }
 
-        public decimal? PR_FinalAmount { get; set; }
+        public string? PR_FinalAmount { get; set; }
+        public string? PR_BankReferenceNumber { get; set; }
 
         [JsonIgnore]
         public string? PR_Image { get; set; }
@@ -499,7 +500,8 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? PR_PaymentReceivedClosedDate { get; set; }
 
-        public decimal? PR_FinalAmount { get; set; }
+        public string? PR_FinalAmount { get; set; }
+        public string? PR_BankReferenceNumber { get; set; }
 
         public string? PR_Image { get; set; }
         public string? PR_OriginalFileName { get; set; }
@@ -967,6 +969,12 @@ namespace Diyan.Application.Models
         [DefaultValue(false)]
         public bool? BRCInDGFT { get; set; }
 
+        [DefaultValue(0)]
+        public decimal? FOBPerct { get; set; }
+
+        [DefaultValue(0)]
+        public decimal? DBKValue { get; set; }
+
         [DefaultValue(false)]
         public bool? DBKReceived { get; set; }
 
@@ -991,8 +999,8 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? Reuse_Fresh { get; set; }
 
-        [DefaultValue("")]
-        public string? Transporter { get; set; }
+        [DefaultValue(0)]
+        public int? TransporterId { get; set; }
 
         [DefaultValue(0)]
         public decimal? Rate { get; set; }
@@ -1003,8 +1011,8 @@ namespace Diyan.Application.Models
         [DefaultValue("")]
         public string? TransporterInvoice { get; set; }
 
-        [DefaultValue("")]
-        public string? Forwarder { get; set; }
+        [DefaultValue(0)]
+        public int? ForwarderId { get; set; }
 
         [DefaultValue("")]
         public string? ForwarderInvoice { get; set; }
@@ -1012,8 +1020,8 @@ namespace Diyan.Application.Models
         [DefaultValue(0)]
         public decimal? SeaFreight { get; set; }
 
-        [DefaultValue("")]
-        public string? Cha { get; set; }
+        [DefaultValue(0)]
+        public int? CHAId { get; set; }
 
         [DefaultValue("")]
         public string? ChaInvoice { get; set; }
@@ -1059,6 +1067,8 @@ namespace Diyan.Application.Models
         public decimal? ExchangeRate { get; set; }
         public bool? BRCInBank { get; set; }
         public bool? BRCInDGFT { get; set; }
+        public decimal? FOBPerct { get; set; }
+        public decimal? DBKValue { get; set; }
         public bool? DBKReceived { get; set; }
         public decimal? IGSTAmount { get; set; }
         public bool? IGSTReceived { get; set; }
@@ -1067,14 +1077,17 @@ namespace Diyan.Application.Models
         public decimal? UnUtilizedAmount { get; set; }
         public int? Containers { get; set; }
         public string? Reuse_Fresh { get; set; }
+        public int? TransporterId { get; set; }
         public string? Transporter { get; set; }
         public decimal? Rate { get; set; }
         public decimal? LandFreight { get; set; }
         public string? TransporterInvoice { get; set; }
+        public int? ForwarderId { get; set; }
         public string? Forwarder { get; set; }
         public string? ForwarderInvoice { get; set; }
         public decimal? SeaFreight { get; set; }
-        public string? Cha { get; set; }
+        public int? CHAId { get; set; }
+        public string? CHA { get; set; }
         public string? ChaInvoice { get; set; }
         public decimal? Clearing { get; set; }
         public decimal? CurrentExchangeRate { get; set; }
