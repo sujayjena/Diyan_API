@@ -28,7 +28,7 @@ namespace Diyan.Application.Interfaces
 
         Task<int> DeletePIIssued(int Id);
 
-        Task<IEnumerable<SelectListResponse>> GetPINumberForSelectList();
+        Task<IEnumerable<SelectListResponse>> GetPINumberForSelectList(PINumberForSelect_Search parameters);
 
         Task<IEnumerable<ValidatePINumber_Response>> ValidatePINumber(string PINumber);
 

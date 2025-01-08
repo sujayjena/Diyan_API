@@ -108,6 +108,7 @@ namespace Diyan.Application.Models
         public decimal? TotalFOBValue { get; set; }
         public bool? BRCInBank { get; set; }
         public bool? BRCInDGFT { get; set; }
+        public decimal? FOBPerct { get; set; }
         public decimal? DBKValue { get; set; }
         public bool? DBKReceived { get; set; }
         public decimal? IGSTAmount { get; set; }

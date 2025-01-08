@@ -471,12 +471,13 @@ namespace Diyan.API.Controllers
                     WorkSheet1.Cells[1, 12].Value = "FOB Value(INR)";
                     WorkSheet1.Cells[1, 13].Value = "BRC In Bank";
                     WorkSheet1.Cells[1, 14].Value = "BRC In DGFT";
-                    WorkSheet1.Cells[1, 15].Value = "DBK Value";
-                    WorkSheet1.Cells[1, 16].Value = "DBK Received";
-                    WorkSheet1.Cells[1, 17].Value = "IGST Amount";
-                    WorkSheet1.Cells[1, 18].Value = "IGST Received";
-                    WorkSheet1.Cells[1, 19].Value = "Created Date";
-                    WorkSheet1.Cells[1, 20].Value = "Created By";
+                    WorkSheet1.Cells[1, 15].Value = "FOB %";
+                    WorkSheet1.Cells[1, 16].Value = "DBK Value";
+                    WorkSheet1.Cells[1, 17].Value = "DBK Received";
+                    WorkSheet1.Cells[1, 18].Value = "IGST Amount";
+                    WorkSheet1.Cells[1, 19].Value = "IGST Received";
+                    WorkSheet1.Cells[1, 20].Value = "Created Date";
+                    WorkSheet1.Cells[1, 21].Value = "Created By";
 
                     recordIndex = 2;
 
@@ -499,13 +500,14 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 12].Value = items.TotalFOBValue;
                         WorkSheet1.Cells[recordIndex, 13].Value = items.BRCInBank;
                         WorkSheet1.Cells[recordIndex, 14].Value = items.BRCInDGFT;
-                        WorkSheet1.Cells[recordIndex, 15].Value = items.DBKValue;
-                        WorkSheet1.Cells[recordIndex, 16].Value = items.DBKReceived;
-                        WorkSheet1.Cells[recordIndex, 17].Value = items.IGSTAmount;
-                        WorkSheet1.Cells[recordIndex, 18].Value = items.IGSTReceived;
-                        WorkSheet1.Cells[recordIndex, 19].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
-                        WorkSheet1.Cells[recordIndex, 19].Value = items.CreatedDate;
-                        WorkSheet1.Cells[recordIndex, 20].Value = items.CreatorName;
+                        WorkSheet1.Cells[recordIndex, 15].Value = items.FOBPerct;
+                        WorkSheet1.Cells[recordIndex, 16].Value = items.DBKValue;
+                        WorkSheet1.Cells[recordIndex, 17].Value = items.DBKReceived;
+                        WorkSheet1.Cells[recordIndex, 18].Value = items.IGSTAmount;
+                        WorkSheet1.Cells[recordIndex, 19].Value = items.IGSTReceived;
+                        WorkSheet1.Cells[recordIndex, 20].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
+                        WorkSheet1.Cells[recordIndex, 20].Value = items.CreatedDate;
+                        WorkSheet1.Cells[recordIndex, 21].Value = items.CreatorName;
 
                         if (string.IsNullOrEmpty(items.PortCode) || string.IsNullOrEmpty(items.SBNo) || items.Freight == 0 || items.SBDate == null || items.LeoDate == null 
                             || items.ExchangeRate == 0 || items.BRCInBank == false || items.BRCInDGFT == false || items.DBKValue == 0 || items.DBKReceived == false 

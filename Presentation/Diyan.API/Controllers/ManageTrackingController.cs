@@ -949,9 +949,9 @@ namespace Diyan.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetPINumberForSelectList()
+        public async Task<ResponseModel> GetPINumberForSelectList(PINumberForSelect_Search parameters)
         {
-            IEnumerable<SelectListResponse> lstUsers = await _manageTrackingRepository.GetPINumberForSelectList();
+            IEnumerable<SelectListResponse> lstUsers = await _manageTrackingRepository.GetPINumberForSelectList(parameters);
             _response.Data = lstUsers.ToList();
             return _response;
         }

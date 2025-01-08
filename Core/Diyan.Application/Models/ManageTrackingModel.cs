@@ -171,6 +171,8 @@ namespace Diyan.Application.Models
 
         public string? PR_FinalAmount { get; set; }
         public string? PR_BankReferenceNumber { get; set; }
+        public decimal? PR_AmountDue { get; set; }
+        public decimal? PR_BalanceAmount { get; set; }
 
         [JsonIgnore]
         public string? PR_Image { get; set; }
@@ -221,6 +223,7 @@ namespace Diyan.Application.Models
     public class PurchaseOrderList_Response : BaseResponseEntity
     {
         public string? TrackingNumber { get; set; }
+        public string? PINumber { get; set; }
         public int? CustomerId { get; set; }
         public string? CustomerName { get; set; }
         public string? ParentCustomer { get; set; }
@@ -502,6 +505,8 @@ namespace Diyan.Application.Models
 
         public string? PR_FinalAmount { get; set; }
         public string? PR_BankReferenceNumber { get; set; }
+        public decimal? PR_AmountDue { get; set; }
+        public decimal? PR_BalanceAmount { get; set; }
 
         public string? PR_Image { get; set; }
         public string? PR_OriginalFileName { get; set; }
@@ -647,6 +652,15 @@ namespace Diyan.Application.Models
     {
         public int? Id { get; set; }
         public string? PINumber { get; set; }
+    }
+
+    public class PINumberForSelect_Search
+    {
+        [DefaultValue(0)]
+        public int? StatusId { get; set; }
+
+        [DefaultValue(0)]
+        public int? CustomerId { get; set; }
     }
 
     #endregion
@@ -963,6 +977,9 @@ namespace Diyan.Application.Models
         [DefaultValue(0)]
         public decimal? ExchangeRate { get; set; }
 
+        [DefaultValue(0)]
+        public decimal? TotalFOBValue { get; set; }
+
         [DefaultValue(false)]
         public bool? BRCInBank { get; set; }
 
@@ -1065,6 +1082,7 @@ namespace Diyan.Application.Models
         public DateTime? SBDate { get; set; }
         public DateTime? LeoDate { get; set; }
         public decimal? ExchangeRate { get; set; }
+        public decimal? TotalFOBValue { get; set; }
         public bool? BRCInBank { get; set; }
         public bool? BRCInDGFT { get; set; }
         public decimal? FOBPerct { get; set; }

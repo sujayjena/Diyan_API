@@ -90,6 +90,8 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PR_PaymentReceivedDate", parameters.PR_PaymentReceivedDate);
             queryParameters.Add("@PR_FinalAmount", parameters.PR_FinalAmount);
             queryParameters.Add("@PR_BankReferenceNumber", parameters.PR_BankReferenceNumber);
+            queryParameters.Add("@PR_AmountDue", parameters.PR_AmountDue);
+            queryParameters.Add("@PR_BalanceAmount", parameters.PR_BalanceAmount);
             queryParameters.Add("@PR_OriginalFileName", parameters.PR_OriginalFileName);
             queryParameters.Add("@PR_Image", parameters.PR_Image);
 
@@ -211,9 +213,11 @@ namespace Diyan.Persistence.Repositories
             return await SaveByStoredProcedure<int>("DeletePIIssued", queryParameters);
         }
 
-        public async Task<IEnumerable<SelectListResponse>> GetPINumberForSelectList()
+        public async Task<IEnumerable<SelectListResponse>> GetPINumberForSelectList(PINumberForSelect_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@StatusId", parameters.StatusId);
+            queryParameters.Add("@CustomerId", parameters.CustomerId);
             var result = await ListByStoredProcedure<SelectListResponse>("GetPINumberForSelectList", queryParameters);
 
             return result;
@@ -483,6 +487,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@SBDate", parameters.SBDate);
             queryParameters.Add("@LeoDate", parameters.LeoDate);
             queryParameters.Add("@ExchangeRate", parameters.ExchangeRate);
+            queryParameters.Add("@TotalFOBValue", parameters.TotalFOBValue);
             queryParameters.Add("@BRCInBank", parameters.BRCInBank);
             queryParameters.Add("@BRCInDGFT", parameters.BRCInDGFT);
             queryParameters.Add("@FOBPerct", parameters.FOBPerct);
