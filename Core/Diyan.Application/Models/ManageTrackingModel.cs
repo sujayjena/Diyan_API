@@ -159,9 +159,12 @@ namespace Diyan.Application.Models
 
         [DefaultValue(false)]
         public bool? FAP_IsFinalAmountToPayClose { get; set; }
+
         [DefaultValue(null)]
         public DateTime? FAP_FinalAmountToPayClosedDate { get; set; }
-        public decimal? FAP_FinalAmountToPay { get; set; }
+
+        [DefaultValue("")]
+        public string? FAP_FinalAmountToPay { get; set; }
 
 
         [DefaultValue(false)]
@@ -192,7 +195,7 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? POC_POClosedDate { get; set; }
 
-        public int? MC_TotalQty { get; set; }
+        public decimal? MC_TotalQty { get; set; }
         public decimal? MC_TotalPaymentReceived { get; set; }
         public decimal? MC_CommissionPerTon { get; set; }
         public decimal? MC_TotalCommission { get; set; }
@@ -491,7 +494,7 @@ namespace Diyan.Application.Models
 
         [DefaultValue(null)]
         public DateTime? FAP_FinalAmountToPayClosedDateTime { get; set; }
-        public decimal? FAP_FinalAmountToPay { get; set; }
+        public string? FAP_FinalAmountToPay { get; set; }
 
 
         [DefaultValue(false)]
@@ -533,7 +536,7 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? POC_POClosedDateTime { get; set; }
 
-        public int? MC_TotalQty { get; set; }
+        public decimal? MC_TotalQty { get; set; }
         public decimal? MC_TotalPaymentReceived { get; set; }
         public decimal? MC_CommissionPerTon { get; set; }
         public decimal? MC_TotalCommission { get; set; }
