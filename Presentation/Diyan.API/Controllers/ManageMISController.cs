@@ -75,8 +75,9 @@ namespace Diyan.API.Controllers
                     WorkSheet1.Cells[1, 8].Value = "Quantity";
                     WorkSheet1.Cells[1, 9].Value = "Commission";
                     WorkSheet1.Cells[1, 10].Value = "Paper Type";
-                    WorkSheet1.Cells[1, 11].Value = "Created Date";
-                    WorkSheet1.Cells[1, 12].Value = "Created By";
+                    WorkSheet1.Cells[1, 11].Value = "Status";
+                    WorkSheet1.Cells[1, 12].Value = "Created Date";
+                    WorkSheet1.Cells[1, 13].Value = "Created By";
                    
                     recordIndex = 2;
 
@@ -94,9 +95,10 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 8].Value = items.PO_Quantity;
                         WorkSheet1.Cells[recordIndex, 9].Value = items.PO_CommissionPerTon;
                         WorkSheet1.Cells[recordIndex, 10].Value = items.PaperType;
-                        WorkSheet1.Cells[recordIndex, 11].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
-                        WorkSheet1.Cells[recordIndex, 11].Value = items.CreatedDate;
-                        WorkSheet1.Cells[recordIndex, 12].Value = items.CreatorName;
+                        WorkSheet1.Cells[recordIndex, 11].Value = items.POStatus;
+                        WorkSheet1.Cells[recordIndex, 12].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
+                        WorkSheet1.Cells[recordIndex, 12].Value = items.CreatedDate;
+                        WorkSheet1.Cells[recordIndex, 13].Value = items.CreatorName;
 
                         recordIndex += 1;
                     }

@@ -41,6 +41,7 @@ namespace Diyan.Application.Models
         public decimal? PO_CommissionPerTon { get; set; }
         public string? PaperTypeId { get; set; }
         public string? PaperType { get; set; }
+        public string? POStatus { get; set; }
     }
 
     public class MIS_AdvanceAmountList_Response : BaseResponseEntity
