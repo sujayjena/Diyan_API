@@ -56,7 +56,7 @@ namespace Diyan.Application.Models
         public bool? PO_IsPOReceived { get; set; }
         public string? PO_PONumber { get; set; }
         public int? PO_PaymentTermsId { get; set; }
-        public int? PO_Quantity { get; set; }
+        public decimal? PO_Quantity { get; set; }
         public int? PO_PaymentType { get; set; }
         public int? PO_CurrencyTypeId { get; set; }
         public decimal? PO_CurrencyValue { get; set; }
@@ -174,7 +174,9 @@ namespace Diyan.Application.Models
 
         public string? PR_FinalAmount { get; set; }
         public string? PR_BankReferenceNumber { get; set; }
-        public decimal? PR_AmountDue { get; set; }
+
+        [DefaultValue("")]
+        public string? PR_AmountDue { get; set; }
         public decimal? PR_BalanceAmount { get; set; }
 
         [JsonIgnore]
@@ -239,7 +241,7 @@ namespace Diyan.Application.Models
         public string? PO_PONumber { get; set; }
         public int? PO_PaymentTermsId { get; set; }
         public string? PO_PaymentTerms { get; set; }
-        public int? PO_Quantity { get; set; }
+        public decimal? PO_Quantity { get; set; }
         public int? PO_PaymentType { get; set; }
         public int? PO_CurrencyTypeId { get; set; }
         public string? PO_CurrencyType { get; set; }
@@ -344,7 +346,7 @@ namespace Diyan.Application.Models
         public string? PO_PONumber { get; set; }
         public int? PO_PaymentTermsId { get; set; }
         public string? PO_PaymentTerms { get; set; }
-        public int? PO_Quantity { get; set; }
+        public decimal? PO_Quantity { get; set; }
         public int? PO_PaymentType { get; set; }
         public int? PO_CurrencyTypeId { get; set; }
         public string? PO_CurrencyType { get; set; }
@@ -508,7 +510,7 @@ namespace Diyan.Application.Models
 
         public string? PR_FinalAmount { get; set; }
         public string? PR_BankReferenceNumber { get; set; }
-        public decimal? PR_AmountDue { get; set; }
+        public string? PR_AmountDue { get; set; }
         public decimal? PR_BalanceAmount { get; set; }
 
         public string? PR_Image { get; set; }

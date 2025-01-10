@@ -37,7 +37,7 @@ namespace Diyan.Application.Models
         public string? Brand { get; set; }
         public string? PO_TypeOfPackagingId { get; set; }
         public string? TypeOfPackaging { get; set; }
-        public int? PO_Quantity { get; set; }
+        public decimal? PO_Quantity { get; set; }
         public decimal? PO_CommissionPerTon { get; set; }
         public string? PaperTypeId { get; set; }
         public string? PaperType { get; set; }
@@ -80,7 +80,7 @@ namespace Diyan.Application.Models
         public string? Brand { get; set; }
         public int? PO_DeliveryTermsId { get; set; }
         public string? DeliveryTerms{ get; set; }
-        public int? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
         public decimal? InvoiceAmount { get; set; }
         public decimal? Freight { get; set; }
         public decimal? FOBValue { get; set; }
@@ -101,7 +101,7 @@ namespace Diyan.Application.Models
         public DateTime? SBDate { get; set; }
         public DateTime? LeoDate { get; set; }
         public string? PortCode { get; set; }
-        public int? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
         public decimal? InvoiceAmount { get; set; }
         public decimal? Freight { get; set; }
         public decimal? FOBValue { get; set; }
@@ -130,7 +130,7 @@ namespace Diyan.Application.Models
         public string? NotifyPartyName { get; set; }
         public int? CountryId { get; set; }
         public string? CountryName { get; set; }
-        public int? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
         public decimal? InvoiceAmount { get; set; }
         public decimal? PO_CommissionPerTon { get; set; }
         public decimal? TotalCommission { get; set; }
@@ -143,7 +143,7 @@ namespace Diyan.Application.Models
     {
         public string? InvoiceNumber { get; set; }
         public DateTime? InvoiceDate { get; set; }
-        public int? Quantity { get; set; }
+        public decimal? Quantity { get; set; }
         public decimal? FinalInvoiceAmount { get; set; }
         public int? Containers { get; set; }
         public string? Reuse_Fresh { get; set; }
