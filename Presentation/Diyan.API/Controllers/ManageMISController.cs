@@ -651,7 +651,7 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 17].Value = items.CreatedDate;
                         WorkSheet1.Cells[recordIndex, 18].Value = items.CreatorName;
 
-                        if (string.IsNullOrEmpty(items.SBNo) || items.SBDate == null || items.ExchangeRate == 0 || items.CommissionMentionInSBill == 0 || items.UtilizedAmount == 0 || items.UnUtilizedAmount == 0)
+                        if (string.IsNullOrEmpty(items.SBNo) || items.SBDate == null || items.ExchangeRate == null || items.CommissionMentionInSBill == null || items.UtilizedAmount == null || items.UnUtilizedAmount == null)
                         {
                             WorkSheet1.Row(recordIndex).Style.Fill.PatternType = ExcelFillStyle.Solid;
                             WorkSheet1.Row(recordIndex).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Pink);
