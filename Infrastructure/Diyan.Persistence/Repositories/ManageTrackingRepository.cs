@@ -511,6 +511,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@ChaInvoice", parameters.ChaInvoice);
             queryParameters.Add("@Clearing", parameters.Clearing);
             queryParameters.Add("@CurrentExchangeRate", parameters.CurrentExchangeRate);
+            queryParameters.Add("@DrawBackPerct", parameters.DrawBackPerct);
             queryParameters.Add("@DrawBack_RodTep", parameters.DrawBack_RodTep);
             queryParameters.Add("@InvoiceAmountInINR", parameters.InvoiceAmountInINR);
             queryParameters.Add("@NetSellRate", parameters.NetSellRate);

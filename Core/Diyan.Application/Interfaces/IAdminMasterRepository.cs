@@ -204,5 +204,21 @@ namespace Diyan.Application.Interfaces
         Task<CHA_Response?> GetCHAById(int Id);
 
         #endregion
+
+        #region Bank
+        Task<int> SaveBank(Bank_Request parameters);
+
+        Task<IEnumerable<Bank_Response>> GetBankList(BaseSearchEntity parameters);
+
+        Task<Bank_Response?> GetBankById(int Id);
+        #endregion
+
+        #region Port
+        Task<int> SavePort(Port_Request parameters);
+
+        Task<IEnumerable<Port_Response>> GetPortList(BaseSearchEntity parameters);
+
+        Task<Port_Response?> GetPortById(int Id);
+        #endregion
     }
 }

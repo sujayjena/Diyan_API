@@ -1055,6 +1055,9 @@ namespace Diyan.Application.Models
         public decimal? CurrentExchangeRate { get; set; }
 
         [DefaultValue(0)]
+        public decimal? DrawBackPerct { get; set; }
+
+        [DefaultValue(0)]
         public decimal? DrawBack_RodTep { get; set; }
 
         [DefaultValue(0)]
@@ -1114,6 +1117,7 @@ namespace Diyan.Application.Models
         public string? ChaInvoice { get; set; }
         public decimal? Clearing { get; set; }
         public decimal? CurrentExchangeRate { get; set; }
+        public decimal? DrawBackPerct { get; set; }
         public decimal? DrawBack_RodTep { get; set; }
         public decimal? InvoiceAmountInINR { get; set; }
         public decimal? NetSellRate { get; set; }

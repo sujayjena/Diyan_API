@@ -92,7 +92,7 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 5].Value = items.PaymentTerms;
                         WorkSheet1.Cells[recordIndex, 6].Value = items.Brand;
                         WorkSheet1.Cells[recordIndex, 7].Value = items.TypeOfPackaging;
-                        WorkSheet1.Cells[recordIndex, 8].Value = items.PO_Quantity;
+                        WorkSheet1.Cells[recordIndex, 8].Value = Convert.ToDecimal(items.PO_Quantity).ToString("0.000");
                         WorkSheet1.Cells[recordIndex, 9].Value = items.PO_CommissionPerTon;
                         WorkSheet1.Cells[recordIndex, 10].Value = items.PaperType;
                         WorkSheet1.Cells[recordIndex, 11].Value = items.POStatus;
@@ -350,7 +350,7 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 9].Value = items.TypeOfPackaging;
                         WorkSheet1.Cells[recordIndex, 10].Value = items.Brand;
                         WorkSheet1.Cells[recordIndex, 11].Value = items.DeliveryTerms;
-                        WorkSheet1.Cells[recordIndex, 12].Value = items.Quantity;
+                        WorkSheet1.Cells[recordIndex, 12].Value = Convert.ToDecimal(items.Quantity).ToString("0.000");
                         WorkSheet1.Cells[recordIndex, 13].Value = items.InvoiceAmount;
                         WorkSheet1.Cells[recordIndex, 14].Value = items.FOBValue;
                         WorkSheet1.Cells[recordIndex, 15].Value = items.Freight;
@@ -494,7 +494,7 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 5].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
                         WorkSheet1.Cells[recordIndex, 5].Value = items.LeoDate;
                         WorkSheet1.Cells[recordIndex, 6].Value = items.PortCode;
-                        WorkSheet1.Cells[recordIndex, 7].Value = items.Quantity;
+                        WorkSheet1.Cells[recordIndex, 7].Value = Convert.ToDecimal(items.Quantity).ToString("0.000");
                         WorkSheet1.Cells[recordIndex, 8].Value = items.InvoiceAmount;
                         WorkSheet1.Cells[recordIndex, 9].Value = items.Freight;
                         WorkSheet1.Cells[recordIndex, 10].Value = items.FOBValue;
@@ -640,7 +640,7 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 7].Value = items.ConsigneeName;
                         WorkSheet1.Cells[recordIndex, 8].Value = items.NotifyPartyName;
                         WorkSheet1.Cells[recordIndex, 9].Value = items.CountryName;
-                        WorkSheet1.Cells[recordIndex, 10].Value = items.Quantity;
+                        WorkSheet1.Cells[recordIndex, 10].Value = Convert.ToDecimal(items.Quantity).ToString("0.000");
                         WorkSheet1.Cells[recordIndex, 11].Value = items.InvoiceAmount;
                         WorkSheet1.Cells[recordIndex, 12].Value = items.PO_CommissionPerTon;
                         WorkSheet1.Cells[recordIndex, 13].Value = items.TotalCommission;
@@ -781,7 +781,7 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 1].Value = items.InvoiceNumber;
                         WorkSheet1.Cells[recordIndex, 2].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
                         WorkSheet1.Cells[recordIndex, 2].Value = items.InvoiceDate;
-                        WorkSheet1.Cells[recordIndex, 3].Value = items.Quantity;
+                        WorkSheet1.Cells[recordIndex, 3].Value = Convert.ToDecimal(items.Quantity).ToString("0.000");
                         WorkSheet1.Cells[recordIndex, 4].Value = items.FinalInvoiceAmount;
                         WorkSheet1.Cells[recordIndex, 5].Value = items.Containers;
                         WorkSheet1.Cells[recordIndex, 6].Value = items.Reuse_Fresh;

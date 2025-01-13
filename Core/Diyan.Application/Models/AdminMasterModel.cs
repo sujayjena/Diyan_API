@@ -385,4 +385,45 @@ namespace Diyan.Application.Models
         public bool? IsActive { get; set; }
     }
     #endregion
+
+    #region Bank
+
+    public class Bank_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? BankName { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    public class Bank_Response : BaseResponseEntity
+    {
+        public string? BankName { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Port
+
+    public class Port_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? PortName { get; set; }
+
+        [DefaultValue("")]
+        public string? PortCode { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    public class Port_Response : BaseResponseEntity
+    {
+        public string? PortName { get; set; }
+        public string? PortCode { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }
