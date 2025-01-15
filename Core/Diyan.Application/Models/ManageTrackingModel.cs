@@ -145,6 +145,9 @@ namespace Diyan.Application.Models
         [DefaultValue(null)]
         public DateTime? BID_BIDraftIssueClosedDate { get; set; }
 
+        [DefaultValue(false)]
+        public bool? BID_IsConfirmed { get; set; }
+
 
         [DefaultValue(false)]
         public bool? FBI_IsFinalBIDraftIssueClose { get; set; }
@@ -294,6 +297,10 @@ namespace Diyan.Application.Models
 
         [DefaultValue(false)]
         public bool? BID_IsBIDraftIssueClose { get; set; }
+
+        [DefaultValue(false)]
+        public bool? BID_IsConfirmed { get; set; }
+
 
         [DefaultValue(false)]
         public bool? FBI_IsFinalBIDraftIssueClose { get; set; }
@@ -472,6 +479,9 @@ namespace Diyan.Application.Models
 
         [DefaultValue(null)]
         public DateTime? BID_BIDraftIssueClosedDateTime { get; set; }
+
+        [DefaultValue(false)]
+        public bool? BID_IsConfirmed { get; set; }
 
 
         [DefaultValue(false)]
@@ -1146,14 +1156,25 @@ namespace Diyan.Application.Models
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }
         public string? Image_Base64 { get; set; }
+        public string? Remark { get; set; }
+        public int? StatusId { get; set; }
     }
 
     public class BIDraftIssuedImages_Response : BaseEntity
     {
+        public BIDraftIssuedImages_Response()
+        {
+            BIDraftIssuedLogList = new List<BIDraftIssuedLog_Response>();
+        }
+
         public int? PurchaseOrderId { get; set; }
         public string? ImageName { get; set; }
         public string? OriginalFileName { get; set; }
         public string ImageURL { get; set; }
+        public int StatusId { get; set; }
+        public string StatusName { get; set; }
+
+        public List<BIDraftIssuedLog_Response>? BIDraftIssuedLogList { get; set; }
     }
 
     public class BIDraftIssuedRemarkLog_Response : BaseResponseEntity
@@ -1170,6 +1191,23 @@ namespace Diyan.Application.Models
         public int? PurchaseOrderId { get; set; }
 
         public string Comments { get; set; }
+    }
+
+    public class BIDraftIssuedLog_Search
+    {
+        [DefaultValue(0)]
+        public int? BIDraftIssuedId { get; set; }
+    }
+
+    public class BIDraftIssuedLog_Response
+    {
+        public int? BIDraftIssuedId { get; set; }
+        public string? Remarks { get; set; }
+        public int? StatusId { get; set; }
+        public string? StatusName { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public int? CreatedBy { get; set; }
+        public string? CreatorName { get; set; }
     }
 
     #endregion

@@ -346,6 +346,8 @@ namespace Diyan.API.Controllers
                         PurchaseOrderId = result,
                         ImageName = vImageName,
                         OriginalFileName = vimgItem.OriginalFileName,
+                        Remark = vimgItem.Remark,
+                        StatusId = vimgItem.StatusId,
                     };
 
                     int resultContainer = await _manageTrackingRepository.SaveBIDraftIssuedImages(vPIIssuedObj);
@@ -674,9 +676,37 @@ namespace Diyan.API.Controllers
                             ImageName = itemLog.ImageName,
                             OriginalFileName = itemLog.OriginalFileName,
                             ImageURL = itemLog.ImageURL,
+                            StatusId = itemLog.StatusId,
+                            StatusName = itemLog.StatusName,
                         };
 
                         vResultObj.BIDraftIssuedImagesList.Add(vPIIssuedLog);
+
+                        #region BI Draft Issued Log Log
+
+                        var vBIDraftIssuedLog_Search = new BIDraftIssuedLog_Search()
+                        {
+                            BIDraftIssuedId = itemLog.Id,
+                        };
+
+                        var vBIDraftIssuedLogList = await _manageTrackingRepository.GetBIDraftIssuedLogListById(vBIDraftIssuedLog_Search);
+                        foreach (var biitemLog in vBIDraftIssuedLogList)
+                        {
+                            var vBIDraftIssuedLog_Response = new BIDraftIssuedLog_Response()
+                            {
+                                BIDraftIssuedId = biitemLog.BIDraftIssuedId,
+                                Remarks = biitemLog.Remarks,
+                                StatusId = biitemLog.StatusId,
+                                StatusName = biitemLog.StatusName,
+                                CreatedBy = biitemLog.CreatedBy,
+                                CreatedDate = biitemLog.CreatedDate,
+                                CreatorName = biitemLog.CreatorName,
+                            };
+
+                            vPIIssuedLog.BIDraftIssuedLogList.Add(vBIDraftIssuedLog_Response);
+                        }
+
+                        #endregion
                     }
 
                     // Remark Log

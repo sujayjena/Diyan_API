@@ -76,7 +76,8 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@BID_BIDraftComment", parameters.BID_BIDraftComment);
             queryParameters.Add("@BID_IsBIDraftIssueClose", parameters.BID_IsBIDraftIssueClose);
             queryParameters.Add("@BID_BIDraftIssueClosedDate", parameters.BID_BIDraftIssueClosedDate);
-           
+            queryParameters.Add("@BID_IsConfirmed", parameters.BID_IsConfirmed);
+
             queryParameters.Add("@FBI_IsFinalBIDraftIssueClose", parameters.FBI_IsFinalBIDraftIssueClose);
             queryParameters.Add("@FBI_FinalBIDraftIssueClosedDate", parameters.FBI_FinalBIDraftIssueClosedDate);
             queryParameters.Add("@FBI_FinalBIImage", parameters.FBI_FinalBIImage);
@@ -609,6 +610,16 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
 
             var result = await ListByStoredProcedure<BIDraftIssuedCommentsLog_Response>("GetBIDraftIssuedCommentsLogById", queryParameters);
+
+            return result;
+        }
+
+        public async Task<IEnumerable<BIDraftIssuedLog_Response>> GetBIDraftIssuedLogListById(BIDraftIssuedLog_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@BIDraftIssuedId", parameters.BIDraftIssuedId);
+
+            var result = await ListByStoredProcedure<BIDraftIssuedLog_Response>("GetBIDraftIssuedLogListById", queryParameters);
 
             return result;
         }

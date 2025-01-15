@@ -99,6 +99,8 @@ namespace Diyan.Application.Interfaces
 
         Task<IEnumerable<BIDraftIssuedCommentsLog_Response>> GetBIDraftIssuedCommentLogById(BIDraftIssuedImages_Search parameters);
 
+        Task<IEnumerable<BIDraftIssuedLog_Response>> GetBIDraftIssuedLogListById(BIDraftIssuedLog_Search parameters);
+
         #endregion
     }
 }
