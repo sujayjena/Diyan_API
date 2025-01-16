@@ -26,8 +26,10 @@ namespace Diyan.Application.Models
     public class MIS_PITrackingList_Response : BaseResponseEntity
     {
         public string? PINumber { get; set; }
-        public int? CustomerId { get; set; }
-        public string? CustomerName { get; set; }
+        public int? ConsigneeId { get; set; }
+        public string? ConsigneeName { get; set; }
+        public int? NotifyPartyId { get; set; }
+        public string? NotifyPartyName { get; set; }
         public int? PO_PortDischargeId { get; set; }
         public string? PortDischarge { get; set; }
         public DateTime? ShipmentSchedule { get; set; }
@@ -47,8 +49,10 @@ namespace Diyan.Application.Models
     public class MIS_AdvanceAmountList_Response : BaseResponseEntity
     {
         public string? PINumber { get; set; }
-        public int? CustomerId { get; set; }
-        public string? CustomerName { get; set; }
+        public int? ConsigneeId { get; set; }
+        public string? ConsigneeName { get; set; }
+        public int? NotifyPartyId { get; set; }
+        public string? NotifyPartyName { get; set; }
         public int? PO_PaymentTermsId { get; set; }
         public string? PaymentTerms { get; set; }
         public string? Bank { get; set; }
@@ -88,6 +92,8 @@ namespace Diyan.Application.Models
         public string? PaymentTerms { get; set; }
         public decimal? TotalReceivedAmount { get; set; }
         public DateTime? PaymentReceivedDate { get; set; }
+        public int? PortId { get; set; }
+        public string? PortName { get; set; }
         public string? PortCode { get; set; }
         public string? SBNo { get; set; }
         public DateTime? SBDate { get; set; }
@@ -100,6 +106,8 @@ namespace Diyan.Application.Models
         public string? SBNo { get; set; }
         public DateTime? SBDate { get; set; }
         public DateTime? LeoDate { get; set; }
+        public int? PortId { get; set; }
+        public string? PortName { get; set; }
         public string? PortCode { get; set; }
         public decimal? Quantity { get; set; }
         public decimal? InvoiceAmount { get; set; }
@@ -137,6 +145,8 @@ namespace Diyan.Application.Models
         public decimal? CommissionMentionInSBill { get; set; }
         public decimal? UtilizedAmount { get; set; }
         public decimal? UnUtilizedAmount { get; set; }
+        public string? CommissionRemark { get; set; }
+        public bool? IsCommissionClosed { get; set; }
     }
 
     public class MIS_SellRateList_Response : BaseResponseEntity
@@ -146,7 +156,7 @@ namespace Diyan.Application.Models
         public decimal? Quantity { get; set; }
         public decimal? FinalInvoiceAmount { get; set; }
         public int? Containers { get; set; }
-        public string? Reuse_Fresh { get; set; }
+        public int? ReuseOrFreshId { get; set; }
         public int? TransporterId { get; set; }
         public string? Transporter { get; set; }
         public decimal? Rate { get; set; }

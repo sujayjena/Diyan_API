@@ -483,7 +483,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@Quantity", parameters.Quantity);
 
             queryParameters.Add("@Freight", parameters.Freight);
-            queryParameters.Add("@PortCode", parameters.PortCode);
+            queryParameters.Add("@PortId", parameters.PortId);
             queryParameters.Add("@SBNo", parameters.SBNo);
             queryParameters.Add("@SBDate", parameters.SBDate);
             queryParameters.Add("@LeoDate", parameters.LeoDate);
@@ -499,8 +499,10 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@CommissionMentionInSBill", parameters.CommissionMentionInSBill);
             queryParameters.Add("@UtilizedAmount", parameters.UtilizedAmount);
             queryParameters.Add("@UnUtilizedAmount", parameters.UnUtilizedAmount);
+            queryParameters.Add("@CommissionRemark", parameters.CommissionRemark);
+            queryParameters.Add("@IsCommissionClosed", parameters.IsCommissionClosed);
             queryParameters.Add("@Containers", parameters.Containers);
-            queryParameters.Add("@Reuse_Fresh", parameters.Reuse_Fresh);
+            queryParameters.Add("@ReuseOrFreshId", parameters.ReuseOrFreshId);
             queryParameters.Add("@TransporterId", parameters.TransporterId);
             queryParameters.Add("@Rate", parameters.Rate);
             queryParameters.Add("@LandFreight", parameters.LandFreight);

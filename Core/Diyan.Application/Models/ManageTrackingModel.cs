@@ -981,8 +981,8 @@ namespace Diyan.Application.Models
         [DefaultValue(0)]
         public decimal? Freight { get; set; }
 
-        [DefaultValue("")]
-        public string? PortCode { get; set; }
+        [DefaultValue(0)]
+        public int? PortId { get; set; }
 
         [DefaultValue("")]
         public string? SBNo { get; set; }
@@ -1025,11 +1025,17 @@ namespace Diyan.Application.Models
         [DefaultValue(0)]
         public decimal? UnUtilizedAmount { get; set; }
 
+        [DefaultValue("")]
+        public string? CommissionRemark { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsCommissionClosed { get; set; }
+
         [DefaultValue(0)]
         public int? Containers { get; set; }
 
-        [DefaultValue("")]
-        public string? Reuse_Fresh { get; set; }
+        [DefaultValue(0)]
+        public int? ReuseOrFreshId { get; set; }
 
         [DefaultValue(0)]
         public int? TransporterId { get; set; }
@@ -1095,6 +1101,8 @@ namespace Diyan.Application.Models
         public decimal? Quantity { get; set; }
 
         public decimal? Freight { get; set; }
+        public int? PortId { get; set; }
+        public string? PortName { get; set; }
         public string? PortCode { get; set; }
         public string? SBNo { get; set; }
         public DateTime? SBDate { get; set; }
@@ -1111,8 +1119,10 @@ namespace Diyan.Application.Models
         public decimal? CommissionMentionInSBill { get; set; }
         public decimal? UtilizedAmount { get; set; }
         public decimal? UnUtilizedAmount { get; set; }
+        public string? CommissionRemark { get; set; }
+        public bool? IsCommissionClosed { get; set; }  
         public int? Containers { get; set; }
-        public string? Reuse_Fresh { get; set; }
+        public int? ReuseOrFreshId { get; set; }
         public int? TransporterId { get; set; }
         public string? Transporter { get; set; }
         public decimal? Rate { get; set; }
