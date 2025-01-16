@@ -571,7 +571,8 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
             queryParameters.Add("@ImageName", parameters.ImageName);
             queryParameters.Add("@OriginalFileName", parameters.OriginalFileName);
-
+            queryParameters.Add("@Remark", parameters.Remark);
+            queryParameters.Add("@StatusId", parameters.StatusId);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SaveBIDraftIssuedImages", queryParameters);
