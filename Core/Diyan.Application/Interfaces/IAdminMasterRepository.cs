@@ -220,5 +220,13 @@ namespace Diyan.Application.Interfaces
 
         Task<Port_Response?> GetPortById(int Id);
         #endregion
+
+        #region Version Details
+        Task<int> SaveVersionDetails(VersionDetails_Request parameters);
+
+        Task<IEnumerable<VersionDetails_Response>> GetVersionDetailsList(VersionDetails_Search parameters);
+
+        Task<VersionDetails_Response?> GetVersionDetailsById(int Id);
+        #endregion
     }
 }
