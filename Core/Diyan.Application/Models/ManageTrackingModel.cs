@@ -759,8 +759,8 @@ namespace Diyan.Application.Models
         public string? PINumber { get; set; }
         public DateTime? PIIssuedDate { get; set; }
 
-        [DefaultValue("")]
-        public string? Bank { get; set; }
+        [DefaultValue(0)]
+        public int? BankId { get; set; }
 
         [DefaultValue(0)]
         public decimal? BankCommission { get; set; }
@@ -825,7 +825,8 @@ namespace Diyan.Application.Models
         public DateTime? InvoiceGenerateDate { get; set; }
         public string? PINumber { get; set; }
         public DateTime? PIIssuedDate { get; set; }
-        public string? Bank { get; set; }
+        public int? BankId { get; set; }
+        public string? BankName { get; set; }
         public decimal? BankCommission { get; set; }
         public List<PurchaseOrderPaymentReceivedImages_Response> PurchaseOrderPaymentReceivedImagesList { get; set; }
     }

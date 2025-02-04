@@ -55,7 +55,8 @@ namespace Diyan.Application.Models
         public string? NotifyPartyName { get; set; }
         public int? PO_PaymentTermsId { get; set; }
         public string? PaymentTerms { get; set; }
-        public string? Bank { get; set; }
+        public int? BankId { get; set; }
+        public string? BankName { get; set; }
         public decimal? PO_Amount { get; set; }
         public decimal? TotalReceivedAmount { get; set; }
         public decimal? BankCommission { get; set; }

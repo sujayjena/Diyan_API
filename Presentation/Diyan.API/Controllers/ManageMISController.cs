@@ -211,7 +211,7 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 2].Value = items.ConsigneeName;
                         WorkSheet1.Cells[recordIndex, 3].Value = items.NotifyPartyName;
                         WorkSheet1.Cells[recordIndex, 4].Value = items.PaymentTerms;
-                        WorkSheet1.Cells[recordIndex, 5].Value = items.Bank;
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.BankName;
                         WorkSheet1.Cells[recordIndex, 6].Value = items.PO_Amount;
                         WorkSheet1.Cells[recordIndex, 7].Value = items.TotalReceivedAmount;
                         WorkSheet1.Cells[recordIndex, 8].Value = items.BankCommission;
@@ -222,7 +222,7 @@ namespace Diyan.API.Controllers
                         WorkSheet1.Cells[recordIndex, 11].Value = items.CreatedDate;
                         WorkSheet1.Cells[recordIndex, 12].Value = items.CreatorName;
 
-                        if (string.IsNullOrEmpty(items.Bank) || items.BankCommission == 0)
+                        if (items.BankId == 0 || items.BankCommission == 0)
                         {
                             WorkSheet1.Row(recordIndex).Style.Fill.PatternType = ExcelFillStyle.Solid;
                             WorkSheet1.Row(recordIndex).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Pink);

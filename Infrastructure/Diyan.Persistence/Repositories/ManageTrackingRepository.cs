@@ -279,7 +279,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@InvoiceGenerateDate", parameters.InvoiceGenerateDate);
             queryParameters.Add("@PINumber", parameters.PINumber);
             queryParameters.Add("@PIIssuedDate", parameters.PIIssuedDate);
-            queryParameters.Add("@Bank", parameters.Bank);
+            queryParameters.Add("@BankId", parameters.BankId);
             queryParameters.Add("@BankCommission", parameters.BankCommission);
             queryParameters.Add("@ModuleType", parameters.ModuleType);
 
