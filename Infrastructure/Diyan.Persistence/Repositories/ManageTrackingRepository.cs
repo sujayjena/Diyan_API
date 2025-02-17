@@ -406,6 +406,7 @@ namespace Diyan.Persistence.Repositories
             queryParameters.Add("@Id", parameters.Id);
             queryParameters.Add("@PurchaseOrderId", parameters.PurchaseOrderId);
             queryParameters.Add("@ContainerCount", parameters.ContainerCount);
+            queryParameters.Add("@IsPartialShipment", parameters.IsPartialShipment);
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 

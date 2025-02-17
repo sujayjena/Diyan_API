@@ -250,6 +250,7 @@ namespace Diyan.API.Controllers
                             Id = vParentItem.Id,
                             PurchaseOrderId = result,
                             ContainerCount = vParentItem.ContainerCount,
+                            IsPartialShipment = vParentItem.IsPartialShipment,
                         };
 
                         int resultvPIIssued = await _manageTrackingRepository.SaveContainersUnderLoading(vContainersUnderLoading_RequestObj);
@@ -600,6 +601,7 @@ namespace Diyan.API.Controllers
                         vContainersUnderLoading_ResponseObj.Id = item.Id;
                         vContainersUnderLoading_ResponseObj.PurchaseOrderId = item.PurchaseOrderId;
                         vContainersUnderLoading_ResponseObj.ContainerCount = item.ContainerCount;
+                        vContainersUnderLoading_ResponseObj.IsPartialShipment = item.IsPartialShipment;
 
                         vContainersUnderLoading_ResponseObj.CreatedBy = item.CreatedBy;
                         vContainersUnderLoading_ResponseObj.CreatedDate = item.CreatedDate;

@@ -926,6 +926,9 @@ namespace Diyan.Application.Models
         public int? PurchaseOrderId { get; set; }
         public string? ContainerCount { get; set; }
 
+        [DefaultValue(null)]
+        public bool? IsPartialShipment { get; set; }
+
         public List<ContainersUnderLoadingImages_Request>? ContainersUnderLoadingImagesList { get; set; }
     }
 
@@ -948,6 +951,7 @@ namespace Diyan.Application.Models
         [JsonIgnore]
         public int? PurchaseOrderId { get; set; }
         public string? ContainerCount { get; set; }
+        public bool? IsPartialShipment { get; set; }
 
         public List<ContainersUnderLoadingImages_Response>? ContainersUnderLoadingImagesList { get; set; }
     }
