@@ -324,6 +324,7 @@ namespace Diyan.Application.Models
         public bool? OC_IsOrderCompleteClosed { get; set; }
         [DefaultValue(null)]
         public DateTime? OC_OrderCompleteDate { get; set; }
+        public bool? IsPartialShipment { get; set; }
     }
 
     public class PurchaseOrderDetail_Response : BaseResponseEntity
