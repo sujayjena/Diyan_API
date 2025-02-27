@@ -123,6 +123,9 @@ namespace Diyan.API.Controllers.Admin
                 else
                 {
                     _response.Message = "Record details saved sucessfully";
+
+                    var vRoleList = await _rolePermissionRepository.GetRoleMasterEmployeePermissionById(parameters.EmployeeId);
+                    _response.Data = vRoleList.ToList();
                 }
             }
             return _response;
